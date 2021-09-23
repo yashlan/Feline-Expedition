@@ -1,6 +1,4 @@
-# test1234
-
-# IT ME TRIVITA
+#  Feline-Expedition
 
 Halo teman-teman semua mungkin saya beri sedikit rule biar rapi dan agar kita bisa lebih kompak heheh
 
