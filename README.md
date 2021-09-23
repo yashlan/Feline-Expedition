@@ -1,23 +1,25 @@
 # test1234
 
+# IT ME TRIVITA
+
 Halo teman-teman semua mungkin saya beri sedikit rule biar rapi dan agar kita bisa lebih kompak heheh
 
 ## Rule in Unity
+
 - unity version 2020.3.17f1
 - penamaan class pakai PascalCase. example : AudioManager.cs
 - penulisan code. example :
- 
-    void Awake() <br> 
-    { <br>
-     ㅤㅤㅤㅤㅤㅤ&nbsp; &nbsp; &nbsp; print("test 123"); <br>
-    }
 
+  void Awake() <br>
+  { <br>
+  ㅤㅤㅤㅤㅤㅤ&nbsp; &nbsp; &nbsp; print("test 123"); <br>
+  }
 
 ## Rule Branching
+
 - masing-masing membuat satu branch sesuai fitur yang dikerjakan. example : yashlan - in app purchase.
 - kemudian jika sudah selesai nanti di commit dengan message task yang sedang kamu kerjakan. dan kemudian push ke branch develop.
 - jangan lupa sebelum di push di fetch dulu ya
-
 
 ## kumpulan command git bash
 
