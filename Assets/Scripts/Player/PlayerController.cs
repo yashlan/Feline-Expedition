@@ -23,9 +23,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Anim State")]
     [SerializeField]
+    private int _attackCount;
+    [SerializeField]
+    private bool _isAttacking;
+    [SerializeField]
     private bool _isGrounded;
     [SerializeField]
-    private bool _isRunning;
+    private bool _isMoving;
     [SerializeField]
     private bool _isJumping;
 
@@ -65,19 +69,23 @@ public class PlayerController : MonoBehaviour
         _anim.SetBool("isGrounded", _isGrounded);
     }
 
+
     #region INPUTAN
 
     private void InputPlayer()
     {
         Movement();
         Jump();
+        Attack();
     }
 
     private void Movement()
     {
         _horizontal = Input.GetAxisRaw("Horizontal");
-        _anim.SetFloat("Speed", Mathf.Abs(_horizontal));
+        _anim.SetFloat("Speed", Mathf.Abs(_rb.velocity.x));
+        _anim.SetFloat("vSpeed", _rb.velocity.y);
         _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
+        _isMoving = _anim.GetFloat("Speed") == 0f ? false : true;
     }
 
     private void Jump()
@@ -93,6 +101,15 @@ public class PlayerController : MonoBehaviour
                     _isJumping = false;
                 }
             }
+        }
+    }
+
+    private void Attack()
+    {
+        if (Input.GetKey(KeyCode.P))
+        {
+            _isAttacking = true;
+            _anim.SetBool("Attack", true);
         }
     }
 
@@ -116,4 +133,14 @@ public class PlayerController : MonoBehaviour
     {
         Debug.DrawLine(transform.position, transform.position + (Vector3.down * _groundRaycastDistance), Color.red);
     }
+
+    #region EVENT ANIMATION
+
+    public void SetFalseAttackAnim()
+    {
+        _isAttacking = false;
+        _anim.SetBool("Attack", false);
+    }
+
+    #endregion
 }
