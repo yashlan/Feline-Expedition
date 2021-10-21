@@ -964,6 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36cc14215156a634899d4af63cb3e17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderInLayer: 0
   SortingLayerName: Water
   DisableInGame: 1
   UpdateEachFrame: 1
@@ -1043,7 +1044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1671180124
 Transform:
   m_ObjectHideFlags: 0
