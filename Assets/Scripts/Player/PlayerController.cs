@@ -1,12 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
+    [Header("Melee")]
+    [SerializeField]
+    private PlayerMelee _melee;
 
     [Header("Player Stats")]
+    [SerializeField]
+    private int _healthPoint;
+    [SerializeField]
+    private int _damageToEnemy;
     [SerializeField]
     private float _coolDownAttack;
     [SerializeField]
@@ -29,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private GameObject _shadow;
 
     [Header("Ground Raycast")]
+    [SerializeField]
+    private Vector3 _groundOffset;
     [SerializeField]
     private float _groundRaycastDistance;
     [SerializeField]
@@ -58,10 +65,18 @@ public class PlayerController : MonoBehaviour
 
     private float _delayAttack;
     private float _delayDash;
+    private float _delayLastPos;
 
     private float _delta;
 
     private Vector3 _lastPos;
+
+
+    public int HealthPoint { get => _healthPoint; set => _healthPoint = value; }
+    public int DamageToEnemy => _damageToEnemy;
+    public float CoolDownAttack => _coolDownAttack;
+
+    public bool IsAttacking => _isAttacking;
 
     void Start()
     {
@@ -72,18 +87,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        _lastPos = transform.position;
-
         InputPlayer();
 
         //buat reset pos, sementara
-        if (transform.position.y <= -30f) transform.position = Vector3.zero;
+        if (transform.position.y <= -30f) transform.position = _lastPos;
     }
 
     void FixedUpdate()
     {
         CheckGround();
         HandleFacing();
+        GetLastPositionWhenDie();
     }
 
     #region INPUT
@@ -232,9 +246,21 @@ public class PlayerController : MonoBehaviour
     #region GROUND CHECK
     private void CheckGround()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, _groundRaycastDistance, _groundLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + _groundOffset, Vector2.down, _groundRaycastDistance, _groundLayerMask);
         _isGrounded = hit ? true : false;
         _anim.SetBool("isGrounded", _isGrounded);
+    }
+    #endregion
+
+    #region GET LAST POSITION WHEN DIE
+
+    private void GetLastPositionWhenDie()
+    {
+        if (_isGrounded && Time.time > _delayLastPos)
+        {
+            _lastPos = transform.position;
+            _delayLastPos = Time.time + 0.5f;
+        }
     }
     #endregion
 
@@ -244,11 +270,16 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Debug.DrawLine(transform.position, transform.position + (Vector3.down * _groundRaycastDistance), Color.red);
+        Debug.DrawLine(transform.position + _groundOffset, transform.position + (Vector3.down * _groundRaycastDistance), Color.red);
     }
     #endregion
 
     #region EVENT ANIMATION
+
+    public void MeleeToEnemy()
+    {
+        _melee.StartMelee();
+    }
 
     public void SetFalseAttackAnim()
     {

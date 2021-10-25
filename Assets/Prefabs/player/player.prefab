@@ -1,5 +1,81 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &25032031269692423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2280732658985359512}
+  - component: {fileID: 6841135380149374169}
+  - component: {fileID: 6493310930347325903}
+  m_Layer: 0
+  m_Name: melee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2280732658985359512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25032031269692423}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2239772950115707415}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6841135380149374169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25032031269692423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a624faee08f774cb24942a736edbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &6493310930347325903
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25032031269692423}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 3.035681, y: 1.1548957}
+      - {x: 2.4427738, y: 1.8546343}
+      - {x: 0.07026163, y: 2.0336328}
+      - {x: -0.15530604, y: -1.9292908}
+      - {x: 1.5946124, y: -1.7029369}
+      - {x: 2.793079, y: -0.90078384}
+      - {x: 3.3957345, y: 0.17252916}
 --- !u!1 &2239772950115707413
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +89,6 @@ GameObject:
   - component: {fileID: 2239772950115707412}
   - component: {fileID: 2239772950115707409}
   - component: {fileID: 2239772950115707414}
-  - component: {fileID: 3844042415375450826}
   - component: {fileID: 2239772950115707411}
   m_Layer: 7
   m_Name: player
@@ -34,6 +109,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 206997969205169135}
+  - {fileID: 2280732658985359512}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,17 +125,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c50036a7c5755a47a32970338aa6517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _melee: {fileID: 6841135380149374169}
+  _healthPoint: 100
+  _damageToEnemy: 5
   _coolDownAttack: 0.25
   _coolDownDash: 0.25
   _moveSpeed: 15
   _jumpForce: 35
   _dashDistance: 2
   _shadowAmount: 5
-  _dashShadowWidth: 2
   _delayShadow: 0.01
   _destroyTimeShadow: 0.1
   _shadow: {fileID: 2239772950115707413, guid: 617091a5f4515d746a376f671efeb765, type: 3}
-  _groundRaycastDistance: 3
+  _groundOffset: {x: 0, y: -3, z: 0}
+  _groundRaycastDistance: 2.3
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -107,7 +186,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1234735947
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 3551260261683788849, guid: 7820628860899744f9df9d67c103fb32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -154,7 +233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.013324857, y: 0.6672379}
+  m_Offset: {x: 0.013324857, y: -0.13251996}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -165,24 +244,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.212856, y: 2.8966}
+  m_Size: {x: 2.212856, y: 4.496115}
   m_EdgeRadius: 0
---- !u!58 &3844042415375450826
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2239772950115707413}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.21}
-  serializedVersion: 2
-  m_Radius: 1.19
 --- !u!95 &2239772950115707411
 Animator:
   serializedVersion: 3
@@ -212,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 206997969205169135}
   - component: {fileID: 2776502758769072933}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
