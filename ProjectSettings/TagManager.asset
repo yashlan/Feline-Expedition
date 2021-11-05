@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Vase
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
+  - Vase
   - 
   - 
   - 
@@ -53,6 +55,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3060231349
+    locked: 0
+  - name: VFX
+    uniqueID: 4291563873
     locked: 0
   - name: UI
     uniqueID: 1175387119

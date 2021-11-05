@@ -9,12 +9,18 @@ public class Enemy : MonoBehaviour
     [Header("Stat Enemy")]
     public EnemyType EnemyType;
     public int HealthPoint;
-    public int DamageToPlayer;
-    public int Speed;
-    public int CoolDownAttack;
+    public int Damage;
+    public float Speed;
+    public float CoolDownAttack;
 
-    public void SetNewStats()
+    public void SetNewStats(EnemyType EnemyType, int HealthPoint, 
+        int Damage, float Speed, float CoolDownAttack)
     {
+        this.EnemyType = EnemyType;
+        this.HealthPoint = HealthPoint;
+        this.Damage = Damage;
+        this.Speed = Speed;
+        this.CoolDownAttack = CoolDownAttack;
         print("new stats excecuted");
     }
 }

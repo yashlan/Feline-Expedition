@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a624faee08f774cb24942a736edbd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meleeEffect: {fileID: 4794043405585894037, guid: 37138c0c33167b04fa1fb90b7f5a794f, type: 3}
 --- !u!60 &6493310930347325903
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -87,9 +88,10 @@ GameObject:
   - component: {fileID: 2239772950115707415}
   - component: {fileID: 2239772950115707408}
   - component: {fileID: 2239772950115707412}
-  - component: {fileID: 2239772950115707409}
-  - component: {fileID: 2239772950115707414}
   - component: {fileID: 2239772950115707411}
+  - component: {fileID: 4943441643102468660}
+  - component: {fileID: 7611096164117565929}
+  - component: {fileID: 4336354658693678997}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -126,23 +128,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _melee: {fileID: 6841135380149374169}
-  _healthPoint: 100
-  _damageToEnemy: 5
+  _healthPoint: 30
+  _damage: 10
   _coolDownAttack: 0.25
   _coolDownDash: 0.25
-  _moveSpeed: 15
-  _jumpForce: 35
-  _dashDistance: 2
-  _shadowAmount: 5
+  _coolDownThrow: 0.25
+  _moveSpeed: 25
+  _canDoubleJump: 1
+  _jumpAmount: 1
+  _jumpForce: 55
+  _dashAmountOnAir: 1
+  _dashDistance: 40
   _delayShadow: 0.01
   _destroyTimeShadow: 0.1
+  _dashFX: {fileID: 100008, guid: cac8f904ff5bc6a48af7caabe4b01a0f, type: 3}
   _shadow: {fileID: 2239772950115707413, guid: 617091a5f4515d746a376f671efeb765, type: 3}
-  _groundOffset: {x: 0, y: -3, z: 0}
+  _groundOffset: {x: 0, y: -2.5, z: 0}
   _groundRaycastDistance: 2.3
   _groundLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 832
   _facingRight: 1
+  _isThrowing: 0
+  _isCharging: 0
   _isDashing: 0
   _isAttacking: 0
   _isGrounded: 0
@@ -167,7 +175,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -199,53 +207,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2239772950115707409
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2239772950115707413}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 5
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!61 &2239772950115707414
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2239772950115707413}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.013324857, y: -0.13251996}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 6}
-    newSize: {x: 2.32, y: 4.39}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.212856, y: 4.496115}
-  m_EdgeRadius: 0
 --- !u!95 &2239772950115707411
 Animator:
   serializedVersion: 3
@@ -265,6 +226,69 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &4943441643102468660
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2239772950115707413}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.012087464, y: 0.2087611}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6, y: 6}
+    newSize: {x: 2.32, y: 4.39}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3916667, y: 3.813553}
+  m_EdgeRadius: 0
+--- !u!50 &7611096164117565929
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2239772950115707413}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 16
+  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!58 &4336354658693678997
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2239772950115707413}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.65}
+  serializedVersion: 2
+  m_Radius: 0.7
 --- !u!1 &8027054967104560123
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,9 +336,9 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 000000008751f0ea79eae854b56c67b6
+  m_ApplyToSortingLayers: 000000008751f0ea79eae854d95aacabb56c67b66111ccff
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -324,7 +348,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 20
+  m_PointLightOuterRadius: 10
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
