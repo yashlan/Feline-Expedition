@@ -4,6 +4,9 @@ using Cinemachine;
 
 public class DebugGame : MonoBehaviour
 {
+    public Toggle toggleInvicible;
+    public Toggle toggleWaterSpear;
+
     public Slider x_damp;
     public Slider y_damp;
     public Slider off_x;
@@ -34,7 +37,7 @@ public class DebugGame : MonoBehaviour
     void SetDefault()
     {
         x_damp.value = 1;
-        y_damp.value = 3;
+        y_damp.value = 0;
 
         off_x.value = 0;
         off_y.value = 3;
@@ -47,6 +50,9 @@ public class DebugGame : MonoBehaviour
 
         damping_x.text = $"X Damping : {x_damp.value:0.00}";
         damping_y.text = $"Y Damping : {y_damp.value:0.00}";
+
+        toggleWaterSpear.isOn = false;
+        toggleInvicible.isOn = false;
     }
 
     void Update()
@@ -70,6 +76,18 @@ public class DebugGame : MonoBehaviour
         }
 
         textInputInfo.gameObject.SetActive(showInputInfo ? true : false);
+
+        toggleInvicible.onValueChanged.AddListener((isOn) => {
+
+            PlayerData.IsInvincibleShieldWasUnlocked = isOn;
+
+        });
+
+        toggleWaterSpear.onValueChanged.AddListener((isOn) => {
+
+            PlayerData.IsWaterSpearWasUnlocked = isOn;
+
+        });
     }
 
     private void OnGUI()

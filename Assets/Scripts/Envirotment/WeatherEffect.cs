@@ -35,12 +35,11 @@ public class WeatherEffect : MonoBehaviour
 
     private void ChangeRainIntensity()
     {
-        _newRainIntensity = Random.Range(0.4f, 1f);
+        _newRainIntensity = Random.Range(0.5f, 0.9f);
         _rain.RainIntensity = _newRainIntensity;
 
         var randomTime = Random.Range(15f, 25f);
         Invoke(nameof(ChangeRainIntensity), randomTime);
-        //print("intensity :" + randomTime);
     }
 
     private void StartThunderEffect()
@@ -49,7 +48,6 @@ public class WeatherEffect : MonoBehaviour
 
         var randomTime = Random.Range(3f, 7f);
         Invoke(nameof(StartThunderEffect), randomTime);
-        //print("thunder show after :" + randomTime);
     }
 
     private IEnumerator ShowThunder(float timer, float maxIntensity)
