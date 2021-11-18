@@ -36,7 +36,7 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     #endregion
 
     #region SHOP
-    public const string GOLD            = "GOLD";
-    public const string TOTAL_RUNE_SLOT_USED = "TOTAL_RUNE_SLOT";
+    public const string GOLD                 = "GOLD";
+    public const string TOTAL_RUNE_SLOT_USED = "TOTAL_RUNE_SLOT_USED";
     #endregion
 }
