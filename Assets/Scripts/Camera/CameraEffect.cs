@@ -19,7 +19,8 @@ public class CameraEffect : Singleton<CameraEffect>
     static float firstOrtoSize;
     static CinemachineVirtualCamera virtualCamera;
 
-    // Start is called before the first frame update
+    static PlayerController player => PlayerController.Instance;
+
     void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
@@ -56,7 +57,7 @@ public class CameraEffect : Singleton<CameraEffect>
     private static IEnumerator PlayZoomInOut(float ortoSize)
     {
         virtualCamera.m_Lens.OrthographicSize = ortoSize;
-        yield return new WaitUntil(() => !PlayerController.Instance.IsCharging);
+        yield return new WaitUntil(() => PlayerData.IsInvincibleShieldWasUnlocked ? !player.IsDefend : !player.IsCharging);
         virtualCamera.m_Lens.OrthographicSize = firstOrtoSize;
         yield break;
     }

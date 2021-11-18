@@ -9,7 +9,6 @@ public class SingletonDontDestroy<T> : MonoBehaviour where T : SingletonDontDest
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-            throw new System.Exception("An instance of this singleton already exists.");
         }
         else
         {
