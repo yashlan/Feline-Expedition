@@ -9,6 +9,7 @@ public class PlayerMelee : MonoBehaviour
     private GameObject _meleeEffect;
 
     private float delay;
+    private float delay2;
     PolygonCollider2D _polygonCollider;
     GameObject _meleeEffectClone;
 
@@ -43,10 +44,10 @@ public class PlayerMelee : MonoBehaviour
     {
         var tag = collision.gameObject.tag;
 
-        if (_tagList.Find(t => t.Equals(tag)) != null && Time.time > delay)
+        if (_tagList.Find(t => t.Equals(tag)) != null && Time.time > delay2)
         {
             TakeDamage(collision);
-            delay = Time.time + _player.CoolDownSpearAttack;
+            delay2 = Time.time + _player.CoolDownSpearAttack;
         }
     }
 
@@ -121,7 +122,7 @@ public class PlayerMelee : MonoBehaviour
     private IEnumerator Melee()
     {
         _polygonCollider.enabled = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.025f);
         _polygonCollider.enabled = false;
         yield break;
     }

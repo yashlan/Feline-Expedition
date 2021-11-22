@@ -11,12 +11,19 @@ public class EnemyController : Enemy
     // Start is called before the first frame update
     void Start()
     {
-        SetNewStats(EnemyType.Easy, 100, 5, 2f, 0.25f);
+        SetNewStats(EnemyType.Easy, 1000, 5, 10f, 0.25f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GroundCheck();
+        Movement();
+        SetAttackPoint();
+    }
+
+    void FixedUpdate()
+    {
+        HandleFacing();
     }
 }

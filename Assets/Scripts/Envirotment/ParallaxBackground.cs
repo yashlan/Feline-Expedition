@@ -4,6 +4,8 @@ public class ParallaxBackground : MonoBehaviour
 {
 	[Header("Sorting Order")]
 	[SerializeField]
+	private bool _setSortingOrder;
+	[SerializeField]
 	private int _bgOrder; //order in layer backgroound
 	[SerializeField]
 	private int _mgOrder; //order in layer backgroound
@@ -32,9 +34,12 @@ public class ParallaxBackground : MonoBehaviour
 	{
 		startPosX = _camera.position.x;
 
-		_background.sortingOrder = _bgOrder;
-		_midground.sortingOrder  = _mgOrder;
-		_foreground.sortingOrder = _fgOrder;
+        if (_setSortingOrder)
+        {
+			_background.sortingOrder = _bgOrder;
+			_midground.sortingOrder = _mgOrder;
+			_foreground.sortingOrder = _fgOrder;
+		}
 	}
 
 	// Update is called once per frame

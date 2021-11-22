@@ -10,13 +10,27 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField]
     private PlayerMelee _meleeAttack2;
     [SerializeField]
-    private PlayerMelee _meleeSpearAttack;
+    private PlayerMelee _meleeSpearAttack1;
+    [SerializeField]
+    private PlayerMelee _meleeSpearAttack2;
+    [SerializeField]
+    private PlayerMelee _meleeSpearAttack3;
+    [SerializeField]
+    private PlayerMelee _meleeSpearAttack4;
 
     [Header("Fireball")]
     [SerializeField]
     private GameObject _fireBall;
     [SerializeField]
     private Transform _throwPoint;
+
+    [Header("Combo Attack")]
+    [SerializeField]
+    private bool _isTimeComboAttack;
+    [SerializeField]
+    private float _timeToResetCombo;
+    [SerializeField]
+    private int _comboAttackCount;
 
     [Header("Player Stats")]
     [SerializeField]
@@ -139,13 +153,12 @@ public class PlayerController : Singleton<PlayerController>
     public float CoolDownAttack => _coolDownAttack;
     public float CoolDownSpearAttack => _coolDownSpearAttack;
 
+    public bool IsTimeComboAttack { get => _isTimeComboAttack; set => _isTimeComboAttack = value; }
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
     public bool IsCharging => _isCharging;
     public bool IsDefend => _isDefend;
     public bool FacingRight => _facingRight;
-
-    public Animator Anim => _anim;
-
+    public bool IsGrounded => _isGrounded;
 
     void Start()
     {
@@ -168,6 +181,8 @@ public class PlayerController : Singleton<PlayerController>
         InputPlayer();
         CheckIsTouchWall();
         CheckGround();
+        HandleAttackCombo();
+
 
         //buat reset pos, sementara
         if (transform.position.y <= -30f) transform.position = _lastPos;
@@ -176,12 +191,6 @@ public class PlayerController : Singleton<PlayerController>
         {
             _dashAmountOnAir = 1;
             _jumpAmount = _canDoubleJump ? 2 : 1;
-        }
-
-        //goto menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
     }
 
@@ -329,7 +338,7 @@ public class PlayerController : Singleton<PlayerController>
         if (Input.GetKeyDown(OptionsManager.AttackMeleeKey) && !_isJumping
             && Time.time > _delayAttack && !_isCharging)
         {
-            _isAttacking = true;
+            _timeToResetCombo += _coolDownAttack;
 
             if (_canDashing && _withDashEffect)
                 _isDashing = true;
@@ -345,7 +354,7 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
-        //_anim.SetBool("Attack", _isAttacking);
+        _isAttacking = _isTimeComboAttack;
     }
 
     float _delayAfterDash;
@@ -420,7 +429,8 @@ public class PlayerController : Singleton<PlayerController>
             StartCoroutine(ShowShield());
         }
     }
-    #endregion
+
+    #endregion INPUT
 
     #region ABILITY
 
@@ -501,6 +511,7 @@ public class PlayerController : Singleton<PlayerController>
         yield break;
     }
     #endregion
+
     #endregion ABILITY
 
     #region UTILITY
@@ -614,7 +625,34 @@ public class PlayerController : Singleton<PlayerController>
                             !_isDefend;
     #endregion
 
+    #region HANDLE ATTACK COMBO
+
+    private void HandleAttackCombo()
+    {
+        _isTimeComboAttack = _timeToResetCombo > 0;
+
+        if (_isTimeComboAttack)
+        {
+            if(_timeToResetCombo >= 0)
+            {
+                _timeToResetCombo -= 1f * Time.deltaTime;
+
+                if(_timeToResetCombo <= 0)
+                {
+                    _isTimeComboAttack = false;
+                    _timeToResetCombo = 0;
+                }
+            }
+        }
+
+    }
     #endregion
+
+    #region HURT ANIMATION
+    public void PlayHurt() => _anim.SetBool("Hurt", true);
+    #endregion
+
+    #endregion UTILITY
 
     #region DEBUG WITH GIZMOS
 
@@ -638,9 +676,24 @@ public class PlayerController : Singleton<PlayerController>
         _meleeAttack2.StartMelee();
     }
 
-    public void MeleeSpearAttackEvent()
+    public void MeleeSpearAttack1Event()
     {
-        _meleeSpearAttack.StartMelee();
+        _meleeSpearAttack1.StartMelee();
+    }
+
+    public void MeleeSpearAttack2Event()
+    {
+        _meleeSpearAttack2.StartMelee();
+    }
+
+    public void MeleeSpearAttack3Event()
+    {
+        _meleeSpearAttack3.StartMelee();
+    }
+
+    public void MeleeSpearAttack4Event()
+    {
+        _meleeSpearAttack4.StartMelee();
     }
 
     public void ThrowFireballEvent()
@@ -648,18 +701,14 @@ public class PlayerController : Singleton<PlayerController>
         Instantiate(_fireBall, _throwPoint.position, Quaternion.identity);
     }
 
-    public void SetFalseAttackEvent() //lanjut besok
+    public void PlayWaterSpearAttack4Event() //event for attack spear 3 anim
     {
-        _isAttacking = false;
-        _anim.SetBool("Attack", _isAttacking);
-        _anim.Play("player idle anim");
+        _anim.Play("player water spear 4 anim");
     }
 
-    public void SetGotoNextAttackEvent() //besok
+    public void DisableHurtEvent()
     {
-        _isAttacking = true;
-        _anim.SetBool("Attack", _isAttacking);
-        _anim.Play("player attack2 anim");
+        _anim.SetBool("Hurt", false);
     }
     #endregion
 }

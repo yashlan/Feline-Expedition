@@ -1540,7 +1540,7 @@ SpriteRenderer:
   m_SortingLayerID: -353349241
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 26bb2e8f9445a8842bcf8bdd77200fba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57f25bb4bb6345044a7f7e4eaa91e2a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2099,6 +2099,10 @@ PrefabInstance:
     - target: {fileID: 186064, guid: f1de9968472fbb54bac54676ee1e917d, type: 3}
       propertyPath: m_Name
       value: Waterfall
+      objectReference: {fileID: 0}
+    - target: {fileID: 186064, guid: f1de9968472fbb54bac54676ee1e917d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 493542, guid: f1de9968472fbb54bac54676ee1e917d, type: 3}
       propertyPath: m_RootOrder

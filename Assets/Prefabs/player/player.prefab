@@ -54,7 +54,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 25032031269692423}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -106,7 +106,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2239772950115707415}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2239772950115707413
 GameObject:
@@ -145,6 +145,9 @@ Transform:
   - {fileID: 2280732658985359512}
   - {fileID: 8620891902768704639}
   - {fileID: 4732555744458078907}
+  - {fileID: 3607662845226125727}
+  - {fileID: 1238497189294968506}
+  - {fileID: 3424802930611586025}
   - {fileID: 3262714189754596602}
   - {fileID: 2016213685781688809}
   m_Father: {fileID: 0}
@@ -164,9 +167,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meleeAttack1: {fileID: 6841135380149374169}
   _meleeAttack2: {fileID: 8090197745003919664}
-  _meleeSpearAttack: {fileID: 2962430746268380947}
+  _meleeSpearAttack1: {fileID: 2962430746268380947}
+  _meleeSpearAttack2: {fileID: 7457996464877635824}
+  _meleeSpearAttack3: {fileID: 6637379196632900823}
+  _meleeSpearAttack4: {fileID: 6075517670600386408}
   _fireBall: {fileID: 184530915408922247, guid: 5b4a822331e4ccb488513ca4a080f89b, type: 3}
   _throwPoint: {fileID: 2016213685781688809}
+  _isTimeComboAttack: 0
+  _timeToResetCombo: 0
+  _comboAttackCount: 0
   _healthPoint: 30
   _manaPoint: 0
   _damageReduction: 0
@@ -174,6 +183,7 @@ MonoBehaviour:
   _damageMagic: 7
   _manaRegen: 0
   _coolDownAttack: 0.25
+  _coolDownSpearAttack: 0.25
   _coolDownJumpAttack: 0.25
   _coolDownDash: 0.25
   _coolDownThrow: 0.25
@@ -193,7 +203,7 @@ MonoBehaviour:
   _wallJumpForce: 80
   _wallSlideSpeed: 1
   _wallCheckPoint: {fileID: 3262714189754596602}
-  _wallCheckSize: {x: 0.2, y: 2}
+  _wallCheckSize: {x: 0.2, y: 0.5}
   _wallLayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -399,7 +409,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 2519949916070725740}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -423,6 +433,85 @@ PolygonCollider2D:
       - {x: 3.5996766, y: -1.6681745}
       - {x: 4.1381783, y: -1.3959844}
       - {x: 4.5531607, y: -1.0948372}
+--- !u!1 &5036383960905718641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238497189294968506}
+  - component: {fileID: 6637379196632900823}
+  - component: {fileID: 1714534055959509310}
+  m_Layer: 0
+  m_Name: melee spear 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1238497189294968506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036383960905718641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2239772950115707415}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6637379196632900823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036383960905718641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a624faee08f774cb24942a736edbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meleeEffect: {fileID: 1112258596635602228, guid: 3d718092be710de4d822b25cecb11276, type: 3}
+--- !u!60 &1714534055959509310
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036383960905718641}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 12.150694, y: 1.0728221}
+      - {x: 4.4028444, y: 0.7557335}
+      - {x: 2.023395, y: 1.1925292}
+      - {x: 0.54167885, y: -1.7601901}
+      - {x: 2.53486, y: -1.80286}
+      - {x: 3.5996766, y: -1.8609583}
+      - {x: 5.9374943, y: -1.8136827}
+      - {x: 12.894746, y: -1.2323153}
+      - {x: 15.246455, y: -0.107078075}
 --- !u!1 &5796095213433610126
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,12 +536,170 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5796095213433610126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.82, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.82, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2239772950115707415}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6189970345809169025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3424802930611586025}
+  - component: {fileID: 6075517670600386408}
+  - component: {fileID: 6011267604290329798}
+  m_Layer: 0
+  m_Name: melee spear 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3424802930611586025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189970345809169025}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2239772950115707415}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6075517670600386408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189970345809169025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a624faee08f774cb24942a736edbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meleeEffect: {fileID: 1112258596635602228, guid: 3d718092be710de4d822b25cecb11276, type: 3}
+--- !u!60 &6011267604290329798
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6189970345809169025}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 12.150694, y: 1.0728221}
+      - {x: 4.4028444, y: 0.7557335}
+      - {x: 2.023395, y: 1.1925292}
+      - {x: 0.54167885, y: -1.7601901}
+      - {x: 2.53486, y: -1.80286}
+      - {x: 3.5996766, y: -1.8609583}
+      - {x: 5.9374943, y: -1.8136827}
+      - {x: 12.894746, y: -1.2323153}
+      - {x: 15.246455, y: -0.107078075}
+--- !u!1 &6907958053089277177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3607662845226125727}
+  - component: {fileID: 7457996464877635824}
+  - component: {fileID: 9003380532936820756}
+  m_Layer: 0
+  m_Name: melee spear 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3607662845226125727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907958053089277177}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2239772950115707415}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7457996464877635824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907958053089277177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a624faee08f774cb24942a736edbd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _meleeEffect: {fileID: 1112258596635602228, guid: 3d718092be710de4d822b25cecb11276, type: 3}
+--- !u!60 &9003380532936820756
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907958053089277177}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 12.150694, y: 1.0728221}
+      - {x: 4.4028444, y: 0.7557335}
+      - {x: 2.023395, y: 1.1925292}
+      - {x: 0.54167885, y: -1.7601901}
+      - {x: 2.53486, y: -1.80286}
+      - {x: 3.5996766, y: -1.8609583}
+      - {x: 5.9374943, y: -1.8136827}
+      - {x: 12.894746, y: -1.2323153}
+      - {x: 15.246455, y: -0.107078075}
 --- !u!1 &6925044724397553391
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +712,7 @@ GameObject:
   - component: {fileID: 2962430746268380947}
   - component: {fileID: 5030862702268080474}
   m_Layer: 0
-  m_Name: melee spear
+  m_Name: melee spear 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,7 +754,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 6925044724397553391}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: c5d1916dee2a8e9419014483a5e72475, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0

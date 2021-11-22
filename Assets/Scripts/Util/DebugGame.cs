@@ -51,8 +51,8 @@ public class DebugGame : MonoBehaviour
         damping_x.text = $"X Damping : {x_damp.value:0.00}";
         damping_y.text = $"Y Damping : {y_damp.value:0.00}";
 
-        toggleWaterSpear.isOn = false;
-        toggleInvicible.isOn = false;
+        toggleWaterSpear.isOn = PlayerData.IsWaterSpearWasUnlocked;
+        toggleInvicible.isOn = PlayerData.IsInvincibleShieldWasUnlocked;
     }
 
     void Update()
