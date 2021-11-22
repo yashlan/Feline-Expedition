@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerFireballController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject _fireballEffect;
+
     public float _damage;
     public float _speed = 50;
     Rigidbody2D _rb;
@@ -62,11 +65,6 @@ public class PlayerFireballController : MonoBehaviour
                 Destroy(vase.gameObject);
         }
 
-/*        var pos = collision.transform.position;
-        var randomRotation = Random.Range(-30f, 30f);*/
-
-/*        _meleeEffectClone.transform.position = pos;
-        _meleeEffectClone.transform.rotation = Quaternion.Euler(0, 0, randomRotation);
-        _meleeEffectClone.SetActive(true);*/
+        Instantiate(_fireballEffect, collision.transform.position, Quaternion.identity);
     }
 }

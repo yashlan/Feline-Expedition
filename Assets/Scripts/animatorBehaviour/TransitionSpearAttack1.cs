@@ -13,16 +13,16 @@ public class TransitionSpearAttack1 : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (PlayerController.Instance.IsAttacking && PlayerData.IsWaterSpearWasUnlocked)
+        if (PlayerController.Instance.IsTimeComboAttack && PlayerData.IsWaterSpearWasUnlocked)
         {
-            PlayerController.Instance.Anim.Play("player water spear 2 anim");
+            animator.Play("player water spear 2 anim");
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerController.Instance.IsAttacking = false;
+        PlayerController.Instance.IsTimeComboAttack = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
