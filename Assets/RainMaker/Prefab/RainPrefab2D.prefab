@@ -4636,7 +4636,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -3403423
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 20
   m_RenderMode: 0
   m_SortMode: 0
@@ -4778,8 +4778,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -3403423
-  m_SortingLayer: 5
+  m_SortingLayerID: -2038610335
+  m_SortingLayer: 7
   m_SortingOrder: 10
   m_RenderMode: 1
   m_SortMode: 0
@@ -9504,8 +9504,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -3403423
-  m_SortingLayer: 5
+  m_SortingLayerID: -2038610335
+  m_SortingLayer: 7
   m_SortingOrder: 30
   m_RenderMode: 0
   m_SortMode: 0
@@ -14225,7 +14225,7 @@ MonoBehaviour:
   RainSoundLight: {fileID: 8300000, guid: c980eda1ec9b9ff4b930005976b00f41, type: 3}
   RainSoundMedium: {fileID: 8300000, guid: 3359e9d10af08ca46ae396298dbd1ed9, type: 3}
   RainSoundHeavy: {fileID: 8300000, guid: db1471092e49b7445bfbd374a17ea61a, type: 3}
-  RainSoundAudioMixer: {fileID: 0}
+  RainSoundAudioMixer: {fileID: 5304721241933011140, guid: cc4bc7d6a847e5648bef8a1661b31742, type: 2}
   RainIntensity: 0.5
   RainFallParticleSystem: {fileID: 19804216}
   RainExplosionParticleSystem: {fileID: 19837776}
@@ -14241,6 +14241,6 @@ MonoBehaviour:
   RainWidthMultiplier: 1.5
   CollisionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   CollisionLifeTimeRain: 0
   RainMistCollisionMultiplier: 0.75

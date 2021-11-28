@@ -35,7 +35,7 @@ public class WeatherEffect : MonoBehaviour
 
     private void ChangeRainIntensity()
     {
-        _newRainIntensity = Random.Range(0.5f, 0.9f);
+        _newRainIntensity = Random.Range(0.5f, 0.6f);
         _rain.RainIntensity = _newRainIntensity;
 
         var randomTime = Random.Range(15f, 25f);

@@ -35,7 +35,7 @@ public class ButtonInputController : MonoBehaviour
         LoadButtonText();
     }
 
-    private void OnGUI()
+    void OnGUI()
     {
         _keyEvent = Event.current;
 
@@ -46,6 +46,9 @@ public class ButtonInputController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// button name harus sama dengan nama button gameObject yg ada di inspector
+    /// </summary>
     private void SetButtonText(string buttonName, string value)
     {
         for (int i = 0; i < _panelOptions.childCount; i++)

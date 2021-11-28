@@ -110,6 +110,10 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Player Anim State")]
     [SerializeField]
+    private bool _isDead;
+    [SerializeField]
+    private bool _isHurt;
+    [SerializeField]
     private bool _isThrowing;
     [SerializeField]
     private bool _isDefend;
@@ -147,6 +151,8 @@ public class PlayerController : Singleton<PlayerController>
 
     private Vector3 _lastPos;
 
+    public Animator Anim { get => _anim; set => _anim = value; }
+    public Rigidbody2D Rigidbody { get => _rb; set => _rb = value; }
     public int HealthPoint { get => _healthPoint; set => _healthPoint = value; }
     public int DamageMelee => _damageMelee;
     public int DamageMagic => _damageMagic;
@@ -159,6 +165,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsDefend => _isDefend;
     public bool FacingRight => _facingRight;
     public bool IsGrounded => _isGrounded;
+    public bool IsHurt => _isHurt;
 
     void Start()
     {
@@ -178,30 +185,32 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-        InputPlayer();
-        CheckIsTouchWall();
-        CheckGround();
-        HandleAttackCombo();
-
-
-        //buat reset pos, sementara
-        if (transform.position.y <= -30f) transform.position = _lastPos;
-
-        if (_isGrounded || _isTouchingWall)
+        if(GameManager.GameState == GameState.Playing)
         {
-            _dashAmountOnAir = 1;
-            _jumpAmount = _canDoubleJump ? 2 : 1;
+            InputPlayer();
+            CheckIsTouchWall();
+            CheckGround();
+            HandleAttackCombo();
+
+            if (_isGrounded || _isTouchingWall)
+            {
+                _dashAmountOnAir = 1;
+                _jumpAmount = _canDoubleJump ? 2 : 1;
+            }
         }
     }
 
     void FixedUpdate()
     {
-        WallSlide();
-        HandleFacing();
-        SaveLastTransform(0.5f);
+        if (GameManager.GameState == GameState.Playing)
+        {
+            WallSlide();
+            HandleFacing();
+            SaveLastTransform(0.5f);
 
-        if (_isDashing)
-            StartDashing();
+            if (_isDashing)
+                StartDashing();
+        }
     }
 
     #region INPUT
@@ -215,7 +224,7 @@ public class PlayerController : Singleton<PlayerController>
         Jump();
         Dash();
 
-        if (PlayerData.IsInvincibleShieldWasUnlocked)
+        if (PlayerData.IsInvincibleShieldUsed())
             ShowInvincibleShield();
         else
             Throw();
@@ -223,38 +232,41 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Movement(bool _withShadowEffect)
     {
-        if (!_isCharging || !_isDefend)
+        if (!_isHurt)
         {
-            if (!_isDashing && (!_isWallSliding || !_isTouchingWall))
+            if (!_isCharging || !_isDefend || !_isAttacking)
             {
-                if (Input.GetKey(OptionsManager.LeftKey))
+                if (!_isDashing && (!_isWallSliding || !_isTouchingWall))
                 {
-                    _horizontal = -1;
-                    _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
-                }
-                else if (Input.GetKey(OptionsManager.RightKey))
-                {
-                    _horizontal = 1;
-                    _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
-                }
-                else
-                {
-                    _horizontal = 0;
-                    _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
-                }
-
-                _anim.SetFloat("Speed", Mathf.Abs(_rb.velocity.x));
-                _anim.SetFloat("vSpeed", _rb.velocity.y);
-                _isMoving = _anim.GetFloat("Speed") != 0f;
-
-                if (_isMoving && _withShadowEffect && _isGrounded)
-                {
-                    if (_delta > 0)
-                        _delta -= Time.deltaTime;
+                    if (Input.GetKey(OptionsManager.LeftKey))
+                    {
+                        _horizontal = -1;
+                        _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
+                    }
+                    else if (Input.GetKey(OptionsManager.RightKey))
+                    {
+                        _horizontal = 1;
+                        _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
+                    }
                     else
                     {
-                        _delta = _delayShadow;
-                        CreateShadowEffect();
+                        _horizontal = 0;
+                        _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
+                    }
+
+                    _anim.SetFloat("Speed", Mathf.Abs(_rb.velocity.x));
+                    _anim.SetFloat("vSpeed", _rb.velocity.y);
+                    _isMoving = _anim.GetFloat("Speed") != 0f;
+
+                    if (_isMoving && _withShadowEffect && _isGrounded)
+                    {
+                        if (_delta > 0)
+                            _delta -= Time.deltaTime;
+                        else
+                        {
+                            _delta = _delayShadow;
+                            CreateShadowEffect();
+                        }
                     }
                 }
             }
@@ -264,7 +276,7 @@ public class PlayerController : Singleton<PlayerController>
     bool _wasFirstJump = false;
     private void Jump()
     {
-        if (Input.GetKeyDown(OptionsManager.JumpKey))
+        if (Input.GetKeyDown(OptionsManager.JumpKey) && (!_isCharging || !_isDefend))
         {
             if (_isGrounded && _jumpAmount > 0)
             {
@@ -330,13 +342,13 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
-        _anim.SetBool("JumpAttack", _isJumpAttack);
+        _anim.SetBool(PlayerData.IsWaterSpearUsed() ? "JumpAttackSpear" : "JumpAttack", _isJumpAttack);
     }
 
     private void Attack(bool _withDashEffect)
     {
-        if (Input.GetKeyDown(OptionsManager.AttackMeleeKey) && !_isJumping
-            && Time.time > _delayAttack && !_isCharging)
+        if (Input.GetKeyDown(OptionsManager.AttackMeleeKey) && !_isJumping && !_isDashing && !_isCharging
+            && Time.time > _delayAttack)
         {
             _timeToResetCombo += _coolDownAttack;
 
@@ -355,13 +367,19 @@ public class PlayerController : Singleton<PlayerController>
         }
 
         _isAttacking = _isTimeComboAttack;
+
+        if(_isAttacking && Time.time < _delayAttack)
+        {
+            _rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+            _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     float _delayAfterDash;
 
     private void Dash()
     {
-        if (_canDashing && !_isTouchingWall)
+        if (_canDashing && !_isTouchingWall && !_isAttacking)
         {
             if (_isDashing)
                 _delayAfterDash = Time.time + 0.5f;
@@ -561,7 +579,12 @@ public class PlayerController : Singleton<PlayerController>
     #region GROUND CHECK
     private void CheckGround()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + _groundOffset, Vector2.down, _groundRaycastDistance, _groundLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(
+            transform.position + _groundOffset, 
+            Vector2.down, 
+            _groundRaycastDistance, 
+            _groundLayerMask);
+
         _isGrounded = hit && !_isDashing;
         _anim.SetBool("isGrounded", _isGrounded);
     }
@@ -600,7 +623,48 @@ public class PlayerController : Singleton<PlayerController>
     }
     #endregion
 
-    #region GET LAST POSITION WHEN DIE
+    #region ON DEAD AREA
+
+    public void OnDeadArea()
+    {
+        GameManager.GameState = GameState.HitDeadArea;
+
+        _isDead = true;
+
+        if (GameManager.GameState == GameState.HitDeadArea && _isDead)
+        {
+            //_anim.SetTrigger("Dead");
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            PanelSlideUIController.Instance.FadeIn(() => { GetLastPos(); });
+        }
+    }
+
+    private void GetLastPos()
+    {
+        _isDead = false;
+        GameManager.GameState = GameState.Playing;
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        transform.position = _lastPos;
+    }
+    #endregion
+
+    #region ON DEAD HEALTHPOIN <= 0
+
+    public void Dead()
+    {
+        GameManager.GameState = GameState.GameOver;
+
+        _isDead = true;
+
+        if (GameManager.GameState == GameState.GameOver && _isDead)
+        {
+            _anim.SetTrigger("Dead");
+            _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
+    #endregion
+
+    #region SAVE TRANSFORM
 
     private void SaveLastTransform(float interval)
     {
@@ -622,6 +686,7 @@ public class PlayerController : Singleton<PlayerController>
                             !_isJumping    &&
                             !_isThrowing   &&
                             !_isJumpAttack &&
+                            !_isHurt       &&
                             !_isDefend;
     #endregion
 
@@ -649,7 +714,12 @@ public class PlayerController : Singleton<PlayerController>
     #endregion
 
     #region HURT ANIMATION
-    public void PlayHurt() => _anim.SetBool("Hurt", true);
+    public void PlayHurt() 
+    {
+        _isHurt = true;
+        _anim.SetBool("Hurt", _isHurt);
+        PanelHurtUIController.Instance.Show();
+    }
     #endregion
 
     #endregion UTILITY
@@ -708,7 +778,18 @@ public class PlayerController : Singleton<PlayerController>
 
     public void DisableHurtEvent()
     {
-        _anim.SetBool("Hurt", false);
+        _isHurt = false;
+        _anim.SetBool("Hurt", _isHurt);
+        PanelHurtUIController.Instance.Hide();
+    }
+
+    public void DeadEvent()
+    {
+        if (GameManager.GameState == GameState.GameOver)
+        {
+            //transform.position = checkpoin pos
+            print("Player dead");
+        }
     }
     #endregion
 }

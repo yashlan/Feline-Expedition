@@ -1,6 +1,11 @@
 
 public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
 {
+    #region SOUND 
+    public const string VOLUME_BGM = "VOLUME_BGM";
+    public const string VOLUME_SFX = "VOLUME_SFX";
+    #endregion
+
     #region INPUT KEYCODE
     public const string MOVE_LEFT    = "MOVE_LEFT";
     public const string MOVE_RIGHT   = "MOVE_RIGHT";
@@ -10,7 +15,6 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     public const string ATTACK_THROW = "ATTACK_THROW";
     public const string RECHARGE     = "RECHARGE";
     #endregion
-
 
     #region PLAYER STATS DATA
     public const string HEALTHPOINT      = "HEALTHPOINT";

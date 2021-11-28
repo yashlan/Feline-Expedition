@@ -13,7 +13,7 @@ using UnityEngine.Audio;
 
 namespace DigitalRuby.RainMaker
 {
-    public class BaseRainScript : MonoBehaviour
+    public class BaseRainScript : Singleton<BaseRainScript>
     {
         [Tooltip("Camera the rain should hover over, defaults to main camera")]
         public Camera Camera;
@@ -290,6 +290,17 @@ namespace DigitalRuby.RainMaker
             audioSourceRainLight.Update();
             audioSourceRainMedium.Update();
             audioSourceRainHeavy.Update();
+
+        }
+
+        public static void PauseRainSFX()
+        {
+            Instance.audioSourceRainCurrent.AudioSource.Pause();
+        }
+
+        public static void UnPauseRainSFX()
+        {
+            Instance.audioSourceRainCurrent.AudioSource.UnPause();
         }
 
         protected virtual float RainFallEmissionRate()

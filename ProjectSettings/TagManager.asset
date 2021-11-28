@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Vase
   - FxTemporaire
+  - Dead Area
+  - Finish Area
   layers:
   - Default
   - TransparentFX
@@ -61,6 +63,9 @@ TagManager:
     locked: 0
   - name: VFX
     uniqueID: 4291563873
+    locked: 0
+  - name: Environment Front
+    uniqueID: 2256356961
     locked: 0
   - name: UI
     uniqueID: 1175387119

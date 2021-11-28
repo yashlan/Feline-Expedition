@@ -13,7 +13,7 @@ public class CameraEffect : Singleton<CameraEffect>
     private float _ortographicSize; 
 
     private static float ShakePower => Instance._shakePower;
-    private static float OrtographicSize => Instance._ortographicSize;
+    private static float OrtographicSize { get => Instance._ortographicSize; set => Instance._ortographicSize = value; }
 
     static CinemachineBasicMultiChannelPerlin cinemachineBasic;
     static float firstOrtoSize;
@@ -37,6 +37,11 @@ public class CameraEffect : Singleton<CameraEffect>
         Instance.StartCoroutine(PlayShake(ShakePower));
     }
 
+    public static void PlayShakeEffect(float power)
+    {
+        Instance.StartCoroutine(PlayShake(power));
+    }
+
     private static IEnumerator PlayShake(float power)
     {
         cinemachineBasic.m_AmplitudeGain = power;
@@ -51,13 +56,14 @@ public class CameraEffect : Singleton<CameraEffect>
     #region ZOOM IN/OUT CAMERA
     public static void PlayZoomInOutEffect()
     {
+        OrtographicSize = 18;
         Instance.StartCoroutine(PlayZoomInOut(OrtographicSize));
     }
 
     private static IEnumerator PlayZoomInOut(float ortoSize)
     {
         virtualCamera.m_Lens.OrthographicSize = ortoSize;
-        yield return new WaitUntil(() => PlayerData.IsInvincibleShieldWasUnlocked ? !player.IsDefend : !player.IsCharging);
+        yield return new WaitUntil(() => PlayerData.IsInvincibleShieldUsed() ? !player.IsDefend : !player.IsCharging);
         virtualCamera.m_Lens.OrthographicSize = firstOrtoSize;
         yield break;
     }

@@ -203,7 +203,7 @@ namespace DigitalRuby.RainMaker
             TransformParticleSystem(RainExplosionParticleSystem, initialStartSpeedExplosion, initialStartSizeExplosion);
 
             CheckForCollisionsRainParticles();
-            CheckForCollisionsMistParticles();
+            CheckForCollisionsMistParticles(); 
         }
 
         protected override float RainFallEmissionRate()

@@ -124,11 +124,13 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         get => Instance._lastScene; 
         set => Instance._lastScene = value;
     }
+
     public static string LastCheckPoint 
     {
         get => Instance._lastCheckPoint;
         set => Instance._lastCheckPoint = value;
     }
+
     public static bool IsWaterSpearWasUnlocked 
     { 
         get => Instance._isWaterSpearWasUnlocked; 
@@ -199,8 +201,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         DamageReduction = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_REDUCTION, DEFAULT_DAMAGE_REDUCTION + DamageReduction);
         ManaRegen = PlayerPrefs.GetInt(PlayerPrefsKey.MANA_REGEN,             DEFAULT_MANA_REGEN       + ManaRegen);
 
-        _lastScene = PlayerPrefs.GetString(PlayerPrefsKey.LAST_SCENE,           "map_1");
-        _lastCheckPoint = PlayerPrefs.GetString(PlayerPrefsKey.LAST_CHECKPOINT, "map1_point_1");
+        _lastScene = PlayerPrefs.GetString(PlayerPrefsKey.LAST_SCENE,           _lastScene);
+        _lastCheckPoint = PlayerPrefs.GetString(PlayerPrefsKey.LAST_CHECKPOINT, _lastCheckPoint);
     }
     #endregion
 

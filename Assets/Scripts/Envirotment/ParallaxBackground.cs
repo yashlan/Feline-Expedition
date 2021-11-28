@@ -11,20 +11,26 @@ public class ParallaxBackground : MonoBehaviour
 	private int _mgOrder; //order in layer backgroound
 	[SerializeField]
 	private int _fgOrder; //order in layer foregroound
+	[SerializeField]
+	private int _fgOrder2; //order in layer foregroound
 
 	[Header("Background")]
 	[SerializeField]
-	private Renderer _background;
+	private SpriteRenderer _background;
 	[SerializeField]
 	private float _speedBG;
 	[SerializeField]
-	private Renderer _midground;
+	private SpriteRenderer _midground;
 	[SerializeField]
 	private float _speedMG;
 	[SerializeField]
-	private Renderer _foreground;
+	private SpriteRenderer _foreground;
 	[SerializeField]
 	private float _speedFG;
+	[SerializeField]
+	private SpriteRenderer _foreground2;
+	[SerializeField]
+	private float _speedFG2;
 
 	private Transform _camera => Camera.main.transform;
 	float startPosX;
@@ -39,6 +45,7 @@ public class ParallaxBackground : MonoBehaviour
 			_background.sortingOrder = _bgOrder;
 			_midground.sortingOrder = _mgOrder;
 			_foreground.sortingOrder = _fgOrder;
+			_foreground2.sortingOrder = _fgOrder2;
 		}
 	}
 
@@ -63,6 +70,12 @@ public class ParallaxBackground : MonoBehaviour
 		{
 			float offset = (x * _speedFG) % 1;
 			_foreground.material.mainTextureOffset = new Vector2(offset, _foreground.material.mainTextureOffset.y);
+		}
+
+		if (_foreground2 != null)
+		{
+			float offset = (x * _speedFG2) % 1;
+			_foreground2.material.mainTextureOffset = new Vector2(offset, _foreground2.material.mainTextureOffset.y);
 		}
 	}
 }

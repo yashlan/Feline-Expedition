@@ -8,8 +8,6 @@ public class PlayerMelee : MonoBehaviour
     [SerializeField]
     private GameObject _meleeEffect;
 
-    private float delay;
-    private float delay2;
     PolygonCollider2D _polygonCollider;
     GameObject _meleeEffectClone;
 
@@ -33,10 +31,9 @@ public class PlayerMelee : MonoBehaviour
     {
         var tag = collision.gameObject.tag;
 
-        if (_tagList.Find(t => t.Equals(tag)) != null && Time.time > delay)
+        if (_tagList.Find(t => t.Equals(tag)) != null)
         {
             TakeDamage(collision);
-            delay = Time.time + _player.CoolDownAttack;
         }
     }
 
@@ -44,10 +41,9 @@ public class PlayerMelee : MonoBehaviour
     {
         var tag = collision.gameObject.tag;
 
-        if (_tagList.Find(t => t.Equals(tag)) != null && Time.time > delay2)
+        if (_tagList.Find(t => t.Equals(tag)) != null)
         {
             TakeDamage(collision);
-            delay2 = Time.time + _player.CoolDownSpearAttack;
         }
     }
 
