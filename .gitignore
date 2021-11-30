@@ -35,5 +35,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+*.rar
+*.zip
 
 [Ff]ile Export/

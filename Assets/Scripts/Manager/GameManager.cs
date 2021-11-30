@@ -26,13 +26,11 @@ public class GameManager : Singleton<GameManager>
 
     public static GameState GameState { get => Instance._gameState; set => Instance._gameState = value; }
 
-    // Start is called before the first frame update
     void Start()
     {
         _gameState = GameState.Playing;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //goto menu sementara
@@ -62,6 +60,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
 
         AudioManager.PauseBGM();
+        AudioManager.StopSFX();
 
         if (BaseRainScript.Instance != null)
             BaseRainScript.PauseRainSFX();
@@ -74,7 +73,6 @@ public class GameManager : Singleton<GameManager>
 
         Time.timeScale = 1;
 
-        AudioManager.PlaySfx(AudioManager.Instance.ButtonClickClip);
         AudioManager.UnPauseBGM();
 
         if (BaseRainScript.Instance != null)

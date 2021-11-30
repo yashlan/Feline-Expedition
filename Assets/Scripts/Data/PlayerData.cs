@@ -165,7 +165,6 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private const int DEFAULT_MANAPOINT        = 100;
     private const int DEFAULT_DAMAGE_MELEE     = 10;
     private const int DEFAULT_DAMAGE_MAGIC     = 7;
-    private const float DEFAULT_MOVE_SPEED     = 25;
     private const int DEFAULT_DAMAGE_REDUCTION = 0;
     private const int DEFAULT_MANA_REGEN       = 3;
     #endregion

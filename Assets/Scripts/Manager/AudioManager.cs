@@ -22,12 +22,14 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip BgmClip;
 
     [Header("SFX UI")]
-    public AudioClip ButtonClickClip;
+    public AudioClip ButtonEnterClip;
 
     [Header("SFX Environment")]
-    public AudioClip BrigdeClip;
+    public AudioClip EnviThunderClip;
+    public AudioClip EnviBrigdeClip;
 
     [Header("SFX Player")]
+    public AudioClip PlayerBasicAttack1Clip;
     public AudioClip PlayerDeadClip;
 
     [Header("SFX Enemy")]
@@ -40,10 +42,17 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
 
     void Start()
     {
+        Load();
+        SetBackgroundMusic(BgmClip);
+    }
+
+    void Load()
+    {
         volume_BGM = PlayerPrefs.GetFloat(PlayerPrefsKey.VOLUME_BGM, volume_BGM);
         volume_SFX = PlayerPrefs.GetFloat(PlayerPrefsKey.VOLUME_SFX, volume_SFX);
 
-        SetBackgroundMusic(BgmClip);
+        AudioMixer.SetFloat(Exspose_BGM, Mathf.Log10(volume_BGM) * 20);
+        AudioMixer.SetFloat(Exspose_SFX, Mathf.Log10(volume_SFX) * 20);
     }
 
     public static void PauseBGM()
@@ -54,6 +63,11 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public static void UnPauseBGM()
     {
         Instance.BGMSource.UnPause();
+    }
+
+    public static void StopSFX()
+    {
+        Instance.SFXSource.Stop();
     }
 
     public static void PlaySfx(AudioClip clip)
@@ -69,7 +83,6 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
 
     public static void SetBackgroundMusic(AudioClip clip)
     {
-
         if (clip == null)
         {
             Debug.LogWarning("audio clip bgm belum di isi");
@@ -80,12 +93,4 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
         Instance.BGMSource.clip = clip;
         Instance.BGMSource.Play();
     }
-
-    #region Button Event Listener
-
-    public void PlayClickSound()
-    {
-        PlaySfx(ButtonClickClip);
-    }
-    #endregion
 }
