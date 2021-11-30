@@ -117,6 +117,7 @@ public class PlayerMelee : MonoBehaviour
 
     private IEnumerator Melee()
     {
+        AudioManager.PlaySfx(AudioManager.Instance.PlayerBasicAttack1Clip);
         _polygonCollider.enabled = true;
         yield return new WaitForSeconds(0.025f);
         _polygonCollider.enabled = false;

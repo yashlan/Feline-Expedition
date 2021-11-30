@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    //BUAT BUTTON NEW GAME
     public void ChangeSceneOnClick(string name)
     {
         if(!PlayerPrefs.HasKey(PlayerPrefsKey.LAST_SCENE))
@@ -18,8 +17,13 @@ public class SceneTransition : MonoBehaviour
         }
 
         SceneManager.LoadScene(name);
+        AudioManager.UnPauseBGM();
+        Time.timeScale = 1;
     }
 
     //BUAT BUTTON CONTINUE
-    public void GotoLastSceneOnClick() => SceneManager.LoadScene(PlayerData.LastScene);
+    public void GotoLastSceneOnClick()
+    {
+        SceneManager.LoadScene(PlayerData.LastScene);
+    } 
 }

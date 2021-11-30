@@ -46,12 +46,14 @@ public class WeatherEffect : MonoBehaviour
     {
         StartCoroutine(ShowThunder(0.05f, 5f));
 
-        var randomTime = Random.Range(3f, 7f);
+        var randomTime = Random.Range(15f, 20f);
         Invoke(nameof(StartThunderEffect), randomTime);
     }
 
     private IEnumerator ShowThunder(float timer, float maxIntensity)
     {
+        AudioManager.PlaySfx(AudioManager.Instance.EnviThunderClip);
+
         _light.intensity = maxIntensity;
         yield return new WaitForSeconds(timer);
         _light.intensity = _firstIntensity;

@@ -2331,9 +2331,9 @@ AudioSource:
   m_GameObject: {fileID: 798677376}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: cc4bc7d6a847e5648bef8a1661b31742, type: 2}
+  OutputAudioMixerGroup: {fileID: 7552228742489234644, guid: cc4bc7d6a847e5648bef8a1661b31742, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -2436,8 +2436,10 @@ MonoBehaviour:
   volume_BGM: 1
   volume_SFX: 1
   BgmClip: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
-  ButtonClickClip: {fileID: 0}
-  BrigdeClip: {fileID: 0}
+  ButtonEnterClip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
+  EnviThunderClip: {fileID: 8300000, guid: 0afd185b9304c1b4fbe757fe14c4718b, type: 3}
+  EnviBrigdeClip: {fileID: 0}
+  PlayerBasicAttack1Clip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
   PlayerDeadClip: {fileID: 0}
   EnemyDeadClip: {fileID: 0}
   BossBattleDeadClip: {fileID: 0}
@@ -3006,7 +3008,6 @@ GameObject:
   m_Component:
   - component: {fileID: 956936736}
   - component: {fileID: 956936735}
-  - component: {fileID: 956936737}
   m_Layer: 0
   m_Name: Global Light 2D
   m_TagString: Untagged
@@ -3069,23 +3070,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &956936737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956936734}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e9c4e7c1203c3a42b61768b310cccc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _useDynamicRainEffect: 0
-  _rain: {fileID: 0}
-  _newRainIntensity: 0
-  _useThunderEffect: 0
-  _light: {fileID: 956936735}
 --- !u!1 &958295493
 GameObject:
   m_ObjectHideFlags: 0
