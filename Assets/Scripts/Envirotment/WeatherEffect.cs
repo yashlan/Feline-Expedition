@@ -44,23 +44,23 @@ public class WeatherEffect : MonoBehaviour
 
     private void StartThunderEffect()
     {
-        StartCoroutine(ShowThunder(0.05f, 5f));
+        StartCoroutine(IStartThunderEffect(0.05f, 5f));
 
         var randomTime = Random.Range(15f, 20f);
         Invoke(nameof(StartThunderEffect), randomTime);
     }
 
-    private IEnumerator ShowThunder(float timer, float maxIntensity)
+    private IEnumerator IStartThunderEffect(float timer, float maxIntensity)
     {
+        _light.intensity = maxIntensity;
+        yield return new WaitForSeconds(timer);
+        _light.intensity = _firstIntensity;
+        yield return new WaitForSeconds(timer);
+        _light.intensity = maxIntensity;
+        yield return new WaitForSeconds(timer);
+        _light.intensity = _firstIntensity;
+        yield return new WaitForSeconds(3f);
         AudioManager.PlaySfx(AudioManager.Instance.EnviThunderClip);
-
-        _light.intensity = maxIntensity;
-        yield return new WaitForSeconds(timer);
-        _light.intensity = _firstIntensity;
-        yield return new WaitForSeconds(timer);
-        _light.intensity = maxIntensity;
-        yield return new WaitForSeconds(timer);
-        _light.intensity = _firstIntensity;
         yield break;
     }
 }

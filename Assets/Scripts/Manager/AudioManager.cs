@@ -19,14 +19,21 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public float volume_SFX;
 
     [Header("Background Music")]
-    public AudioClip BgmClip;
+    public AudioClip[] BgmClip;
 
     [Header("SFX UI")]
     public AudioClip ButtonEnterClip;
 
-    [Header("SFX Environment")]
+    [Header("SFX Environment Map 1")]
     public AudioClip EnviThunderClip;
     public AudioClip EnviBrigdeClip;
+    public AudioClip EnviLeverBrigdeClip;
+
+    [Header("SFX Environment Map 2")]
+    public AudioClip Envi2LoremIpsumClip;
+
+    [Header("SFX Environment Map 3")]
+    public AudioClip Envi3LoremIpsumClip;
 
     [Header("SFX Player")]
     public AudioClip PlayerBasicAttack1Clip;
@@ -39,11 +46,10 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip BossBattleDeadClip;
 
 
-
     void Start()
     {
         Load();
-        SetBackgroundMusic(BgmClip);
+        SetBackgroundMusic(BgmClip[0]);
     }
 
     void Load()

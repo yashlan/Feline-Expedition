@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -136,9 +137,7 @@ public class PlayerController : Singleton<PlayerController>
     private Rigidbody2D _rb;
     private Animator _anim;
     private GameObject _dashFXClone;
-
     private float _horizontal;
-
     private float _delayAttack;
     private float _delayJumpAttack;
     private float _delayThrow;
@@ -146,19 +145,20 @@ public class PlayerController : Singleton<PlayerController>
     private float _delayLastPos;
     private float _delaycanRecharge;
     private float _delaycanShowShield;
-
     private float _delta;
-
+    private float _delayAfterDash;
     private Vector3 _lastPos;
+    private bool _wasFirstJump = false;
 
+    #region GETTER SETTER
     public Animator Anim { get => _anim; set => _anim = value; }
     public Rigidbody2D Rigidbody { get => _rb; set => _rb = value; }
     public int HealthPoint { get => _healthPoint; set => _healthPoint = value; }
+    public int DamageReduction { get => _damageReduction; set => _damageReduction = value; }
     public int DamageMelee => _damageMelee;
     public int DamageMagic => _damageMagic;
     public float CoolDownAttack => _coolDownAttack;
     public float CoolDownSpearAttack => _coolDownSpearAttack;
-
     public bool IsTimeComboAttack { get => _isTimeComboAttack; set => _isTimeComboAttack = value; }
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
     public bool IsCharging => _isCharging;
@@ -166,6 +166,10 @@ public class PlayerController : Singleton<PlayerController>
     public bool FacingRight => _facingRight;
     public bool IsGrounded => _isGrounded;
     public bool IsHurt => _isHurt;
+    public bool IsDead => _isDead;
+
+    #endregion
+
 
     void Start()
     {
@@ -181,10 +185,14 @@ public class PlayerController : Singleton<PlayerController>
             PlayerData.DamageMelee,
             PlayerData.DamageMagic,
             PlayerData.ManaRegen);
+
     }
 
     void Update()
     {
+        if (_isDead)
+            return;
+
         if(GameManager.GameState == GameState.Playing)
         {
             InputPlayer();
@@ -202,6 +210,9 @@ public class PlayerController : Singleton<PlayerController>
 
     void FixedUpdate()
     {
+        if (_isDead)
+            return;
+
         if (GameManager.GameState == GameState.Playing)
         {
             WallSlide();
@@ -273,7 +284,6 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    bool _wasFirstJump = false;
     private void Jump()
     {
         if (Input.GetKeyDown(OptionsManager.JumpKey) && (!_isCharging || !_isDefend))
@@ -292,8 +302,7 @@ public class PlayerController : Singleton<PlayerController>
                 _wasFirstJump = false;
                 Invoke(nameof(DecreaseJumpAmount), 0.1f);
             }
-            else if ((Input.GetKey(OptionsManager.LeftKey) && _facingRight ||
-                !_facingRight && Input.GetKey(OptionsManager.RightKey)) && 
+            else if ((Input.GetKey(OptionsManager.LeftKey) && (_facingRight || !_facingRight) && Input.GetKey(OptionsManager.RightKey)) && 
                 (_isWallSliding || _isTouchingWall) && _jumpAmount > 0)
             {
                 _rb.velocity = Vector2.zero;
@@ -302,8 +311,7 @@ public class PlayerController : Singleton<PlayerController>
                 _wasFirstJump = true;
                 Invoke(nameof(DecreaseJumpAmount), 0.1f);
             }
-            else if ((Input.GetKey(OptionsManager.LeftKey) && _facingRight ||
-                !_facingRight && Input.GetKey(OptionsManager.RightKey)) && 
+            else if ((Input.GetKey(OptionsManager.LeftKey) && (_facingRight || !_facingRight) && Input.GetKey(OptionsManager.RightKey)) && 
                 (_isWallSliding || _isTouchingWall) && _jumpAmount == 1 && _wasFirstJump)
             {
                 _rb.velocity = Vector2.zero;
@@ -367,15 +375,7 @@ public class PlayerController : Singleton<PlayerController>
         }
 
         _isAttacking = _isTimeComboAttack;
-
-        if(_isAttacking && Time.time < _delayAttack)
-        {
-            _rb.constraints = RigidbodyConstraints2D.FreezePositionX;
-            _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
     }
-
-    float _delayAfterDash;
 
     private void Dash()
     {
@@ -427,7 +427,7 @@ public class PlayerController : Singleton<PlayerController>
             CameraEffect.PlayZoomInOutEffect();
 
         if (Input.GetKey(OptionsManager.RechargeKey)
-            && IsIdling() && Time.time > _delaycanRecharge)
+            && IsIdle() && Time.time > _delaycanRecharge)
         {
             StartCoroutine(ReChargeMana());
         }
@@ -442,7 +442,7 @@ public class PlayerController : Singleton<PlayerController>
             CameraEffect.PlayZoomInOutEffect();
 
         if (Input.GetKey(OptionsManager.AttackThrowKey)
-            && IsIdling() && Time.time > _delaycanShowShield)
+            && IsIdle() && Time.time > _delaycanShowShield)
         {
             StartCoroutine(ShowShield());
         }
@@ -533,6 +533,31 @@ public class PlayerController : Singleton<PlayerController>
     #endregion ABILITY
 
     #region UTILITY
+
+    #region KNOCKBACK
+
+    public void KnockBack(float force, Transform enemy)
+    {
+        _isHurt = true;
+        _anim.SetBool("Hurt", _isHurt);
+        PanelHurtUIController.Instance.Show();
+        StartCoroutine(IKnockBack(force, enemy));
+    }
+
+    IEnumerator IKnockBack(float force, Transform enemy)
+    {
+        while (_isHurt)
+        {
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+
+            Rigidbody.AddForce(
+                (enemy.position.x < transform.position.x ?
+                Vector2.right : Vector2.left) * force,
+                ForceMode2D.Impulse);
+            yield return null;
+        }
+    }
+    #endregion
 
     #region LOAD PLAYER STATS
 
@@ -625,15 +650,14 @@ public class PlayerController : Singleton<PlayerController>
 
     #region ON DEAD AREA
 
-    public void OnDeadArea()
+    public void OnHitDeadArea()
     {
-        GameManager.GameState = GameState.HitDeadArea;
+        GameManager.ChangeGameState(GameState.HitDeadArea);
 
         _isDead = true;
 
         if (GameManager.GameState == GameState.HitDeadArea && _isDead)
         {
-            //_anim.SetTrigger("Dead");
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
             PanelSlideUIController.Instance.FadeIn(() => { GetLastPos(); });
         }
@@ -648,11 +672,11 @@ public class PlayerController : Singleton<PlayerController>
     }
     #endregion
 
-    #region ON DEAD HEALTHPOIN <= 0
+    #region ON DEAD HEALTHPOINT <= 0 (GAME OVER)
 
     public void Dead()
     {
-        GameManager.GameState = GameState.GameOver;
+        GameManager.ChangeGameState(GameState.GameOver);
 
         _isDead = true;
 
@@ -660,7 +684,16 @@ public class PlayerController : Singleton<PlayerController>
         {
             _anim.SetTrigger("Dead");
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            PanelSlideUIController.Instance.FadeIn(() => { Restart(); });
         }
+    }
+
+    private void Restart()
+    {
+        _isDead = false;
+        GameManager.ChangeGameState(GameState.Playing);
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        SceneManager.LoadScene(PlayerData.LastScene);
     }
     #endregion
 
@@ -678,7 +711,7 @@ public class PlayerController : Singleton<PlayerController>
 
     #region CHECK IS IDLE
 
-    private bool IsIdling() => _isGrounded &&
+    public bool IsIdle() => _isGrounded    &&
                             !_isMoving     &&
                             !_isAttacking  &&
                             !_isCharging   &&
@@ -710,15 +743,6 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
-    }
-    #endregion
-
-    #region HURT ANIMATION
-    public void PlayHurt() 
-    {
-        _isHurt = true;
-        _anim.SetBool("Hurt", _isHurt);
-        PanelHurtUIController.Instance.Show();
     }
     #endregion
 
@@ -780,7 +804,6 @@ public class PlayerController : Singleton<PlayerController>
     {
         _isHurt = false;
         _anim.SetBool("Hurt", _isHurt);
-        PanelHurtUIController.Instance.Hide();
     }
 
     public void DeadEvent()

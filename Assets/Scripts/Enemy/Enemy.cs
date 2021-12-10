@@ -1,115 +1,159 @@
+using System;
+using System.Collections;
 using UnityEngine;
 public enum EnemyType
 {
-    Easy, Medium, Hard, Expert, BossBattle
+    GreenSlime,
+
 }
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Type")]
+    public EnemyType enemyType;
+
     [Header("Melee")]
     public EnemyMelee EnemyMelee;
-
     public float AttackRadius;
 
+    [Header("Facing")]
     public bool FacingRight;
 
-    public Animator Anim;
-    public Rigidbody2D Rigidbody;
+    [Header("KnockBack")]
+    public bool isKnock;
+
+    [Header("Stat Enemy")]
+    public int HealthPoint;
+    public int Damage;
+    public int DamageReduction;
+    public float Speed;
+    public float CoolDownAttack;
 
     [Header("Ground Raycast")]
     public Transform GroundCheckPoint;
     public float GroundCastDistance;
     public LayerMask GroundMask;
 
-    [Header("Stat Enemy")]
-    public EnemyType EnemyType;
-    public int HealthPoint;
-    public int Damage;
-    public float Speed;
-    public float CoolDownAttack;
+    [HideInInspector] public Animator Anim;
+    [HideInInspector] public Rigidbody2D Rigidbody;
 
-    PlayerController _target => PlayerController.Instance;
     float distance;
     float delayAttack;
     RaycastHit2D hitGround;
     float horizontal;
+    Vector3 firstPos;
+    public PlayerController _target => PlayerController.Instance;
 
-    public void SetNewStats(
-        EnemyType EnemyType, 
-        int HealthPoint, 
-        int Damage, 
-        float Speed,
-        float CoolDownAttack)
+    void Awake()
     {
-        this.EnemyType = EnemyType;
-        this.HealthPoint = HealthPoint;
-        this.Damage = Damage;
-        this.Speed = Speed;
-        this.CoolDownAttack = CoolDownAttack;
+        Anim = GetComponent<Animator>();
+        Rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Movement()
+    private void Setup(int healthPoint, int damage, int damageReduction, float speed, float coolDownAttack)
     {
-        if (_target == null) return;
+        HealthPoint = healthPoint;
+        Damage = damage;
+        DamageReduction = damageReduction;
+        Speed = speed;
+        CoolDownAttack = coolDownAttack;
+    }
+    public void SetFirstPosition()
+    {
+        firstPos = transform.position;
+    }
 
-        Rigidbody.velocity = new Vector2(
-            (_target.transform.position.x > transform.position.x) && hitGround ? Speed : -Speed, 0);
+    public void SetNewStats(EnemyType enemyType)
+    {
+        if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 10, 0.7f);
+    }
+
+    private void MoveToTarget()
+    {
+        Rigidbody.velocity = new Vector2(Speed * horizontal, 0);
+        transform.LookAt(_target.transform);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    private void MoveToFirstPosition()
+    {
+        Rigidbody.velocity = new Vector2(transform.position.x < firstPos.x ? Speed : -Speed, 0);
+        transform.LookAt(firstPos);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void HandleFacing()
     {
-        horizontal = Speed > 0 ? 1 : -1;
-
-        if (horizontal > 0 && !FacingRight)
-        {
-            Flip();
-        }
-        else if (horizontal < 0 && FacingRight)
-        {
-            Flip();
-        }
+        Flip();
     }
 
     private void Flip()
     {
-        FacingRight = !FacingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        var scale = transform.localScale;
+
+        scale.x = Mathf.Abs(scale.x);
+
+        if (_target.transform.position.x < transform.position.x) scale.x *= -1;
+
+        transform.localScale = scale;
+
+        FacingRight = scale.x > 0;
+
+        horizontal = scale.x > 0 ? 1 : -1;
     }
 
     public void GroundCheck()
     {
-        hitGround = Physics2D.Raycast(GroundCheckPoint.position, Vector2.down, GroundCastDistance, GroundMask);
+        hitGround = Physics2D.Raycast(
+            GroundCheckPoint.position, 
+            Vector2.down, 
+            GroundCastDistance, 
+            GroundMask);
 
         if (!hitGround) 
             Speed = FacingRight ? -Speed : Speed;
     }
 
-    public void SetAttackPoint()
+    public void SetAttackState()
     {
-        if (_target == null) return;
-
-        if (hitGround)
+        if (!isKnock)
         {
-            distance = Vector2.Distance(transform.position, _target.transform.position);
-
-            if (distance <= AttackRadius && _target.IsGrounded)
+            if (hitGround)
             {
-                transform.LookAt(_target.transform);
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
+                distance = Vector2.Distance(transform.position, _target.transform.position);
 
-            if (delayAttack < Time.time && distance <= 7f)
-            {
-                print("attacking");
-                Anim.SetBool("Attack", true);
-                delayAttack = Time.time + CoolDownAttack;
-            }
+                if (distance <= AttackRadius && _target.IsGrounded)
+                {
+                    MoveToTarget();
+                }
+                else
+                    MoveToFirstPosition();
 
-            Rigidbody.constraints = Anim.GetBool("Attack") ?
-                RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation;
+                if (Time.time > delayAttack && distance < 6f)
+                {
+                    Anim.SetTrigger("Attack");
+                    delayAttack = Time.time + CoolDownAttack;
+                }
+            }
         }
+    }
+
+    public void KnockBack(float force)
+    {
+        StartCoroutine(IKnockBack(force));
+    }
+
+    IEnumerator IKnockBack(float force)
+    {
+        isKnock = true;
+        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+
+        Rigidbody.AddForce(
+            (_target.transform.position.x < transform.position.x ? 
+            Vector2.right : Vector2.left) * force,
+            ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.2f);
+        isKnock = false;
     }
 
     #region DEBUG

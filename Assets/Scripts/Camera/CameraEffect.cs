@@ -13,7 +13,7 @@ public class CameraEffect : Singleton<CameraEffect>
     private float _ortographicSize; 
 
     private static float ShakePower => Instance._shakePower;
-    private static float OrtographicSize { get => Instance._ortographicSize; set => Instance._ortographicSize = value; }
+    public static float OrtographicSize { get => Instance._ortographicSize; set => Instance._ortographicSize = value; }
 
     static CinemachineBasicMultiChannelPerlin cinemachineBasic;
     static float firstOrtoSize;

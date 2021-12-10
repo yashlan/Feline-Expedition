@@ -20,10 +20,23 @@ public class SliderVolumeUI : MonoBehaviour
         slider = GetComponent<Slider>();
 
         if (VolumeType == SliderVolumeType.BGM)
-            slider.value = PlayerPrefs.GetFloat(PlayerPrefsKey.VOLUME_BGM);
+            slider.value = manager.volume_BGM;
         else
-            slider.value = PlayerPrefs.GetFloat(PlayerPrefsKey.VOLUME_SFX);
+            slider.value = manager.volume_SFX;
     }
+
+    //void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.RightArrow))
+    //    {
+    //        slider.value = Mathf.MoveTowards(slider.value, slider.maxValue, Time.deltaTime);
+    //    }
+
+    //    if (Input.GetKey(KeyCode.LeftArrow))
+    //    {
+    //        slider.value = Mathf.MoveTowards(slider.value, slider.minValue, Time.deltaTime);
+    //    }
+    //}
 
     #region ON VALUE CHANGED LISTENER
 

@@ -5,17 +5,17 @@ using UnityEngine;
 public class EnemyMelee : MonoBehaviour
 {
     PlayerController _player => PlayerController.Instance;
-    EnemyController _enemy;
+    EnemyGreenSlime _enemy;
     PolygonCollider2D _polygonCollider; 
 
 
     void Start()
     {
         _polygonCollider = GetComponent<PolygonCollider2D>();
-        _enemy = GetComponentInParent<EnemyController>();
+        _enemy = GetComponentInParent<EnemyGreenSlime>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
@@ -25,15 +25,18 @@ public class EnemyMelee : MonoBehaviour
 
     private void TakeDamage()
     {
-        if (_player == null)
+        if (_player.IsDead)
             return;
 
         CameraEffect.PlayShakeEffect();
 
-        _player.PlayHurt();
+        _player.KnockBack(1, transform.parent);
 
-        if (_player.HealthPoint > 0)
-            _player.HealthPoint -= _enemy.Damage; // dikurang damage reduction
+        _player.HealthPoint -= (_enemy.Damage - _player.DamageReduction);
+        SliderHealthPlayerUI.UpdateCurrentHealth();
+
+        if (_player.HealthPoint <= 0)
+            _player.Dead();
     }
 
     #region FOR EVENT ANIMATION
