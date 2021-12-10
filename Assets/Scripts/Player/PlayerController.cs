@@ -133,6 +133,8 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField]
     private bool _isJumping;
 
+    private BoxCollider2D _boxCollider;
+    private CircleCollider2D _circleCollider;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rb;
     private Animator _anim;
@@ -176,6 +178,8 @@ public class PlayerController : Singleton<PlayerController>
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _circleCollider = GetComponent<CircleCollider2D>();
 
         //load stats data
         LoadPlayerData(
@@ -217,6 +221,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             WallSlide();
             HandleFacing();
+            HandleFrictionPhysicsMaterial();
             SaveLastTransform(0.5f);
 
             if (_isDashing)
@@ -743,6 +748,16 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
+    }
+    #endregion
+
+    #region HANDLE PHYSIC MATERIAL
+
+    private void HandleFrictionPhysicsMaterial()
+    {
+        _rb.sharedMaterial.friction = 
+        _circleCollider.sharedMaterial.friction = 
+        _boxCollider.sharedMaterial.friction = !_isGrounded ? 0f : 0.5f;
     }
     #endregion
 

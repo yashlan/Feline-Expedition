@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
     RaycastHit2D hitGround;
     float horizontal;
     Vector3 firstPos;
+
     public PlayerController _target => PlayerController.Instance;
 
     void Awake()
@@ -65,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     public void SetNewStats(EnemyType enemyType)
     {
-        if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 10, 0.7f);
+        if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 7, 0.7f);
     }
 
     private void MoveToTarget()
