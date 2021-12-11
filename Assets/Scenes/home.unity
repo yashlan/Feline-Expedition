@@ -2214,7 +2214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &439423575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4027,6 +4027,8 @@ MonoBehaviour:
   EnviThunderClip: {fileID: 8300000, guid: 0afd185b9304c1b4fbe757fe14c4718b, type: 3}
   EnviBrigdeClip: {fileID: 0}
   EnviLeverBrigdeClip: {fileID: 0}
+  Envi2LoremIpsumClip: {fileID: 0}
+  Envi3LoremIpsumClip: {fileID: 0}
   PlayerBasicAttack1Clip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
   PlayerDeadClip: {fileID: 0}
   EnemyDeadClip: {fileID: 0}
@@ -5688,7 +5690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1056065564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5757,7 +5759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056065563}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5722654fee02dee45ab97d7097ebaa28, type: 3}
   m_Name: 
@@ -5773,7 +5775,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056065563}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e32d9f1c9dd6b354d91e1bd65176b047, type: 3}
   m_Name: 
@@ -7708,7 +7710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400.6, y: -50}
+  m_AnchoredPosition: {x: 400.60004, y: -50}
   m_SizeDelta: {x: 300, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489956894

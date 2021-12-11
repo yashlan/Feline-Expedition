@@ -17,55 +17,56 @@ namespace NoodleEater.Caravan
 
         private InputLayerSystem _baseInputLayerSystem;
 
-        private InputLayer _currentLayer = InputLayer.BgmUI;
+        private InputLayer _currentLayer = InputLayer.SliderSfxUI;
         
-        // Start is called before the first frame update
         void Start()
         {
             _baseInputLayerSystem = GetComponent<InputLayerSystem>();
             
-            _baseInputLayerSystem.BindAction(InputLayer.SfxUI, SetSFXVolume);
-            _baseInputLayerSystem.BindAction(InputLayer.BgmUI, SetBGMVolume);
+            _baseInputLayerSystem.BindAction(InputLayer.SliderSfxUI, SetSFXVolume);
+            _baseInputLayerSystem.BindAction(InputLayer.SliderBgmUI, SetBGMVolume);
             
             _baseInputLayerSystem.OnLayerChange += (layer) =>
             {
-                if (layer == InputLayer.SfxUI)
+                if (layer == InputLayer.SliderSfxUI)
                 {
                     bgmText.color = Color.black;
                     SfxText.color = Color.red;
                 }
 
-                if (layer == InputLayer.BgmUI)
+                if (layer == InputLayer.SliderBgmUI)
                 {
                     bgmText.color = Color.red;
                     SfxText.color = Color.black;
                 }
             };
             
-            _baseInputLayerSystem.EnableLayer(InputLayer.SfxUI);
+            _baseInputLayerSystem.EnableLayer(InputLayer.SliderSfxUI);
         }
 
-        private void Update()
+        void Update()
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) && _currentLayer == InputLayer.BgmUI)
+            if (Input.GetKeyDown(KeyCode.DownArrow) && _currentLayer == InputLayer.SliderBgmUI)
             {
-                _currentLayer = InputLayer.SfxUI;
-                _baseInputLayerSystem.EnableLayer(InputLayer.BgmUI);
+                _currentLayer = InputLayer.SliderSfxUI;
+                _baseInputLayerSystem.EnableLayer(InputLayer.SliderBgmUI);
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) && _currentLayer == InputLayer.SfxUI)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && _currentLayer == InputLayer.SliderSfxUI)
             {
-                _currentLayer = InputLayer.BgmUI;
-                _baseInputLayerSystem.EnableLayer(InputLayer.SfxUI);
+                _currentLayer = InputLayer.SliderBgmUI;
+                _baseInputLayerSystem.EnableLayer(InputLayer.SliderSfxUI);
             }
         }
 
-/*        [MenuItem("Test/Layer")]
+#if UNITY_EDITOR
+        [MenuItem("Test/Layer")]
         private static void Test()
         {
-            InputLayer layer = InputLayer.SfxUI;
+            InputLayer layer = InputLayer.SliderSfxUI;
             Debug.Log((layer - 1));
-        }*/
+        }
+#endif
 
         public void SetSFXVolume()
         {
