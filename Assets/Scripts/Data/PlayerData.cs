@@ -35,7 +35,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private int _totalRuneSlotUsed;
     [SerializeField]
-    private int _gold;
+    private int _coin;
 
     [Header("Purchased Items")]
     [SerializeField]
@@ -182,7 +182,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private void Load()
     {
         #region SHOP
-        _gold = PlayerPrefs.GetInt(PlayerPrefsKey.GOLD,                              _gold);
+        _coin = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                              _coin);
         _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, _totalRuneSlotUsed);
         #endregion
 
@@ -243,6 +243,11 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private int IntValueOf(bool val) => val ? 1 : 0;
     private bool BoolValueOf(int val) => val != 0;
     #endregion
+
+    public static void AddCoin(int amount)
+    {
+        Instance._coin += amount;
+    }
 
     public void OnRuneEquip() // belum selesai
     {

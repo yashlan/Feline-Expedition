@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class ButtonInputController : MonoBehaviour
 {
     [SerializeField]
-    private Transform _panelOptions;
+    private Transform _panelControl;
     [SerializeField]
     private GameObject _panelAssignKey;
 
-    private Text buttonText;
+    private Image buttonImage;
     private Event _keyEvent;
     private KeyCode _newKey;
     private bool _waitingForKey = false;
@@ -21,18 +21,18 @@ public class ButtonInputController : MonoBehaviour
             StartCoroutine(AssignKey(keyName));
     }
 
-    public void SendTextOnClick(Text text) => buttonText = text;
+    public void SendImageOnClick(Image image) => buttonImage = image;
 
     public void ResetDefaultInputOnClick()
     {
         OptionsManager.SetDefaultButtonInput();
-        LoadButtonText();
+        LoadButtonSprite();
     }
     #endregion
 
-    void Start()
+    void Awake()
     {
-        LoadButtonText();
+        LoadButtonSprite();
     }
 
     void OnGUI()
@@ -49,27 +49,32 @@ public class ButtonInputController : MonoBehaviour
     /// <summary>
     /// button name harus sama dengan nama button gameObject yg ada di inspector
     /// </summary>
-    private void SetButtonText(string buttonName, string value)
+    private void SetButtonSprite(string buttonName, Sprite value)
     {
-        for (int i = 0; i < _panelOptions.childCount; i++)
+        for (int i = 0; i < _panelControl.childCount; i++)
         {
-            var child = _panelOptions.GetChild(i);
+            var button = _panelControl.GetChild(i);
 
-            if (child.name == buttonName)
-                child.GetComponentInChildren<Text>().text = value;                
+            if (button.name == buttonName)
+                button.GetComponent<Image>().sprite = value;                
         }
     }
 
-    private void LoadButtonText()
+    private void LoadButtonSprite()
     {
-        SetButtonText("Button Left",         OptionsManager.LeftKey.ToString());
-        SetButtonText("Button Right",        OptionsManager.RightKey.ToString());
-        SetButtonText("Button Jump",         OptionsManager.JumpKey.ToString());
-        SetButtonText("Button Dash",         OptionsManager.DashKey.ToString());
-        SetButtonText("Button Throw Attack", OptionsManager.AttackThrowKey.ToString());
-        SetButtonText("Button Melee Attack", OptionsManager.AttackMeleeKey.ToString());
-        SetButtonText("Button Recharge",     OptionsManager.RechargeKey.ToString());
+        SetButtonSprite("Button Left",         GetSprite(PlayerPrefsKey.MOVE_LEFT));
+        SetButtonSprite("Button Right",        GetSprite(PlayerPrefsKey.MOVE_RIGHT));
+        SetButtonSprite("Button Jump",         GetSprite(PlayerPrefsKey.JUMP));
+        SetButtonSprite("Button Dash",         GetSprite(PlayerPrefsKey.DASH));
+        SetButtonSprite("Button Throw Attack", GetSprite(PlayerPrefsKey.ATTACK_THROW));
+        SetButtonSprite("Button Melee Attack", GetSprite(PlayerPrefsKey.ATTACK_MELEE));
+        SetButtonSprite("Button Recharge",     GetSprite(PlayerPrefsKey.RECHARGE));
+        SetButtonSprite("Button Interaction",  GetSprite(PlayerPrefsKey.INTERACTION));
+        SetButtonSprite("Button Open Map",     GetSprite(PlayerPrefsKey.OPEN_MAP));
     }
+
+    private Sprite GetSprite(string prefsKey) =>
+         Resources.Load<Sprite>($"button/{PlayerPrefs.GetString(prefsKey)}");
 
     private IEnumerator WaitForKey()
     {
@@ -88,46 +93,56 @@ public class ButtonInputController : MonoBehaviour
         {
             case "left":
                 OptionsManager.LeftKey = _newKey;
-                SetNewKey(OptionsManager.LeftKey.ToString(), PlayerPrefsKey.MOVE_LEFT);
+                SetNewKey(PlayerPrefsKey.MOVE_LEFT);
                 break;
 
             case "right":
                 OptionsManager.RightKey = _newKey;
-                SetNewKey(OptionsManager.RightKey.ToString(), PlayerPrefsKey.MOVE_RIGHT);
+                SetNewKey(PlayerPrefsKey.MOVE_RIGHT);
                 break;
 
             case "jump":
                 OptionsManager.JumpKey = _newKey;
-                SetNewKey(OptionsManager.JumpKey.ToString(), PlayerPrefsKey.JUMP);
+                SetNewKey(PlayerPrefsKey.JUMP);
                 break;
 
             case "dash":
                 OptionsManager.DashKey = _newKey;
-                SetNewKey(OptionsManager.DashKey.ToString(), PlayerPrefsKey.DASH);
+                SetNewKey(PlayerPrefsKey.DASH);
                 break;
 
             case "recharge":
                 OptionsManager.RechargeKey = _newKey;
-                SetNewKey(OptionsManager.RechargeKey.ToString(), PlayerPrefsKey.RECHARGE);
+                SetNewKey(PlayerPrefsKey.RECHARGE);
                 break;
 
             case "melee":
                 OptionsManager.AttackMeleeKey = _newKey;
-                SetNewKey(OptionsManager.AttackMeleeKey.ToString(), PlayerPrefsKey.ATTACK_MELEE);
+                SetNewKey(PlayerPrefsKey.ATTACK_MELEE);
                 break;
 
             case "throw":
                 OptionsManager.AttackThrowKey = _newKey;
-                SetNewKey(OptionsManager.AttackThrowKey.ToString(), PlayerPrefsKey.ATTACK_THROW);
+                SetNewKey(PlayerPrefsKey.ATTACK_THROW);
+                break;
+
+            case "interaction":
+                OptionsManager.InteractionKey = _newKey;
+                SetNewKey(PlayerPrefsKey.INTERACTION);
+                break;
+
+            case "open map":
+                OptionsManager.OpenMapKey = _newKey;
+                SetNewKey(PlayerPrefsKey.OPEN_MAP);
                 break;
         }
         yield return null;
     }
 
-    private void SetNewKey(string buttonTextValue, string prefsKey)
+    private void SetNewKey(string prefsKey)
     {
-        buttonText.text = buttonTextValue;
-        OptionsManager.SaveNewKeyCode(prefsKey, buttonText.text);
+        OptionsManager.SaveNewKeyCode(prefsKey, _newKey.ToString());
+        buttonImage.sprite = GetSprite(prefsKey); print(_newKey.ToString());
         _panelAssignKey.SetActive(false);
     }
 }

@@ -4,21 +4,15 @@ using UnityEngine.UI;
 
 public class PanelHurtUIController : Singleton<PanelHurtUIController>
 {
-    Image image;
+    Animator anim;
 
     void Start()
     {
-        image = GetComponent<Image>();
-        image.enabled = false;
+        anim = GetComponent<Animator>();
     }
 
     public void Show()
     {
-        image.enabled = true;
-    }
-
-    public void Hide()
-    {
-        image.enabled = false;
+        anim.SetTrigger("Show");
     }
 }

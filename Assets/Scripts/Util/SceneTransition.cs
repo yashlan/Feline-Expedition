@@ -17,8 +17,6 @@ public class SceneTransition : MonoBehaviour
         }
 
         SceneManager.LoadScene(name);
-        AudioManager.UnPauseBGM();
-        Time.timeScale = 1;
     }
 
     //BUAT BUTTON CONTINUE

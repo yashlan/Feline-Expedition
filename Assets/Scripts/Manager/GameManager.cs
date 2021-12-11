@@ -1,4 +1,5 @@
 using DigitalRuby.RainMaker;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 
 public enum GameState
 {
+    Ready,
     Playing,
     Paused,
     HitDeadArea,
@@ -28,18 +30,14 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        _gameState = GameState.Playing;
+        ChangeGameState(
+            GameState.Playing, 
+            ()=> AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
     }
 
     void Update()
     {
-        //goto menu sementara
-        if (Input.GetKeyDown(KeyCode.Escape) && _gameState == GameState.Playing)
-        {
-            SceneManager.LoadScene(0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }
@@ -54,7 +52,7 @@ public class GameManager : Singleton<GameManager>
 
     private void PauseGame()
     {
-        _gameState = GameState.Paused;
+        ChangeGameState(GameState.Paused);
         _panelPause.SetActive(true);
 
         Time.timeScale = 0;
@@ -68,7 +66,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ResumeOnClick()
     {
-        _gameState = GameState.Playing;
+        ChangeGameState(GameState.Playing);
         _panelPause.SetActive(false);
 
         Time.timeScale = 1;
@@ -77,6 +75,34 @@ public class GameManager : Singleton<GameManager>
 
         if (BaseRainScript.Instance != null)
             BaseRainScript.UnPauseRainSFX();
+    }
+
+    public void ExitOnClick()
+    {
+        Time.timeScale = 1;
+        AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[0]);
+        SceneManager.LoadScene("home");
+    }
+
+    #endregion
+
+    #region UTILITY
+
+    public static void ChangeGameState(GameState gameState, Action OnChange = null)
+    {
+        Instance._gameState = gameState;
+        OnChange?.Invoke();
+    }
+
+    public static void OnCutScene(bool EndWaitCondition)
+    {
+        Instance.StartCoroutine(IOnCutScene(EndWaitCondition));
+    }
+
+    private static IEnumerator IOnCutScene(bool EndWaitCondition)
+    {
+        yield return new WaitUntil(() => EndWaitCondition);
+        ChangeGameState(GameState.Playing);
     }
     #endregion
 }

@@ -27,16 +27,6 @@ public class PlayerMelee : MonoBehaviour
         _meleeEffectClone.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        var tag = collision.gameObject.tag;
-
-        if (_tagList.Find(t => t.Equals(tag)) != null)
-        {
-            TakeDamage(collision);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var tag = collision.gameObject.tag;
@@ -47,49 +37,19 @@ public class PlayerMelee : MonoBehaviour
         }
     }
 
-    private void TakeDamage(Collision2D collision)
-    {
-        CameraEffect.PlayShakeEffect();
-
-        if (collision.gameObject.GetComponent<EnemyController>() != null)
-        {
-            var enemy = collision.gameObject.GetComponent<EnemyController>();
-
-            if (enemy.HealthPoint > 0)
-                enemy.HealthPoint -= _player.DamageMelee;
-            else
-                Destroy(enemy.gameObject);
-        }
-
-        if (collision.gameObject.GetComponent<VaseController>() != null)
-        {
-            var vase = collision.gameObject.GetComponent<VaseController>();
-
-            if (vase.HealthPoint > 0)
-                vase.HealthPoint -= _player.DamageMelee;
-            else
-                Destroy(vase.gameObject);
-        }
-
-        var pos = collision.transform.position;
-        var randomRotation = Random.Range(-30f, 30f);
-
-        _meleeEffectClone.transform.position = pos;
-        _meleeEffectClone.transform.rotation = Quaternion.Euler(0, 0, randomRotation);
-        _meleeEffectClone.SetActive(true);
-    }
-
     private void TakeDamage(Collider2D collision)
     {
         CameraEffect.PlayShakeEffect();
 
-        if (collision.gameObject.GetComponent<EnemyController>() != null)
+        if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            var enemy = collision.gameObject.GetComponent<EnemyController>();
+            var enemy = collision.gameObject.GetComponent<Enemy>();
 
-            if (enemy.HealthPoint > 0)
-                enemy.HealthPoint -= _player.DamageMelee;
-            else
+            enemy.KnockBack(30);
+
+            enemy.HealthPoint -= (_player.DamageMelee - enemy.DamageReduction);
+
+            if (enemy.HealthPoint <= 0) 
                 Destroy(enemy.gameObject);
         }
 
@@ -97,9 +57,9 @@ public class PlayerMelee : MonoBehaviour
         {
             var vase = collision.gameObject.GetComponent<VaseController>();
 
-            if (vase.HealthPoint > 0)
-                vase.HealthPoint -= _player.DamageMelee;
-            else
+            vase.HealthPoint -= _player.DamageMelee;
+
+            if (vase.HealthPoint <= 0)
                 Destroy(vase.gameObject);
         }
 
