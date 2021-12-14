@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 5829902782543244908}
   - component: {fileID: 1234832150575826285}
   - component: {fileID: 8055278482095758738}
+  - component: {fileID: 7489120426765520714}
   m_Layer: 6
   m_Name: bridge
   m_TagString: Untagged
@@ -152,9 +153,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1424550521
-  m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingLayerID: -2038610335
+  m_SortingLayer: 7
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a1cf678ba7c25d24f85d1c921f8181e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -175,7 +176,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1898537055327966672}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d13f8de85fa427b4c986913f591d679e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -230,3 +231,22 @@ PolygonCollider2D:
       - {x: 3.8897877, y: -0.1276749}
       - {x: 3.931034, y: -0.07132304}
       - {x: 3.9601557, y: -0.0076749157}
+--- !u!95 &7489120426765520714
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898537055327966672}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 48acd772c6b390144bf84f03d434084f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

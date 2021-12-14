@@ -14,9 +14,12 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     public const string ATTACK_MELEE = "ATTACK_MELEE";
     public const string ATTACK_THROW = "ATTACK_THROW";
     public const string RECHARGE     = "RECHARGE";
+    public const string INTERACTION  = "INTERACTION";
+    public const string OPEN_MAP     = "OPEN_MAP";
     #endregion
 
     #region PLAYER STATS DATA
+    public const string FIRST_PLAY       = "FIRST_PLAY";
     public const string HEALTHPOINT      = "HEALTHPOINT";
     public const string MANAPOINT        = "MANAPOINT";
     public const string DAMAGE_MELEE     = "DAMAGE_MELEE";
@@ -40,7 +43,7 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     #endregion
 
     #region SHOP
-    public const string GOLD                 = "GOLD";
+    public const string COIN                 = "COIN";
     public const string TOTAL_RUNE_SLOT_USED = "TOTAL_RUNE_SLOT_USED";
     #endregion
 }

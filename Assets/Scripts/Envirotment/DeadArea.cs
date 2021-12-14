@@ -6,7 +6,7 @@ public class DeadArea : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            PlayerController.Instance.OnDeadArea();
+            PlayerController.Instance.OnHitDeadArea();
         }
     }
 }
