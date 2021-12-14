@@ -10,14 +10,14 @@ public class TransitionArea : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            foreach (var scene in SceneManager.GetAllScenes())
-            {
-                if(scene.name != Destination)
-                {
-                    Debug.LogWarning($"Scene dengan nama : {Destination} tidak ada, silakan cek lagi");
-                    return;
-                }
-            }
+            // foreach (var scene in SceneManager.GetAllScenes())
+            // {
+            //     if(scene.name != Destination)
+            //     {
+            //         Debug.LogWarning($"Scene dengan nama : {Destination} tidak ada, silakan cek lagi");
+            //         return;
+            //     }
+            // }
 
             SceneManager.LoadScene(Destination);
         }
