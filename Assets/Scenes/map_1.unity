@@ -3082,7 +3082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e6c5cb70d7a9942a9f081f0f397a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Destination: map 2
+  Destination: map_2
 --- !u!1 &1073335242
 GameObject:
   m_ObjectHideFlags: 0
