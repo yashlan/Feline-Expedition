@@ -190,7 +190,7 @@ MonoBehaviour:
   _moveSpeed: 25
   _canDoubleJump: 1
   _jumpAmount: 1
-  _jumpForce: 55
+  _jumpForce: 60
   _canDashing: 1
   _dashAmountOnAir: 1
   _dashDistance: 40

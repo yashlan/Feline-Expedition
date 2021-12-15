@@ -6,8 +6,9 @@ public class EnemyMelee : MonoBehaviour
 {
     PlayerController _player => PlayerController.Instance;
     EnemyGreenSlime _enemy;
-    PolygonCollider2D _polygonCollider; 
+    PolygonCollider2D _polygonCollider;
 
+    float delay;
 
     void Start()
     {
@@ -17,9 +18,10 @@ public class EnemyMelee : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && Time.time > delay)
         {
             TakeDamage();
+            delay = Time.time + 0.5f;
         }
     }
 
@@ -32,7 +34,7 @@ public class EnemyMelee : MonoBehaviour
 
         _player.KnockBack(1, transform.parent);
 
-        _player.HealthPoint -= (_enemy.Damage - _player.DamageReduction);
+        _player.HealthPoint -= (_enemy.Damage - _player.DamageReduction); print("enemy hit player");
         SliderHealthPlayerUI.UpdateCurrentHealth();
 
         if (_player.HealthPoint <= 0)
