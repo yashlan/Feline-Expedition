@@ -5,14 +5,17 @@ using UnityEngine;
 public class EnemyMelee : MonoBehaviour
 {
     PlayerController _player => PlayerController.Instance;
-    EnemyGreenSlime _enemy;
+    EnemyGreenSlime _slime;
+    EnemySwordman _swordman;
     PolygonCollider2D _polygonCollider; 
+
 
 
     void Start()
     {
         _polygonCollider = GetComponent<PolygonCollider2D>();
-        _enemy = GetComponentInParent<EnemyGreenSlime>();
+        if(GameManager.SceneType == SceneType.map_1) _slime = GetComponentInParent<EnemyGreenSlime>();
+        if(GameManager.SceneType == SceneType.map_3) _swordman = GetComponentInParent<EnemySwordman>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,8 +34,8 @@ public class EnemyMelee : MonoBehaviour
         CameraEffect.PlayShakeEffect();
 
         _player.KnockBack(1, transform.parent);
-
-        _player.HealthPoint -= (_enemy.Damage - _player.DamageReduction);
+        if(_slime!=null) _player.HealthPoint -= (_slime.Damage - _player.DamageReduction);
+        if(_swordman!=null) _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction);        
         SliderHealthPlayerUI.UpdateCurrentHealth();
 
         if (_player.HealthPoint <= 0)
