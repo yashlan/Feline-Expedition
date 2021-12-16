@@ -9,6 +9,9 @@ public class TransitionArea : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            AudioManager.StopSFX();
+            AudioManager.PauseBGM();
+            PlayerData.Save(PlayerPrefsKey.LAST_SCENE, Destination);
             SceneManager.LoadScene(Destination);
         }
     }

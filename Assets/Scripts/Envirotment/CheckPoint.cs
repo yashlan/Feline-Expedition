@@ -11,4 +11,10 @@ public class CheckPoint : MonoBehaviour
             PlayerController.Instance.transform.position = transform.position;
         }
     }
+
+    void Start()
+    {
+        PlayerData.Save(PlayerPrefsKey.LAST_CHECKPOINT, CheckPointId);
+        print($"data saved, last checkpoint : {PlayerData.LastCheckPoint}");
+    }
 }

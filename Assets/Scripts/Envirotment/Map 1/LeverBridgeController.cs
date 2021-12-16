@@ -56,7 +56,7 @@ public class LeverBridgeController : MonoBehaviour
         {
             CameraEffect.PlayShakeEffect(4);
             AudioManager.PlaySfx(AudioManager.Instance.EnviBrigdeClip);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 

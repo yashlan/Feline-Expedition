@@ -17,10 +17,20 @@ public enum GameState
     GameOver
 }
 
+public enum SceneType
+{
+    map_1,
+    map_2,
+    map_3,
+}
+
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     private GameState _gameState;
+
+    [SerializeField]
+    private SceneType sceneType;
 
     [Header("Pause Menu")]
     [SerializeField]
@@ -30,9 +40,8 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        ChangeGameState(
-            GameState.Playing, 
-            ()=> AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
+        if(sceneType == SceneType.map_1) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
+        if(sceneType == SceneType.map_2) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
     }
 
     void Update()
@@ -40,11 +49,6 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
