@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
     private GameObject _panelPause;
 
     public static GameState GameState { get => Instance._gameState; set => Instance._gameState = value; }
+    public static SceneType SceneType { get => Instance.sceneType; set => Instance.sceneType = value; }
 
     void Start()
     {
