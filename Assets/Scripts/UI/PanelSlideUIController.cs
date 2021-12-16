@@ -15,10 +15,10 @@ public class PanelSlideUIController : Singleton<PanelSlideUIController>
         StartCoroutine(StartFadeOut());
     }
 
-    public void FadeIn(Action OnFadeIn)
+    public void FadeIn(Action OnFadeIn, bool ThenFadeOut)
     {
         StopAllCoroutines();
-        StartCoroutine(StartFadeIn(OnFadeIn));
+        StartCoroutine(StartFadeIn(OnFadeIn, ThenFadeOut));
     }
 
     void FadeOut()
@@ -27,7 +27,7 @@ public class PanelSlideUIController : Singleton<PanelSlideUIController>
         StartCoroutine(StartFadeOut());
     }
 
-    IEnumerator StartFadeIn(Action OnFadeIn)
+    IEnumerator StartFadeIn(Action OnFadeIn, bool ThenFadeOut)
     {
         while (image.color.a != 1)
         {
@@ -39,7 +39,8 @@ public class PanelSlideUIController : Singleton<PanelSlideUIController>
         if(image.color.a == 1)
         {
             OnFadeIn?.Invoke();
-            Invoke(nameof(FadeOut), 1f);
+            if(ThenFadeOut)
+                Invoke(nameof(FadeOut), 1f);
         }
     }
 

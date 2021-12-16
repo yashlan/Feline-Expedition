@@ -37,11 +37,16 @@ public class GameManager : Singleton<GameManager>
     private GameObject _panelPause;
 
     public static GameState GameState { get => Instance._gameState; set => Instance._gameState = value; }
+    public static SceneType SceneType { get => Instance.sceneType; set => Instance.sceneType = value; }
 
     void Start()
     {
-        if(sceneType == SceneType.map_1) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
-        if(sceneType == SceneType.map_2) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+        if(sceneType == SceneType.map_1) 
+            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
+        if(sceneType == SceneType.map_2) 
+            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+        if(sceneType == SceneType.map_3)
+            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
     }
 
     void Update()
@@ -49,6 +54,11 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
+        }
+
+        if(_gameState == GameState.HitTransitionArea)
+        {
+            PlayerController.FreezePositon();
         }
     }
 

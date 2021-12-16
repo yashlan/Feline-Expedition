@@ -49,8 +49,6 @@ public class PlayerMelee : MonoBehaviour
 
             enemy.HealthPoint -= (_player.DamageMelee - enemy.DamageReduction);
 
-            if (enemy.HealthPoint <= 0) 
-                Destroy(enemy.gameObject);
         }
 
         if (collision.gameObject.GetComponent<VaseController>() != null)

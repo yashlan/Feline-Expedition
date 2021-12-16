@@ -664,7 +664,7 @@ public class PlayerController : Singleton<PlayerController>
         if (GameManager.GameState == GameState.HitDeadArea && _isDead)
         {
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            PanelSlideUIController.Instance.FadeIn(() => { GetLastPos(); });
+            PanelSlideUIController.Instance.FadeIn(() => GetLastPos(), true);
         }
     }
 
@@ -689,7 +689,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             _anim.SetTrigger("Dead");
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            PanelSlideUIController.Instance.FadeIn(() => { Restart(); });
+            PanelSlideUIController.Instance.FadeIn(() => Restart(), true);
         }
     }
 
@@ -758,6 +758,14 @@ public class PlayerController : Singleton<PlayerController>
         _rb.sharedMaterial.friction = 
         _circleCollider.sharedMaterial.friction = 
         _boxCollider.sharedMaterial.friction = !_isGrounded ? 0f : 0.5f;
+    }
+    #endregion
+
+    #region FREEZE RIGIDBODY WHEN TOUCH TRANSITION AREA
+
+    public static void FreezePositon()
+    {
+        Instance._rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
     #endregion
 
