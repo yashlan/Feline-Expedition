@@ -1,7 +1,58 @@
 fileFormatVersion: 2
 guid: c478a4081851897469e1e7b91f5cd015
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3256261078875207063
+    second: skeleton-swordsman-death_0
+  - first:
+      213: -6640112779503658948
+    second: skeleton-swordsman-death_1
+  - first:
+      213: -8499663993621724456
+    second: skeleton-swordsman-death_2
+  - first:
+      213: -4075196832407005728
+    second: skeleton-swordsman-death_3
+  - first:
+      213: 3684215446624987594
+    second: skeleton-swordsman-death_4
+  - first:
+      213: 5013362503565796029
+    second: skeleton-swordsman-death_5
+  - first:
+      213: 2465819494477432018
+    second: skeleton-swordsman-death_6
+  - first:
+      213: -6704711580201284400
+    second: skeleton-swordsman-death_7
+  - first:
+      213: 6027624312942836838
+    second: skeleton-swordsman-death_8
+  - first:
+      213: 8640797699437077301
+    second: skeleton-swordsman-death_9
+  - first:
+      213: 974231192569761178
+    second: skeleton-swordsman-death_10
+  - first:
+      213: -7606831204425997751
+    second: skeleton-swordsman-death_11
+  - first:
+      213: -8552046578297845798
+    second: skeleton-swordsman-death_12
+  - first:
+      213: -760734435988107732
+    second: skeleton-swordsman-death_13
+  - first:
+      213: 4513218819746932746
+    second: skeleton-swordsman-death_14
+  - first:
+      213: -147059080618968697
+    second: skeleton-swordsman-death_15
+  - first:
+      213: -558071970678197902
+    second: skeleton-swordsman-death_16
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +92,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +126,390 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 51
+        width: 471
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7957946e230903d20800000000000000
+      internalID: 3256261078875207063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_1
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 52
+        width: 472
+        height: 568
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c38172d9b9499d3a0800000000000000
+      internalID: -6640112779503658948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_2
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 59
+        width: 472
+        height: 578
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d2cff581a02b0a80800000000000000
+      internalID: -8499663993621724456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_3
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 68
+        width: 471
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e5559e721ef177c0800000000000000
+      internalID: -4075196832407005728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_4
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 56
+        width: 480
+        height: 622
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac9e61ccd66f02330800000000000000
+      internalID: 3684215446624987594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_5
+      rect:
+        serializedVersion: 2
+        x: 3066
+        y: 55
+        width: 480
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db26d4392aa039540800000000000000
+      internalID: 5013362503565796029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_6
+      rect:
+        serializedVersion: 2
+        x: 3677
+        y: 39
+        width: 472
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d48f8804c9583220800000000000000
+      internalID: 2465819494477432018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_7
+      rect:
+        serializedVersion: 2
+        x: 4264
+        y: 55
+        width: 471
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dc87a4475414f2a0800000000000000
+      internalID: -6704711580201284400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_8
+      rect:
+        serializedVersion: 2
+        x: 4846
+        y: 51
+        width: 541
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66c377c706c66a350800000000000000
+      internalID: 6027624312942836838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_9
+      rect:
+        serializedVersion: 2
+        x: 5412
+        y: 84
+        width: 528
+        height: 528
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 533a5fa0ab74ae770800000000000000
+      internalID: 8640797699437077301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_10
+      rect:
+        serializedVersion: 2
+        x: 6758
+        y: 412
+        width: 53
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9dc932ab1a258d00800000000000000
+      internalID: 974231192569761178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_11
+      rect:
+        serializedVersion: 2
+        x: 6220
+        y: 236
+        width: 152
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 942e4d1825b1f6690800000000000000
+      internalID: -7606831204425997751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_12
+      rect:
+        serializedVersion: 2
+        x: 7282
+        y: 347
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad746fd92f6015980800000000000000
+      internalID: -8552046578297845798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_13
+      rect:
+        serializedVersion: 2
+        x: 7024
+        y: 244
+        width: 37
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2e858e9f045175f0800000000000000
+      internalID: -760734435988107732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_14
+      rect:
+        serializedVersion: 2
+        x: 6811
+        y: 208
+        width: 32
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a08af90ca9c22ae30800000000000000
+      internalID: 4513218819746932746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_15
+      rect:
+        serializedVersion: 2
+        x: 7738
+        y: 146
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789f5ba9b8a85fdf0800000000000000
+      internalID: -147059080618968697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-swordsman-death_16
+      rect:
+        serializedVersion: 2
+        x: 7344
+        y: 117
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 271bf9cdf745148f0800000000000000
+      internalID: -558071970678197902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

@@ -44,13 +44,23 @@ public class PlayerMelee : MonoBehaviour
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
+            
+            if (enemy.IsDead)
+            return;
 
             enemy.KnockBack(30);
 
             enemy.HealthPoint -= (_player.DamageMelee - enemy.DamageReduction);
 
-            if (enemy.HealthPoint <= 0) 
+           if (enemy.HealthPoint <= 0 && enemy.enemyType == EnemyType.GreenSlime)
+            {
                 Destroy(enemy.gameObject);
+            }
+            else if (enemy.HealthPoint <= 0 && enemy.enemyType == EnemyType.Swordman)
+            {
+                enemy.Dead();
+            }
+
         }
 
         if (collision.gameObject.GetComponent<VaseController>() != null)

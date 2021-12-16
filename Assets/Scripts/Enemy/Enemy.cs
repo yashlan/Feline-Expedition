@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     public int DamageReduction;
     public float Speed;
     public float CoolDownAttack;
+    public bool IsDead;
 
     [Header("Ground Raycast")]
     public Transform GroundCheckPoint;
@@ -43,6 +44,7 @@ public class Enemy : MonoBehaviour
     RaycastHit2D hitGround;
     float horizontal;
     Vector3 firstPos;
+    BoxCollider2D _boxCollider;
 
     public PlayerController _target => PlayerController.Instance;
 
@@ -50,6 +52,7 @@ public class Enemy : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Setup(int healthPoint, int damage, int damageReduction, float speed, float coolDownAttack)
@@ -165,6 +168,16 @@ public class Enemy : MonoBehaviour
         Anim.SetFloat("Speed", Mathf.Abs(Rigidbody.velocity.x));
     }
 
+    public void Dead()
+    {
+        Anim.SetTrigger("Dead");
+        gameObject.layer = LayerMask.NameToLayer("Default");
+        Rigidbody.constraints= RigidbodyConstraints2D.FreezeAll;
+        IsDead =  true;
+        _boxCollider.enabled = false;
+    }
+
+
     #region DEBUG
 
     void OnDrawGizmosSelected()
@@ -186,6 +199,11 @@ public class Enemy : MonoBehaviour
     public void DisableAttackEvent()
     {
         Anim.SetBool("Attack", false);
+    }
+
+    public void DeadEvent()
+    {
+        Destroy(gameObject);
     }
     #endregion
 }
