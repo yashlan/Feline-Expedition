@@ -6,13 +6,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum SceneType
-{
-    map_1,
-    map_2,
-    map_3,
-}
-
 public enum GameState
 {
     Ready,
@@ -24,20 +17,26 @@ public enum GameState
     GameOver
 }
 
+public enum SceneType
+{
+    map_1,
+    map_2,
+    map_3,
+}
+
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     private GameState _gameState;
-    
+
     [SerializeField]
-    private SceneType sceneType;
+    private SceneType sceneType; 
 
     [Header("Pause Menu")]
     [SerializeField]
     private GameObject _panelPause;
 
     public static GameState GameState { get => Instance._gameState; set => Instance._gameState = value; }
-    public static SceneType SceneType { get => Instance.sceneType; set => Instance.sceneType = value; }
 
     void Start()
     {
@@ -50,11 +49,6 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
