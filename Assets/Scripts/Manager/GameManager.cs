@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
     private GameState _gameState;
 
     [SerializeField]
-    private SceneType sceneType;
+    private SceneType sceneType; 
 
     [Header("Pause Menu")]
     [SerializeField]
