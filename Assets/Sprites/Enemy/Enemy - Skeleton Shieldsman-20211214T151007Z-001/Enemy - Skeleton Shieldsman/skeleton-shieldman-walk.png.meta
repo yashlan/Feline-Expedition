@@ -1,7 +1,25 @@
 fileFormatVersion: 2
 guid: 30286c36ba410fb40b1b92f57463101e
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6440400283205168345
+    second: skeleton-shieldman-walk_0
+  - first:
+      213: -3069565238677338880
+    second: skeleton-shieldman-walk_1
+  - first:
+      213: 3713780305982044997
+    second: skeleton-shieldman-walk_2
+  - first:
+      213: 5653415860088325839
+    second: skeleton-shieldman-walk_3
+  - first:
+      213: 8391688817432430394
+    second: skeleton-shieldman-walk_4
+  - first:
+      213: 7206529274415526681
+    second: skeleton-shieldman-walk_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +59,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +93,159 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: skeleton-shieldman-walk_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 50
+        width: 396
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dce4c35fe5e06950800000000000000
+      internalID: 6440400283205168345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-walk_1
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 53
+        width: 413
+        height: 539
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00500cdbda6b665d0800000000000000
+      internalID: -3069565238677338880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-walk_2
+      rect:
+        serializedVersion: 2
+        x: 1684
+        y: 50
+        width: 396
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54bb6e7038ff98330800000000000000
+      internalID: 3713780305982044997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-walk_3
+      rect:
+        serializedVersion: 2
+        x: 2472
+        y: 55
+        width: 424
+        height: 542
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6cf1c85c7f47e40800000000000000
+      internalID: 5653415860088325839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-walk_4
+      rect:
+        serializedVersion: 2
+        x: 3273
+        y: 51
+        width: 417
+        height: 555
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a378da4b484457470800000000000000
+      internalID: 8391688817432430394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-walk_5
+      rect:
+        serializedVersion: 2
+        x: 4084
+        y: 57
+        width: 396
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 913bdf8713cb20460800000000000000
+      internalID: 7206529274415526681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

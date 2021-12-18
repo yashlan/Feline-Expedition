@@ -1,40 +1,25 @@
 fileFormatVersion: 2
-guid: c66b43460ec12984cbc509dc80543e61
+guid: 8bcfb0b3d862fdf42b9cfe772f5198bc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1962530722628328228
-    second: skeleton-shieldman-idle_0
+      213: -760734528280036697
+    second: skeleton-shieldman-stab_0
   - first:
-      213: -2452348848989825714
-    second: skeleton-shieldman-idle_1
+      213: -7611718920139174083
+    second: skeleton-shieldman-stab_1
   - first:
-      213: 148337190328177623
-    second: skeleton-shieldman-idle_2
+      213: -7290405997753235097
+    second: skeleton-shieldman-stab_2
   - first:
-      213: 3374707387134316259
-    second: skeleton-shieldman-idle_3
+      213: -6274084683590521036
+    second: skeleton-shieldman-stab_3
   - first:
-      213: 6519584648258357619
-    second: skeleton-shieldman-idle_4
+      213: 4965916265268139919
+    second: skeleton-shieldman-stab_4
   - first:
-      213: 2768522617248285219
-    second: skeleton-shieldman-idle_5
-  - first:
-      213: 3368428409254220568
-    second: skeleton-shieldman-idle_6
-  - first:
-      213: -6444961340417148977
-    second: skeleton-shieldman-idle_7
-  - first:
-      213: 3670025471359759900
-    second: skeleton-shieldman-idle_8
-  - first:
-      213: 3905354284036118628
-    second: skeleton-shieldman-idle_9
-  - first:
-      213: 5291307815640228512
-    second: skeleton-shieldman-idle_10
+      213: -8375704249147625387
+    second: skeleton-shieldman-stab_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -136,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: skeleton-shieldman-idle_0
+      name: skeleton-shieldman-stab_0
       rect:
         serializedVersion: 2
-        x: 62
-        y: 50
-        width: 400
-        height: 533
+        x: 64
+        y: 53
+        width: 397
+        height: 530
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +135,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42b5d075b4f4c3b10800000000000000
-      internalID: 1962530722628328228
+      spriteID: 7aa7e712af35175f0800000000000000
+      internalID: -760734528280036697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton-shieldman-idle_1
+      name: skeleton-shieldman-stab_1
       rect:
         serializedVersion: 2
-        x: 862
-        y: 50
-        width: 403
-        height: 533
+        x: 871
+        y: 43
+        width: 415
+        height: 521
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,19 +156,61 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e459f9607b187fdd0800000000000000
-      internalID: -2452348848989825714
+      spriteID: d3f0cf288fdbd5690800000000000000
+      internalID: -7611718920139174083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton-shieldman-idle_2
+      name: skeleton-shieldman-stab_2
       rect:
         serializedVersion: 2
-        x: 1648
-        y: 50
-        width: 412
+        x: 1630
+        y: 58
+        width: 761
+        height: 526
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7698a8b0f5643da90800000000000000
+      internalID: -7290405997753235097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-stab_3
+      rect:
+        serializedVersion: 2
+        x: 2474
+        y: 60
+        width: 729
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f2ed7c839fde8a0800000000000000
+      internalID: -6274084683590521036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-stab_4
+      rect:
+        serializedVersion: 2
+        x: 3280
+        y: 48
+        width: 715
         height: 537
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -192,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d39d7083effe0200800000000000000
-      internalID: 148337190328177623
+      spriteID: f8754af588a7ae440800000000000000
+      internalID: 4965916265268139919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: skeleton-shieldman-idle_3
+      name: skeleton-shieldman-stab_5
       rect:
         serializedVersion: 2
-        x: 2447
-        y: 50
-        width: 416
-        height: 537
+        x: 4049
+        y: 43
+        width: 443
+        height: 547
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,155 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ee07071d7e55de20800000000000000
-      internalID: 3374707387134316259
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_4
-      rect:
-        serializedVersion: 2
-        x: 3262
-        y: 50
-        width: 401
-        height: 533
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 379878202b73a7a50800000000000000
-      internalID: 6519584648258357619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_5
-      rect:
-        serializedVersion: 2
-        x: 4063
-        y: 50
-        width: 399
-        height: 533
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32208b1f6a4cb6620800000000000000
-      internalID: 2768522617248285219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_6
-      rect:
-        serializedVersion: 2
-        x: 4849
-        y: 50
-        width: 412
-        height: 537
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8139ee0aacf0fbe20800000000000000
-      internalID: 3368428409254220568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_7
-      rect:
-        serializedVersion: 2
-        x: 5648
-        y: 50
-        width: 413
-        height: 537
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc77f49cec5ee86a0800000000000000
-      internalID: -6444961340417148977
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_8
-      rect:
-        serializedVersion: 2
-        x: 6460
-        y: 50
-        width: 425
-        height: 520
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c16b809b8bc8ee230800000000000000
-      internalID: 3670025471359759900
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_9
-      rect:
-        serializedVersion: 2
-        x: 7247
-        y: 50
-        width: 442
-        height: 537
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 468d506a70b923630800000000000000
-      internalID: 3905354284036118628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: skeleton-shieldman-idle_10
-      rect:
-        serializedVersion: 2
-        x: 8063
-        y: 50
-        width: 408
-        height: 537
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a2eb7c7c608e6940800000000000000
-      internalID: 5291307815640228512
+      spriteID: 55073dd9c5583cb80800000000000000
+      internalID: -8375704249147625387
       vertices: []
       indices: 
       edges: []
