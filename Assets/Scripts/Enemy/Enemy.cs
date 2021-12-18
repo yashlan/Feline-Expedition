@@ -4,7 +4,7 @@ using UnityEngine;
 public enum EnemyType
 {
 
-    GreenSlime, Swordman,
+    GreenSlime, Swordman, Shieldman,
 
 }
 
@@ -72,6 +72,7 @@ public class Enemy : MonoBehaviour
     {
         if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 7, 0.7f);        
         if(enemyType == EnemyType.Swordman) Setup(40, 10, 5, 7, 0.7f);
+        if(enemyType == EnemyType.Shieldman) Setup(40, 10, 5, 7, 0.7f);
     }
 
     private void MoveToTarget()
