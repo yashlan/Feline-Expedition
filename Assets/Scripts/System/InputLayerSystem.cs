@@ -22,7 +22,7 @@ namespace NoodleEater.Caravan.System
             _inputActions[_currentLayer]?.Invoke();
         }
 
-        public void BindAction(InputLayer layer, Action inputAction)
+        public void BindAction(InputLayer layer, Action inputAction = null)
         {
             if (_inputActions.ContainsKey(layer))
             {

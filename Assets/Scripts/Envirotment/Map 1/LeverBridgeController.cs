@@ -19,7 +19,6 @@ public class LeverBridgeController : MonoBehaviour
         bridgeAnim = Bridge.GetComponent<Animator>();
         textInfo = canvasInfo.GetComponentInChildren<Text>();
 
-        textInfo.text = $"Press {OptionsManager.InteractionKey} To Switch Lever";
         canvasInfo.SetActive(false);
     }
 
@@ -27,6 +26,8 @@ public class LeverBridgeController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            textInfo.text = $"Press {OptionsManager.InteractionKey} To Switch Lever";
+
             canvasInfo.SetActive(!isSwitched);
 
             if(PlayerController.Instance.IsIdle() && Input.GetKeyDown(OptionsManager.InteractionKey) && !isSwitched)

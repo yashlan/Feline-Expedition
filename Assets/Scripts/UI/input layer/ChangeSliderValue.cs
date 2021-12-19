@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using NoodleEater.Caravan.System;
 using UnityEditor;
 using UnityEngine;
@@ -31,12 +28,12 @@ namespace NoodleEater.Caravan
                 if (layer == InputLayer.SliderSfxUI)
                 {
                     bgmText.color = Color.black;
-                    SfxText.color = Color.red;
+                    SfxText.color = Color.white;
                 }
 
                 if (layer == InputLayer.SliderBgmUI)
                 {
-                    bgmText.color = Color.red;
+                    bgmText.color = Color.white;
                     SfxText.color = Color.black;
                 }
             };
@@ -46,13 +43,15 @@ namespace NoodleEater.Caravan
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) && _currentLayer == InputLayer.SliderBgmUI)
+            if (Input.GetKeyDown(KeyCode.DownArrow) && 
+                _currentLayer == InputLayer.SliderBgmUI)
             {
                 _currentLayer = InputLayer.SliderSfxUI;
                 _baseInputLayerSystem.EnableLayer(InputLayer.SliderBgmUI);
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) && _currentLayer == InputLayer.SliderSfxUI)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && 
+                _currentLayer == InputLayer.SliderSfxUI)
             {
                 _currentLayer = InputLayer.SliderBgmUI;
                 _baseInputLayerSystem.EnableLayer(InputLayer.SliderSfxUI);
@@ -63,12 +62,12 @@ namespace NoodleEater.Caravan
         [MenuItem("Test/Layer")]
         private static void Test()
         {
-            InputLayer layer = InputLayer.SliderSfxUI;
+            InputLayer layer = InputLayer.ButtonNewGame;
             Debug.Log((layer - 1));
         }
 #endif
 
-        public void SetSFXVolume()
+        private void SetSFXVolume()
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
@@ -81,7 +80,7 @@ namespace NoodleEater.Caravan
             }
         }
 
-        public void SetBGMVolume()
+        private void SetBGMVolume()
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {

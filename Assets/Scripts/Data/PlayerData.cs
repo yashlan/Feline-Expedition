@@ -172,10 +172,9 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
 
     void Start()
-    {
+    {  
         Load();
     }
-
 
     #region LOAD
 
@@ -227,14 +226,6 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     public static void Save(string prefsKey, string value)
     {
         PlayerPrefs.SetString(prefsKey, value);
-        Instance.Load();
-    }
-    #endregion
-
-    #region DELETE
-    public static void DeleteAllData()
-    {
-        PlayerPrefs.DeleteAll();
         Instance.Load();
     }
     #endregion

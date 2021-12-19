@@ -41,6 +41,8 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        OptionsManager.HideMouseCursor();
+
         if(sceneType == SceneType.map_1) 
             ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
         if(sceneType == SceneType.map_2) 
@@ -69,6 +71,8 @@ public class GameManager : Singleton<GameManager>
         ChangeGameState(GameState.Paused);
         _panelPause.SetActive(true);
 
+        OptionsManager.ShowMouseCursor();
+
         Time.timeScale = 0;
 
         AudioManager.PauseBGM();
@@ -82,6 +86,8 @@ public class GameManager : Singleton<GameManager>
     {
         ChangeGameState(GameState.Playing);
         _panelPause.SetActive(false);
+
+        OptionsManager.HideMouseCursor();
 
         Time.timeScale = 1;
 

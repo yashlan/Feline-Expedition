@@ -6,6 +6,12 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     public const string VOLUME_SFX = "VOLUME_SFX";
     #endregion
 
+    #region VIDEO SETTING
+    public const string DISPLAY_MODE_FULLSCREEN = "DISPLAY_MODE_FULLSCREEN";
+    public const string GRAPHIC_QUALITY         = "GRAPHIC_QUALITY";
+    public const string DISPLAY_PLAYER_UI       = "DISPLAY_PLAYER_UI";
+    #endregion
+
     #region INPUT KEYCODE
     public const string MOVE_LEFT    = "MOVE_LEFT";
     public const string MOVE_RIGHT   = "MOVE_RIGHT";
@@ -19,7 +25,7 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     #endregion
 
     #region PLAYER STATS DATA
-    public const string FIRST_PLAY       = "FIRST_PLAY";
+    //public const string NOT_FIRST_PLAY   = "NOT_FIRST_PLAY";
     public const string HEALTHPOINT      = "HEALTHPOINT";
     public const string MANAPOINT        = "MANAPOINT";
     public const string DAMAGE_MELEE     = "DAMAGE_MELEE";

@@ -415,10 +415,10 @@ TextureImporter:
       name: Artboard_1_12
       rect:
         serializedVersion: 2
-        x: 1123
-        y: 0
-        width: 797
-        height: 753
+        x: 1228
+        y: 70
+        width: 597
+        height: 553
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

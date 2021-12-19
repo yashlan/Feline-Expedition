@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class OptionsManager : SingletonDontDestroy<OptionsManager>
 {
+    public Texture2D cursorTexture;
+    public RenderPipelineAsset[] renderPipelineAsset;
     #region KEYCODE
     private const string DEFAULT_KEY_LEFT        = "LeftArrow";
     private const string DEFAULT_KEY_RIGHT       = "RightArrow";
@@ -26,18 +29,30 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
 
     #endregion
 
+    #region VIDEO SETTING
+    private const int DEFAULT_GRAPHIC_QUALITY = 3; //high
+    private bool DEFAULT_DISPLAY_PLAYER_UI = true;
+    private bool DEFAULT_DISPLAY_MODE_FULLSCREEN = true;
+
+    public static bool IsFullScreen { get; set; }
+    public static bool DisplayPlayerUI { get; set; }
+    public static QualitySettings QualitySettings { get; set; }
+    #endregion
+
+
     void Start()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefsKey.FIRST_PLAY))
-        {
+        SetupCursor();
+
+        if (IsKeyCodeEmpty())
             SetDefaultButtonInput();
-            PlayerPrefs.SetInt(PlayerPrefsKey.FIRST_PLAY, 1);
-        }
         else
-        {
-            LoadInputKey();
-            //HideMouseCursor();
-        }
+            LoadButtonInputKey();
+
+        if (IsVideoSettingEmpty())
+            SetDefaultVideoSetting();
+        else
+            LoadVideoSetting();
     }
 
     #region KEYCODE
@@ -45,6 +60,17 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
     {
         PlayerPrefs.SetString(prefsKey, newValue);
     }
+
+    private static bool IsKeyCodeEmpty() =>
+        PlayerPrefs.GetString(PlayerPrefsKey.MOVE_LEFT)    == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.MOVE_RIGHT)   == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.JUMP)         == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.DASH)         == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.ATTACK_MELEE) == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.ATTACK_THROW) == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.RECHARGE)     == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.INTERACTION)  == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.OPEN_MAP)     == string.Empty;
 
     public static void SetDefaultButtonInput()
     {
@@ -58,10 +84,10 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
         PlayerPrefs.SetString(PlayerPrefsKey.INTERACTION,  DEFAULT_KEY_INTERACTION);
         PlayerPrefs.SetString(PlayerPrefsKey.OPEN_MAP,     DEFAULT_KEY_OPEN_MAP);
 
-        LoadInputKey();
+        LoadButtonInputKey();
     }
 
-    private static void LoadInputKey()
+    private static void LoadButtonInputKey()
     {
         LeftKey        = KeyCodeValueOf(PlayerPrefsKey.MOVE_LEFT,    DEFAULT_KEY_LEFT);
         RightKey       = KeyCodeValueOf(PlayerPrefsKey.MOVE_RIGHT,   DEFAULT_KEY_RIGHT);
@@ -81,12 +107,94 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
 
     #endregion KEYCODE
 
-    #region MOUSE
 
-    private void HideMouseCursor()
+    #region VIDEO SETTING
+
+    private bool IsVideoSettingEmpty() =>
+        !PlayerPrefs.HasKey(PlayerPrefsKey.DISPLAY_MODE_FULLSCREEN) &&
+        !PlayerPrefs.HasKey(PlayerPrefsKey.DISPLAY_PLAYER_UI)       &&
+        !PlayerPrefs.HasKey(PlayerPrefsKey.GRAPHIC_QUALITY);
+
+
+    private void SetDefaultVideoSetting()
+    {
+        PlayerPrefs.SetInt(
+            PlayerPrefsKey.DISPLAY_MODE_FULLSCREEN,
+            IntValueOf(DEFAULT_DISPLAY_MODE_FULLSCREEN));
+
+        PlayerPrefs.SetInt(
+                PlayerPrefsKey.DISPLAY_PLAYER_UI,
+                IntValueOf(DEFAULT_DISPLAY_PLAYER_UI));
+
+        PlayerPrefs.SetInt(
+                    PlayerPrefsKey.GRAPHIC_QUALITY,
+                    DEFAULT_GRAPHIC_QUALITY);
+
+        LoadVideoSetting();
+    }
+
+    public void LoadVideoSetting()
+    {
+        IsFullScreen = BoolValueOf(
+            PlayerPrefs.GetInt(
+                PlayerPrefsKey.DISPLAY_MODE_FULLSCREEN, 
+                IntValueOf(DEFAULT_DISPLAY_MODE_FULLSCREEN)));
+
+        DisplayPlayerUI = BoolValueOf(
+            PlayerPrefs.GetInt(
+                PlayerPrefsKey.DISPLAY_PLAYER_UI, 
+                IntValueOf(DEFAULT_DISPLAY_PLAYER_UI)));
+
+        QualitySettings.SetQualityLevel(
+            PlayerPrefs.GetInt(
+                    PlayerPrefsKey.GRAPHIC_QUALITY,
+                    DEFAULT_GRAPHIC_QUALITY));
+    }
+
+    public static void SaveVideoSetting(string prefsKey, bool value)
+    {
+        PlayerPrefs.SetInt(prefsKey, Instance.IntValueOf(value));
+        Instance.LoadVideoSetting();
+    }
+
+    public static void SaveGraphicsSetting(string prefsKey, int value)
+    {
+        PlayerPrefs.SetInt(prefsKey, value);
+        Instance.LoadVideoSetting();
+    }
+
+    public static void SaveDisplayPlayerUI(string prefsKey, int value)
+    {
+        PlayerPrefs.SetInt(prefsKey, value);
+        Instance.LoadVideoSetting();
+    }
+
+    #endregion VIDEO SETTING
+
+    #region MOUSE CURSOR
+
+    private void SetupCursor()
+    {
+        Cursor.SetCursor(Instance.cursorTexture, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = true;
+    }
+
+    public static void HideMouseCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
-    #endregion MOUSE
+
+    public static void ShowMouseCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    #endregion CURSOR MOUSE
+
+    #region UTILITY
+    private int IntValueOf(bool val) => val ? 1 : 0;
+    private bool BoolValueOf(int val) => val != 0;
+    #endregion
+
 }
