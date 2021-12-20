@@ -63,7 +63,7 @@ public class CameraEffect : Singleton<CameraEffect>
     private static IEnumerator PlayZoomInOut(float ortoSize)
     {
         virtualCamera.m_Lens.OrthographicSize = ortoSize;
-        yield return new WaitUntil(() => PlayerData.IsInvincibleShieldUsed() ? !player.IsDefend : !player.IsCharging);
+        yield return new WaitUntil(() => PlayerData.IsInvincibleShieldUsed() ? !player.IsDefend : !player.IsSelfHeal);
         virtualCamera.m_Lens.OrthographicSize = firstOrtoSize;
         yield break;
     }

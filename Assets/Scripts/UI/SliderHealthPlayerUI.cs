@@ -11,7 +11,7 @@ public class SliderHealthPlayerUI : Singleton<SliderHealthPlayerUI>
         sliderHP.value = sliderHP.maxValue;
     }
 
-    public static void UpdateCurrentHealth() 
+    public static void UpdateUI() 
     {
         Instance.sliderHP.value = player.HealthPoint;
 

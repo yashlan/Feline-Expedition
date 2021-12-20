@@ -21,7 +21,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private int _healthPoint;
     [SerializeField]
-    private int _manaPoint;
+    private float _manaPoint;
     [SerializeField]
     private int _damageReduction;
     [SerializeField]
@@ -35,7 +35,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private int _totalRuneSlotUsed;
     [SerializeField]
-    private int _coin;
+    private int _coins;
 
     [Header("Purchased Items")]
     [SerializeField]
@@ -95,7 +95,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         set => Instance._damageMelee = value; 
     }
 
-    public static int ManaPoint 
+    public static float ManaPoint 
     { 
         get => Instance._manaPoint; 
         set => Instance._manaPoint = value; 
@@ -155,6 +155,12 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         set => Instance._isInvincibleShieldEquip = value;
     }
 
+    public static int Coins 
+    {
+        get => Instance._coins; 
+        set => Instance._coins = value; 
+    }
+
     #endregion
 
     public static bool IsInvincibleShieldUsed() => IsInvincibleShieldWasUnlocked && IsInvincibleShieldEquip;
@@ -181,8 +187,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private void Load()
     {
         #region SHOP
-        _coin = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                              _coin);
-        _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, _totalRuneSlotUsed);
+        Coins = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                              0);
+        _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, 0);
         #endregion
 
         _healthPointExtra = PlayerPrefs.GetInt(PlayerPrefsKey.HEALTHPOINT_EXTRA,          _healthPointExtra);
@@ -192,12 +198,12 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         _damageReductionExtra = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_REDUCTION_EXTRA, _damageReductionExtra);
         _manaRegenExtra = PlayerPrefs.GetInt(PlayerPrefsKey.MANA_REGEN_EXTRA,             _manaRegenExtra);
 
-        _healthPoint = PlayerPrefs.GetInt(PlayerPrefsKey.HEALTHPOINT,         DEFAULT_HEALTHPOINT      + _healthPointExtra);
-        ManaPoint   = PlayerPrefs.GetInt(PlayerPrefsKey.MANAPOINT,            DEFAULT_MANAPOINT        + _manaPointExtra);
-        _damageMelee = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_MELEE,        DEFAULT_DAMAGE_MELEE     + _damageMeleeExtra);
-        DamageMagic = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_MAGIC,         DEFAULT_DAMAGE_MAGIC     + _damageMagicExtra);
-        DamageReduction = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_REDUCTION, DEFAULT_DAMAGE_REDUCTION + DamageReduction);
-        ManaRegen = PlayerPrefs.GetInt(PlayerPrefsKey.MANA_REGEN,             DEFAULT_MANA_REGEN       + ManaRegen);
+        _healthPoint = PlayerPrefs.GetInt(PlayerPrefsKey.HEALTHPOINT,          DEFAULT_HEALTHPOINT      + _healthPointExtra);
+        _manaPoint   = PlayerPrefs.GetFloat(PlayerPrefsKey.MANAPOINT,          DEFAULT_MANAPOINT        + _manaPointExtra);
+        _damageMelee = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_MELEE,         DEFAULT_DAMAGE_MELEE     + _damageMeleeExtra);
+        _damageMagic = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_MAGIC,         DEFAULT_DAMAGE_MAGIC     + _damageMagicExtra);
+        _damageReduction = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_REDUCTION, DEFAULT_DAMAGE_REDUCTION + DamageReduction);
+        _manaRegen = PlayerPrefs.GetInt(PlayerPrefsKey.MANA_REGEN,             DEFAULT_MANA_REGEN       + ManaRegen);
 
         _lastScene = PlayerPrefs.GetString(PlayerPrefsKey.LAST_SCENE,           _lastScene);
         _lastCheckPoint = PlayerPrefs.GetString(PlayerPrefsKey.LAST_CHECKPOINT, _lastCheckPoint);
@@ -235,9 +241,21 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private bool BoolValueOf(int val) => val != 0;
     #endregion
 
-    public static void AddCoin(int amount)
+    public static void SetDefaultValue()
     {
-        Instance._coin += amount;
+        var player = PlayerController.Instance;
+
+        Instance._healthPoint = DEFAULT_HEALTHPOINT + Instance._healthPointExtra;
+        Instance._manaPoint   = DEFAULT_MANAPOINT + Instance._manaPointExtra;
+        Instance._coins       = 0;
+
+        player.HealthPoint = Instance._healthPoint;
+        player.ManaPoint = Instance._manaPoint;
+        player.Coins = Instance._coins;
+
+        Save(PlayerPrefsKey.HEALTHPOINT, player.HealthPoint);
+        Save(PlayerPrefsKey.MANAPOINT, player.ManaPoint);
+        Save(PlayerPrefsKey.COIN, player.Coins);
     }
 
     public void OnRuneEquip() // belum selesai

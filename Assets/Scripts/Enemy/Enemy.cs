@@ -52,7 +52,12 @@ public class Enemy : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Setup(int healthPoint, int damage, int damageReduction, float speed, float coolDownAttack)
+    private void Setup(
+        int healthPoint, 
+        int damage, 
+        int damageReduction, 
+        float speed, 
+        float coolDownAttack)
     {
         HealthPoint = healthPoint;
         Damage = damage;
@@ -60,6 +65,7 @@ public class Enemy : MonoBehaviour
         Speed = speed;
         CoolDownAttack = coolDownAttack;
     }
+
     public void SetFirstPosition()
     {
         firstPos = transform.position;
@@ -68,8 +74,7 @@ public class Enemy : MonoBehaviour
     public void SetNewStats(EnemyType enemyType)
     {
         if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 7, 0.7f);
-        //obbie
-         if(enemyType == EnemyType.Swordman) Setup(100, 5, 0, 7, 0.7f);
+        if(enemyType == EnemyType.Swordman) Setup(100, 5, 0, 7, 0.7f);
     }
 
     private void MoveToTarget()
@@ -163,6 +168,13 @@ public class Enemy : MonoBehaviour
     public void MovementSkeleton()
     {
         Anim.SetFloat("Speed", Mathf.Abs(Rigidbody.velocity.x));
+    }
+
+    public void Dead()
+    {
+        _target.AddCoin(5);
+        PlayerCoinsUI.UpdateUI();
+        Destroy(gameObject);
     }
 
     #region DEBUG

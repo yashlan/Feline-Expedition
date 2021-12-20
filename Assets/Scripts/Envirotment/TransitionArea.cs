@@ -22,8 +22,16 @@ public class TransitionArea : MonoBehaviour
 
     private void GotoNextDestination()
     {
+        PlayerData.Save(PlayerPrefsKey.HEALTHPOINT, PlayerController.Instance.HealthPoint);
+        PlayerData.Save(PlayerPrefsKey.MANAPOINT,   PlayerController.Instance.ManaPoint);
+        PlayerData.Save(PlayerPrefsKey.COIN,        PlayerController.Instance.Coins);
         PlayerData.Save(PlayerPrefsKey.LAST_SCENE, Destination);
         PlayerData.Save(PlayerPrefsKey.LAST_CHECKPOINT, CheckPointDestination);
+        Invoke(nameof(ChangeScene), 0.5f);
+    }
+
+    void ChangeScene()
+    {
         SceneManager.LoadScene(Destination);
     }
 }

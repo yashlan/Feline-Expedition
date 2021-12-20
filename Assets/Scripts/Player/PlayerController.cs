@@ -35,9 +35,11 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Player Stats")]
     [SerializeField]
+    private int _coins;
+    [SerializeField]
     private int _healthPoint;
     [SerializeField]
-    private int _manaPoint;
+    private float _manaPoint;
     [SerializeField]
     private int _damageReduction;
     [SerializeField]
@@ -119,7 +121,7 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField]
     private bool _isDefend;
     [SerializeField]
-    private bool _isCharging;
+    private bool _isSelfHeal;
     [SerializeField]
     private bool _isDashing;
     [SerializeField]
@@ -145,7 +147,7 @@ public class PlayerController : Singleton<PlayerController>
     private float _delayThrow;
     private float _delayDash;
     private float _delayLastPos;
-    private float _delaycanRecharge;
+    private float _delaycanSelfHeal;
     private float _delaycanShowShield;
     private float _delta;
     private float _delayAfterDash;
@@ -157,13 +159,15 @@ public class PlayerController : Singleton<PlayerController>
     public Rigidbody2D Rigidbody { get => _rb; set => _rb = value; }
     public int HealthPoint { get => _healthPoint; set => _healthPoint = value; }
     public int DamageReduction { get => _damageReduction; set => _damageReduction = value; }
+    public int Coins { get => _coins; set => _coins = value; }
     public int DamageMelee => _damageMelee;
     public int DamageMagic => _damageMagic;
+    public float ManaPoint { get => _manaPoint; set => _manaPoint = value; }
     public float CoolDownAttack => _coolDownAttack;
     public float CoolDownSpearAttack => _coolDownSpearAttack;
     public bool IsTimeComboAttack { get => _isTimeComboAttack; set => _isTimeComboAttack = value; }
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
-    public bool IsCharging => _isCharging;
+    public bool IsSelfHeal { get => _isSelfHeal; set => _isSelfHeal = value; }
     public bool IsDefend => _isDefend;
     public bool FacingRight => _facingRight;
     public bool IsGrounded => _isGrounded;
@@ -188,8 +192,12 @@ public class PlayerController : Singleton<PlayerController>
             PlayerData.DamageReduction,
             PlayerData.DamageMelee,
             PlayerData.DamageMagic,
-            PlayerData.ManaRegen);
+            PlayerData.ManaRegen,
+            PlayerData.Coins);
 
+        PlayerManaUI.UpdateUI();
+        PlayerCoinsUI.UpdateUI();
+        SliderHealthPlayerUI.UpdateUI();
     }
 
     void Update()
@@ -236,7 +244,7 @@ public class PlayerController : Singleton<PlayerController>
         Movement(false);
         Attack(false);
         JumpAttack(false);
-        ReChargingMana();
+        SelfHeal();
         Jump();
         Dash();
 
@@ -250,7 +258,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (!_isHurt)
         {
-            if (!_isCharging || !_isDefend || !_isAttacking)
+            if (!_isSelfHeal || !_isDefend || !_isAttacking)
             {
                 if (!_isDashing && (!_isWallSliding || !_isTouchingWall))
                 {
@@ -291,7 +299,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Jump()
     {
-        if (Input.GetKeyDown(OptionsManager.JumpKey) && (!_isCharging || !_isDefend))
+        if (Input.GetKeyDown(OptionsManager.JumpKey) && (!_isSelfHeal || !_isDefend))
         {
             if (_isGrounded && _jumpAmount > 0)
             {
@@ -335,7 +343,7 @@ public class PlayerController : Singleton<PlayerController>
     private void JumpAttack(bool _withDashEffect)
     {
         if (Input.GetKeyDown(OptionsManager.AttackMeleeKey) && _isJumping
-            && Time.time > _delayJumpAttack && !_isCharging)
+            && Time.time > _delayJumpAttack && !_isSelfHeal)
         {
             _isJumpAttack = true;
 
@@ -360,7 +368,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Attack(bool _withDashEffect)
     {
-        if (Input.GetKeyDown(OptionsManager.AttackMeleeKey) && !_isJumping && !_isDashing && !_isCharging
+        if (Input.GetKeyDown(OptionsManager.AttackMeleeKey) && !_isJumping && !_isDashing && !_isSelfHeal
             && Time.time > _delayAttack)
         {
             _timeToResetCombo += _coolDownAttack;
@@ -389,7 +397,7 @@ public class PlayerController : Singleton<PlayerController>
             if (_isDashing)
                 _delayAfterDash = Time.time + 0.5f;
 
-            if (Input.GetKeyDown(OptionsManager.DashKey) && !_isCharging &&
+            if (Input.GetKeyDown(OptionsManager.DashKey) && !_isSelfHeal &&
                 Time.time > _delayDash && Time.time > _delayAfterDash && _dashAmountOnAir > 0)
             {
                 if (!_isGrounded)
@@ -423,18 +431,18 @@ public class PlayerController : Singleton<PlayerController>
         _anim.SetBool("Throw", _isThrowing);
     }
 
-    private void ReChargingMana()
+    private void SelfHeal()
     {
         if (!_isGrounded)
-            _delaycanRecharge = Time.time + 0.15f;
+            _delaycanSelfHeal = Time.time + 0.15f;
 
-        if (_isCharging)
-            CameraEffect.PlayZoomInOutEffect();
+/*        if (_isCharging)
+            CameraEffect.PlayZoomInOutEffect();*/
 
         if (Input.GetKey(OptionsManager.RechargeKey)
-            && IsIdle() && Time.time > _delaycanRecharge)
+            && IsIdle() && Time.time > _delaycanSelfHeal && _manaPoint > 0)
         {
-            StartCoroutine(ReChargeMana());
+            StartCoroutine(ISelfHeal());
         }
     }
 
@@ -500,20 +508,33 @@ public class PlayerController : Singleton<PlayerController>
     #endregion
 
     #region SELF HEAL
-    //belum fix harusnya pakai hold button selama beberapa detik baru ngecharge
-    private IEnumerator ReChargeMana() 
+    private IEnumerator ISelfHeal() 
     {
-        _isCharging = true;
-        _rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        _anim.SetInteger("ChargeCount", 1);
-        // mana bertambah
-        yield return new WaitForSeconds(2f);
-        _anim.SetInteger("ChargeCount", 2);
-        yield return new WaitForSeconds(0.1f);
-        _anim.SetInteger("ChargeCount", 0);
-        _isCharging = false;
-        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        yield break;
+        var maxHealth = SliderHealthPlayerUI.Instance.sliderHP.maxValue;
+
+        while (_manaPoint > 0 && _healthPoint <= maxHealth)
+        {
+            _anim.SetInteger("SelfHealCount", 1);
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        if(HealthPoint >= maxHealth)
+        {
+            HealthPoint = (int)maxHealth;
+            _anim.SetInteger("SelfHealCount", 2);
+            yield return new WaitForSeconds(0.1f);
+            _anim.SetInteger("SelfHealCount", 0);
+            yield break;
+        }
+
+        if(_manaPoint <= 0)
+        {
+            _manaPoint = 0;
+            _anim.SetInteger("SelfHealCount", 2);
+            yield return new WaitForSeconds(0.1f);
+            _anim.SetInteger("SelfHealCount", 0);
+            yield break;
+        }
     }
     #endregion
 
@@ -524,7 +545,7 @@ public class PlayerController : Singleton<PlayerController>
         _isDefend = true;
         _rb.constraints = RigidbodyConstraints2D.FreezeAll;
         _anim.SetInteger("ShieldCount", 1);
-        //mana berkurang
+        _manaPoint--;
         yield return new WaitForSeconds(0.5f);
         _anim.SetInteger("ShieldCount", 2);
         yield return new WaitForSeconds(3f); //wait until mana habis
@@ -568,11 +589,12 @@ public class PlayerController : Singleton<PlayerController>
 
     private void LoadPlayerData(
         int _healthPoint,
-        int _manaPoint,
+        float _manaPoint,
         int _damageReduction,
         int _damageMelee,
         int _damageMagic,
-        int _manaRegen)
+        int _manaRegen,
+        int _coins)
     {
         this._healthPoint = _healthPoint;
         this._manaPoint = _manaPoint;
@@ -580,6 +602,7 @@ public class PlayerController : Singleton<PlayerController>
         this._damageMelee = _damageMelee;
         this._damageMagic = _damageMagic;
         this._manaRegen = _manaRegen;
+        this._coins = _coins;
     }
     #endregion
 
@@ -624,7 +647,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private bool CanThrowAttack() => !_isMoving &&
                             !_isAttacking &&
-                            !_isCharging &&
+                            !_isSelfHeal &&
                             !_isDashing;
     #endregion
 
@@ -679,6 +702,11 @@ public class PlayerController : Singleton<PlayerController>
 
     #region ON DEAD HEALTHPOINT <= 0 (GAME OVER)
 
+    private void SetDefaultAtribute()
+    {
+        PlayerData.SetDefaultValue();
+    }
+
     public void Dead()
     {
         GameManager.ChangeGameState(GameState.GameOver);
@@ -695,6 +723,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Restart()
     {
+        SetDefaultAtribute();
         _isDead = false;
         GameManager.ChangeGameState(GameState.Playing);
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -719,7 +748,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsIdle() => _isGrounded    &&
                             !_isMoving     &&
                             !_isAttacking  &&
-                            !_isCharging   &&
+                            !_isSelfHeal   &&
                             !_isDashing    &&
                             !_isJumping    &&
                             !_isThrowing   &&
@@ -769,6 +798,22 @@ public class PlayerController : Singleton<PlayerController>
     }
     #endregion
 
+    #region INCREASE MANA WHEN HIT ENEMY
+
+    public void IncreaseMana(int amount)
+    {
+        _manaPoint += amount;
+        PlayerManaUI.UpdateUI();
+    }
+    #endregion
+
+    #region UPDATE COINS
+    public void AddCoin(int amount)
+    {
+        Coins += amount;
+    }
+    #endregion
+
     #endregion UTILITY
 
     #region DEBUG WITH GIZMOS
@@ -813,6 +858,17 @@ public class PlayerController : Singleton<PlayerController>
         _meleeSpearAttack4.StartMelee();
     }
 
+    public void SelfHealEvent()
+    {
+        if(_manaPoint > 0)
+        {
+            _manaPoint -= 20;
+            _healthPoint += 3;
+            PlayerManaUI.UpdateUI();
+            SliderHealthPlayerUI.UpdateUI();
+        }
+    }
+
     public void ThrowFireballEvent()
     {
         Instantiate(_fireBall, _throwPoint.position, Quaternion.identity);
@@ -833,7 +889,6 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (GameManager.GameState == GameState.GameOver)
         {
-            //transform.position = checkpoin pos
             print("Player dead");
         }
     }

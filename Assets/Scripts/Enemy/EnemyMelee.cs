@@ -7,22 +7,26 @@ public class EnemyMelee : MonoBehaviour
     PlayerController _player => PlayerController.Instance;
     EnemyGreenSlime _slime;
     EnemySwordman _swordman;
-    PolygonCollider2D _polygonCollider; 
-
+    PolygonCollider2D _polygonCollider;
+    float delay;
 
 
     void Start()
     {
         _polygonCollider = GetComponent<PolygonCollider2D>();
-        if(GameManager.SceneType == SceneType.map_1) _slime = GetComponentInParent<EnemyGreenSlime>();
-        if(GameManager.SceneType == SceneType.map_3) _swordman = GetComponentInParent<EnemySwordman>();
+
+        if(GameManager.SceneType == SceneType.map_1) 
+            _slime = GetComponentInParent<EnemyGreenSlime>();
+        if(GameManager.SceneType == SceneType.map_3) 
+            _swordman = GetComponentInParent<EnemySwordman>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && Time.time > delay)
         {
             TakeDamage();
+            delay = Time.time + 0.5f;
         }
     }
 
@@ -36,7 +40,7 @@ public class EnemyMelee : MonoBehaviour
         _player.KnockBack(1, transform.parent);
         if(_slime!=null) _player.HealthPoint -= (_slime.Damage - _player.DamageReduction);
         if(_swordman!=null) _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction);        
-        SliderHealthPlayerUI.UpdateCurrentHealth();
+        SliderHealthPlayerUI.UpdateUI();
 
         if (_player.HealthPoint <= 0)
             _player.Dead();
