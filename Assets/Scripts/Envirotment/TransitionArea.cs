@@ -12,7 +12,6 @@ public class TransitionArea : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             GameManager.ChangeGameState(GameState.HitTransitionArea);
-            AudioManager.PauseBGM();
             AudioManager.StopSFX();
             if (BaseRainScript.Instance != null) BaseRainScript.PauseRainSFX();
             PanelSlideUIController.Instance.FadeIn(

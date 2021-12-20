@@ -187,8 +187,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private void Load()
     {
         #region SHOP
-        Coins = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                              0);
-        _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, 0);
+        _coins = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                             _coins);
+        _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, _totalRuneSlotUsed);
         #endregion
 
         _healthPointExtra = PlayerPrefs.GetInt(PlayerPrefsKey.HEALTHPOINT_EXTRA,          _healthPointExtra);

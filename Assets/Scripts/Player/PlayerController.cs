@@ -195,6 +195,12 @@ public class PlayerController : Singleton<PlayerController>
             PlayerData.ManaRegen,
             PlayerData.Coins);
 
+        StartCoroutine(SetupUI());
+    }
+
+    IEnumerator SetupUI()
+    {
+        yield return new WaitUntil(() => GameManager.GameState == GameState.Playing);
         PlayerManaUI.UpdateUI();
         PlayerCoinsUI.UpdateUI();
         SliderHealthPlayerUI.UpdateUI();
@@ -521,8 +527,6 @@ public class PlayerController : Singleton<PlayerController>
         if(HealthPoint >= maxHealth)
         {
             HealthPoint = (int)maxHealth;
-            _anim.SetInteger("SelfHealCount", 2);
-            yield return new WaitForSeconds(0.1f);
             _anim.SetInteger("SelfHealCount", 0);
             yield break;
         }
@@ -530,8 +534,6 @@ public class PlayerController : Singleton<PlayerController>
         if(_manaPoint <= 0)
         {
             _manaPoint = 0;
-            _anim.SetInteger("SelfHealCount", 2);
-            yield return new WaitForSeconds(0.1f);
             _anim.SetInteger("SelfHealCount", 0);
             yield break;
         }

@@ -5,16 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerCoinsUI : Singleton<PlayerCoinsUI>
 {
-    Text text;
+    Text textCoins;
 
-    // Start is called before the first frame update
     void Start()
     {
-        text = GetComponent<Text>();
+        textCoins = GetComponent<Text>();
     }
 
     public static void UpdateUI()
     {
-        Instance.text.text = PlayerController.Instance.Coins.ToString();
+        Instance.textCoins.text = PlayerController.Instance.Coins.ToString();
     }
 }
