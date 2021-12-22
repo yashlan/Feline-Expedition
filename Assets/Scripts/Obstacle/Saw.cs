@@ -43,6 +43,7 @@ public class Saw : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            //collision.GetComponent<HealthPoint>().TakeDamage(damage);
             TakeDamage();
         }
     }
@@ -55,6 +56,7 @@ public class Saw : MonoBehaviour
         CameraEffect.PlayShakeEffect();
 
         _player.KnockBack(1, transform.parent);  
+
         SliderHealthPlayerUI.UpdateCurrentHealth();
 
         if (_player.HealthPoint <= 0)
