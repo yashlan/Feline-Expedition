@@ -43,6 +43,7 @@ public class Saw : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            //collision.GetComponent<HealthPoint>().TakeDamage(damage);
             TakeDamage();
         }
     }
