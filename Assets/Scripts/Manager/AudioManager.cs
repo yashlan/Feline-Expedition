@@ -36,6 +36,7 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip Envi3LoremIpsumClip;
 
     [Header("SFX Player")]
+    public AudioClip PlayerThrowClip;
     public AudioClip PlayerBasicAttack1Clip;
     public AudioClip PlayerDeadClip;
 

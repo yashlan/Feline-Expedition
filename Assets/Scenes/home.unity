@@ -1562,7 +1562,8 @@ MonoBehaviour:
   EnviLeverBrigdeClip: {fileID: 8300000, guid: c29b3541bea40004884b90c4f2feb965, type: 3}
   Envi2LoremIpsumClip: {fileID: 0}
   Envi3LoremIpsumClip: {fileID: 0}
-  PlayerBasicAttack1Clip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
+  PlayerThrowClip: {fileID: 8300000, guid: b02184156f325714c8b85f7193952533, type: 3}
+  PlayerBasicAttack1Clip: {fileID: 8300000, guid: e5bf640bc6986194fabbd303fc4acf1a, type: 3}
   PlayerDeadClip: {fileID: 0}
   EnemyDeadClip: {fileID: 0}
   BossBattleDeadClip: {fileID: 0}
@@ -2130,7 +2131,7 @@ MonoBehaviour:
   _damageMagic: 0
   _manaRegen: 0
   _totalRuneSlotUsed: 0
-  _coin: 0
+  _coins: 0
   _isBeastWasPurchased: 0
   _isDisorderWasPurchased: 0
   _isIlusionWasPurchased: 0

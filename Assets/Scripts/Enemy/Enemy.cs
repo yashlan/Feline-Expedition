@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     public int DamageReduction;
     public float Speed;
     public float CoolDownAttack;
+    public int CoinReward;
 
     [Header("Ground Raycast")]
     public Transform GroundCheckPoint;
@@ -57,13 +58,15 @@ public class Enemy : MonoBehaviour
         int damage, 
         int damageReduction, 
         float speed, 
-        float coolDownAttack)
+        float coolDownAttack,
+        int coinReward)
     {
         HealthPoint = healthPoint;
         Damage = damage;
         DamageReduction = damageReduction;
         Speed = speed;
         CoolDownAttack = coolDownAttack;
+        CoinReward = coinReward;
     }
 
     public void SetFirstPosition()
@@ -73,8 +76,8 @@ public class Enemy : MonoBehaviour
 
     public void SetNewStats(EnemyType enemyType)
     {
-        if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 7, 0.7f);
-        if(enemyType == EnemyType.Swordman) Setup(100, 5, 0, 7, 0.7f);
+        if(enemyType == EnemyType.GreenSlime) Setup(25, 5, 0, 7, 0.7f, 5);
+        if(enemyType == EnemyType.Swordman)   Setup(30, 5, 0, 7, 1f,  15);
     }
 
     private void MoveToTarget()
@@ -172,7 +175,7 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        _target.AddCoin(5);
+        _target.AddCoin(CoinReward);
         PlayerCoinsUI.UpdateUI();
         Destroy(gameObject);
     }

@@ -204,6 +204,11 @@ public class PlayerController : Singleton<PlayerController>
         PlayerManaUI.UpdateUI();
         PlayerCoinsUI.UpdateUI();
         SliderHealthPlayerUI.UpdateUI();
+
+        if (OptionsManager.DisplayPlayerUI)
+            PlayerRuneUI.Show();
+        else
+            PlayerRuneUI.Hide();
     }
 
     void Update()
@@ -442,11 +447,13 @@ public class PlayerController : Singleton<PlayerController>
         if (!_isGrounded)
             _delaycanSelfHeal = Time.time + 0.15f;
 
-/*        if (_isCharging)
-            CameraEffect.PlayZoomInOutEffect();*/
+        /*        if (_isCharging)
+                    CameraEffect.PlayZoomInOutEffect();*/
+
+        var maxHealth = SliderHealthPlayerUI.Instance.sliderHP.maxValue;
 
         if (Input.GetKey(OptionsManager.RechargeKey)
-            && IsIdle() && Time.time > _delaycanSelfHeal && _manaPoint > 0)
+            && IsIdle() && Time.time > _delaycanSelfHeal && _manaPoint > 0 && _healthPoint < maxHealth)
         {
             StartCoroutine(ISelfHeal());
         }
@@ -574,16 +581,16 @@ public class PlayerController : Singleton<PlayerController>
 
     IEnumerator IKnockBack(float force, Transform enemy)
     {
-        while (_isHurt)
-        {
-            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+        if (IsDead)
+            yield break;
 
-            Rigidbody.AddForce(
-                (enemy.position.x < transform.position.x ?
-                Vector2.right : Vector2.left) * force,
-                ForceMode2D.Impulse);
-            yield return null;
-        }
+        var dir = (transform.position - enemy.position).normalized;
+        dir.y = 0.5f;
+
+        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, dir.y);
+
+        Rigidbody.AddForce(dir * force);
+        yield return new WaitForSeconds(0.02f);
     }
     #endregion
 
@@ -873,6 +880,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public void ThrowFireballEvent()
     {
+        AudioManager.PlaySfx(AudioManager.Instance.PlayerThrowClip);
         Instantiate(_fireBall, _throwPoint.position, Quaternion.identity);
     }
 

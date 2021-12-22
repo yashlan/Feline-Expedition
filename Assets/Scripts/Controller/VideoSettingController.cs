@@ -85,6 +85,14 @@ public class VideoSettingController : MonoBehaviour
             IntValueOf(OptionsManager.DisplayPlayerUI));
 
         textDisplayPlayerUI.text = OptionsManager.DisplayPlayerUI ? "on" : "off";
+
+        if (PlayerRuneUI.Instance == null)
+            return;
+
+        if (OptionsManager.DisplayPlayerUI)
+            PlayerRuneUI.Show();
+        else
+            PlayerRuneUI.Hide();
     }
 
     private int IntValueOf(bool val) => val ? 1 : 0;

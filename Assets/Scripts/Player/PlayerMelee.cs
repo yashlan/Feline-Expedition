@@ -45,7 +45,7 @@ public class PlayerMelee : MonoBehaviour
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
 
-            enemy.KnockBack(30);
+            enemy.KnockBack(20);
             enemy.HealthPoint -= (_player.DamageMelee - enemy.DamageReduction);
             _player.IncreaseMana(3);
 

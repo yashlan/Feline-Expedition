@@ -37,7 +37,7 @@ public class EnemyMelee : MonoBehaviour
 
         CameraEffect.PlayShakeEffect();
 
-        _player.KnockBack(1, transform.parent);
+        _player.KnockBack(1000, transform.parent);
         if(_slime!=null) _player.HealthPoint -= (_slime.Damage - _player.DamageReduction);
         if(_swordman!=null) _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction);        
         SliderHealthPlayerUI.UpdateUI();
