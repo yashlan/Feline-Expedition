@@ -326,8 +326,9 @@ public class PlayerController : Singleton<PlayerController>
                 _wasFirstJump = false;
                 Invoke(nameof(DecreaseJumpAmount), 0.1f);
             }
-            else if ((Input.GetKey(OptionsManager.LeftKey) && (_facingRight || !_facingRight) && Input.GetKey(OptionsManager.RightKey)) && 
-                (_isWallSliding || _isTouchingWall) && _jumpAmount > 0)
+            else if (((Input.GetKey(OptionsManager.LeftKey) && _facingRight) ||
+                (Input.GetKey(OptionsManager.RightKey)      && !_facingRight)) && 
+                (_isWallSliding || _isTouchingWall)         && _jumpAmount > 0)
             {
                 _rb.velocity = Vector2.zero;
                 _rb.velocity = Vector2.up * _wallJumpForce;
@@ -335,8 +336,9 @@ public class PlayerController : Singleton<PlayerController>
                 _wasFirstJump = true;
                 Invoke(nameof(DecreaseJumpAmount), 0.1f);
             }
-            else if ((Input.GetKey(OptionsManager.LeftKey) && (_facingRight || !_facingRight) && Input.GetKey(OptionsManager.RightKey)) && 
-                (_isWallSliding || _isTouchingWall) && _jumpAmount == 1 && _wasFirstJump)
+            else if (((Input.GetKey(OptionsManager.LeftKey) && _facingRight) ||
+                (Input.GetKey(OptionsManager.RightKey)      && !_facingRight)) &&
+                (_isWallSliding || _isTouchingWall)         && _jumpAmount == 1)
             {
                 _rb.velocity = Vector2.zero;
                 _rb.velocity = Vector2.up * _wallJumpForce;

@@ -48,7 +48,7 @@ public class GameManager : Singleton<GameManager>
         if(sceneType == SceneType.map_2) 
             ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
         if(sceneType == SceneType.map_3)
-            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
     }
 
     void Update()

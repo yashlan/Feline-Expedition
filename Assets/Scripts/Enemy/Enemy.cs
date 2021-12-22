@@ -81,9 +81,9 @@ public class Enemy : MonoBehaviour
 
     public void SetNewStats(EnemyType enemyType)
     {
-        if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 7, 0.7f);        
-        if(enemyType == EnemyType.Swordman) Setup(40, 10, 5, 7, 0.7f);
-        if(enemyType == EnemyType.Shieldman) Setup(40, 10, 5, 7, 0.7f);
+        if(enemyType == EnemyType.GreenSlime) Setup(25, 5, 0, 7, 0.7f, 5);        
+        if(enemyType == EnemyType.Swordman) Setup(40, 10, 5, 7, 1f, 15);
+        if(enemyType == EnemyType.Shieldman) Setup(40, 10, 5, 7, 1f, 15);
     }
 
     private void MoveToTarget()

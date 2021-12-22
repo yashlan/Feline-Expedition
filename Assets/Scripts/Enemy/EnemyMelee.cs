@@ -10,8 +10,6 @@ public class EnemyMelee : MonoBehaviour
     PolygonCollider2D _polygonCollider;
     float delay;
     EnemyShieldman _shieldman;
-    PolygonCollider2D _polygonCollider; 
-
 
 
 

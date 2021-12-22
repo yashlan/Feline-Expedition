@@ -1556,6 +1556,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
   - {fileID: 8300000, guid: 68db71da3f965874fbf8c6646524d4e9, type: 3}
   - {fileID: 8300000, guid: a72be6dbb33ae1d48b44895f4943bee6, type: 3}
+  - {fileID: 8300000, guid: f480091c3c59e4f49a590777b7d70f20, type: 3}
   ButtonEnterClip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
   EnviThunderClip: {fileID: 8300000, guid: 0afd185b9304c1b4fbe757fe14c4718b, type: 3}
   EnviBrigdeClip: {fileID: 8300000, guid: bbba4d713d406fd49852c4f6483e7dcd, type: 3}
@@ -2149,7 +2150,7 @@ MonoBehaviour:
   _isWaterSpearEquip: 0
   _isInvincibleShieldEquip: 0
   _lastScene: map_1
-  _lastCheckPoint: map1_point_1
+  _lastCheckPoint: map_1_point_1
 --- !u!4 &1021348502
 Transform:
   m_ObjectHideFlags: 0

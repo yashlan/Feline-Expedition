@@ -55,7 +55,7 @@ public class Saw : MonoBehaviour
         CameraEffect.PlayShakeEffect();
 
         _player.KnockBack(1, transform.parent);  
-        SliderHealthPlayerUI.UpdateCurrentHealth();
+        SliderHealthPlayerUI.UpdateUI();
 
         if (_player.HealthPoint <= 0)
             _player.Dead();
