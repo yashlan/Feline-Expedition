@@ -1,7 +1,58 @@
 fileFormatVersion: 2
 guid: c5741f3299773a84483cbc5ad9370256
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -6333476543804377499
+    second: skeleton-shieldman-death_0
+  - first:
+      213: -1684032629438703766
+    second: skeleton-shieldman-death_1
+  - first:
+      213: 6279283847988568232
+    second: skeleton-shieldman-death_2
+  - first:
+      213: 9188570119854168309
+    second: skeleton-shieldman-death_3
+  - first:
+      213: 2834566640702589223
+    second: skeleton-shieldman-death_4
+  - first:
+      213: 2267693878513083327
+    second: skeleton-shieldman-death_5
+  - first:
+      213: 450855464312705575
+    second: skeleton-shieldman-death_6
+  - first:
+      213: -8578971650394694859
+    second: skeleton-shieldman-death_7
+  - first:
+      213: -6296026676434454670
+    second: skeleton-shieldman-death_8
+  - first:
+      213: -6419753227104988611
+    second: skeleton-shieldman-death_9
+  - first:
+      213: 6594072995138638171
+    second: skeleton-shieldman-death_10
+  - first:
+      213: -69081390733716172
+    second: skeleton-shieldman-death_11
+  - first:
+      213: 6390189923097182754
+    second: skeleton-shieldman-death_12
+  - first:
+      213: -7121856434448466346
+    second: skeleton-shieldman-death_13
+  - first:
+      213: -81050025121185042
+    second: skeleton-shieldman-death_14
+  - first:
+      213: 5216280514997582053
+    second: skeleton-shieldman-death_15
+  - first:
+      213: 5272698013950517554
+    second: skeleton-shieldman-death_16
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +92,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +126,390 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 52
+        width: 405
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 566754db3a8fa18a0800000000000000
+      internalID: -6333476543804377499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_1
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 52
+        width: 404
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a679324fe3d11a8e0800000000000000
+      internalID: -1684032629438703766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_2
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 58
+        width: 399
+        height: 542
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a0e433046f742750800000000000000
+      internalID: 6279283847988568232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_3
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 69
+        width: 399
+        height: 548
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f81da347db548f70800000000000000
+      internalID: 9188570119854168309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_4
+      rect:
+        serializedVersion: 2
+        x: 3300
+        y: 63
+        width: 443
+        height: 578
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 729004f6757665720800000000000000
+      internalID: 2834566640702589223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_5
+      rect:
+        serializedVersion: 2
+        x: 4072
+        y: 58
+        width: 448
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb3a9185197787f10800000000000000
+      internalID: 2267693878513083327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_6
+      rect:
+        serializedVersion: 2
+        x: 4848
+        y: 41
+        width: 459
+        height: 581
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7221763f7a2c14600800000000000000
+      internalID: 450855464312705575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_7
+      rect:
+        serializedVersion: 2
+        x: 5625
+        y: 52
+        width: 492
+        height: 548
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53bd310ccbe51f880800000000000000
+      internalID: -8578971650394694859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_8
+      rect:
+        serializedVersion: 2
+        x: 6396
+        y: 80
+        width: 508
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 277bdb6781500a8a0800000000000000
+      internalID: -6296026676434454670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_9
+      rect:
+        serializedVersion: 2
+        x: 7232
+        y: 101
+        width: 493
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d325db8047478e6a0800000000000000
+      internalID: -6419753227104988611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_10
+      rect:
+        serializedVersion: 2
+        x: 8961
+        y: 409
+        width: 49
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b511c32c37ad28b50800000000000000
+      internalID: 6594072995138638171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_11
+      rect:
+        serializedVersion: 2
+        x: 8228
+        y: 250
+        width: 136
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4351ab457d29a0ff0800000000000000
+      internalID: -69081390733716172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_12
+      rect:
+        serializedVersion: 2
+        x: 9682
+        y: 348
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2220d7dd0e38ea850800000000000000
+      internalID: 6390189923097182754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_13
+      rect:
+        serializedVersion: 2
+        x: 9223
+        y: 244
+        width: 38
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65e7e5b5e451a2d90800000000000000
+      internalID: -7121856434448466346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_14
+      rect:
+        serializedVersion: 2
+        x: 9010
+        y: 206
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee28d9b7e6d00eef0800000000000000
+      internalID: -81050025121185042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_15
+      rect:
+        serializedVersion: 2
+        x: 10136
+        y: 145
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e8f839cd73f36840800000000000000
+      internalID: 5216280514997582053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skeleton-shieldman-death_16
+      rect:
+        serializedVersion: 2
+        x: 9743
+        y: 113
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 231ad6168e26c2940800000000000000
+      internalID: 5272698013950517554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

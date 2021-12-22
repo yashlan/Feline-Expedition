@@ -49,10 +49,19 @@ public class PlayerFireballMelee : MonoBehaviour
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
 
+            if (enemy.IsDead)
+            return;
+
             enemy.HealthPoint -= (_player.DamageMagic - enemy.DamageReduction);
 
-            if (enemy.HealthPoint <= 0)
+            if (enemy.HealthPoint <= 0 && enemy.enemyType == EnemyType.GreenSlime)
+            {
                 Destroy(enemy.gameObject);
+            }
+            else if (enemy.HealthPoint <= 0 && enemy.enemyType == EnemyType.Swordman)
+            {
+                enemy.Dead();
+            }
         }
 
         if (collision.gameObject.GetComponent<VaseController>() != null)

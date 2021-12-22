@@ -49,11 +49,11 @@ TagManager:
   - name: Background
     uniqueID: 3941618055
     locked: 0
-  - name: Environment
-    uniqueID: 1424550521
-    locked: 0
   - name: Obstacle
     uniqueID: 3570728073
+    locked: 0
+  - name: Environment
+    uniqueID: 1424550521
     locked: 0
   - name: Enemy
     uniqueID: 2880199385

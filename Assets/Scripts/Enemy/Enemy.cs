@@ -4,7 +4,7 @@ using UnityEngine;
 public enum EnemyType
 {
 
-    GreenSlime, Swordman,
+    GreenSlime, Swordman, Shieldman,
 
 }
 
@@ -30,6 +30,9 @@ public class Enemy : MonoBehaviour
     public float Speed;
     public float CoolDownAttack;
     public int CoinReward;
+    public bool IsDead;
+
+
 
     [Header("Ground Raycast")]
     public Transform GroundCheckPoint;
@@ -44,6 +47,7 @@ public class Enemy : MonoBehaviour
     RaycastHit2D hitGround;
     float horizontal;
     Vector3 firstPos;
+    BoxCollider2D _boxCollider;
 
     public PlayerController _target => PlayerController.Instance;
 
@@ -51,6 +55,7 @@ public class Enemy : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Setup(
@@ -76,8 +81,9 @@ public class Enemy : MonoBehaviour
 
     public void SetNewStats(EnemyType enemyType)
     {
-        if(enemyType == EnemyType.GreenSlime) Setup(25, 5, 0, 7, 0.7f, 5);
-        if(enemyType == EnemyType.Swordman)   Setup(30, 5, 0, 7, 1f,  15);
+        if(enemyType == EnemyType.GreenSlime) Setup(100, 5, 0, 7, 0.7f);        
+        if(enemyType == EnemyType.Swordman) Setup(40, 10, 5, 7, 0.7f);
+        if(enemyType == EnemyType.Shieldman) Setup(40, 10, 5, 7, 0.7f);
     }
 
     private void MoveToTarget()
@@ -177,8 +183,20 @@ public class Enemy : MonoBehaviour
     {
         _target.AddCoin(CoinReward);
         PlayerCoinsUI.UpdateUI();
-        Destroy(gameObject);
+
+        if(enemyType == EnemyType.GreenSlime)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Anim.SetTrigger("Dead");
+        gameObject.layer = LayerMask.NameToLayer("Default");
+        Rigidbody.constraints= RigidbodyConstraints2D.FreezeAll;
+        IsDead =  true;
+        _boxCollider.enabled = false;
     }
+
 
     #region DEBUG
 
@@ -201,6 +219,11 @@ public class Enemy : MonoBehaviour
     public void DisableAttackEvent()
     {
         Anim.SetBool("Attack", false);
+    }
+
+    public void DeadEvent()
+    {
+        Destroy(gameObject);
     }
     #endregion
 }
