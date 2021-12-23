@@ -2995,7 +2995,7 @@ MonoBehaviour:
   _speedBG: -0.001
   _midground: {fileID: 1078750888}
   _speedMG: 0.0001
-  _foreground: {fileID: 657736107}
+  _foreground: {fileID: 1784460962}
   _speedFG: -0.0001
   _foreground2: {fileID: 1184974021}
   _speedFG2: -0.001
