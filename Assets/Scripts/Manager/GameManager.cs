@@ -21,7 +21,8 @@ public enum SceneType
 {
     map_1,
     map_2,
-    map_3,
+    map_3_1,
+    map_3_2,
 }
 
 public class GameManager : Singleton<GameManager>
@@ -43,7 +44,8 @@ public class GameManager : Singleton<GameManager>
     {
         if(sceneType == SceneType.map_1) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
         if(sceneType == SceneType.map_2) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
-        if(sceneType == SceneType.map_3) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+        if(sceneType == SceneType.map_3_1) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+        if(sceneType == SceneType.map_3_2) ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
     }
 
     void Update()

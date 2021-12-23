@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
-    [SerializeField] private float movementDistance;
-    [SerializeField] private float damage; 
-    [SerializeField] private float speed; 
+    [SerializeField] 
+    private float movementDistance;
+    [SerializeField] 
+    private int damage; 
+    [SerializeField] 
+    private float speed; 
     private bool movingleft;
     private float leftEdge;
     private float rightEdge;
+    float delay;
     PlayerController _player => PlayerController.Instance;
     PolygonCollider2D _polygonCollider; 
 
@@ -17,6 +21,11 @@ public class Saw : MonoBehaviour
         rightEdge = transform.position.x + movementDistance;
     }
      
+    void Start()
+    {
+        _polygonCollider = GetComponent<PolygonCollider2D>();
+    }
+
     void Update()
     {
         if (movingleft)
@@ -41,10 +50,10 @@ public class Saw : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player"  && Time.time > delay )
         {
-            //collision.GetComponent<HealthPoint>().TakeDamage(damage);
             TakeDamage();
+            delay = Time.time + 0.5f;
         }
     }
 
@@ -56,7 +65,7 @@ public class Saw : MonoBehaviour
         CameraEffect.PlayShakeEffect();
 
         _player.KnockBack(1, transform.parent);  
-
+        _player.HealthPoint -= (damage - _player.DamageReduction);
         SliderHealthPlayerUI.UpdateCurrentHealth();
 
         if (_player.HealthPoint <= 0)

@@ -16,8 +16,8 @@ public class EnemyMelee : MonoBehaviour
     {
         _polygonCollider = GetComponent<PolygonCollider2D>();
         if(GameManager.SceneType == SceneType.map_1) _slime = GetComponentInParent<EnemyGreenSlime>();
-        if(GameManager.SceneType == SceneType.map_3) _swordman = GetComponentInParent<EnemySwordman>();
-        if(GameManager.SceneType == SceneType.map_3) _shieldman = GetComponentInParent<EnemyShieldman>();
+        if(GameManager.SceneType == SceneType.map_3_1) _swordman = GetComponentInParent<EnemySwordman>();
+        if(GameManager.SceneType == SceneType.map_3_2) _shieldman = GetComponentInParent<EnemyShieldman>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
