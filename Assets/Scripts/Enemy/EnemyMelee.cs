@@ -16,6 +16,7 @@ public class EnemyMelee : MonoBehaviour
     void Start()
     {
         _polygonCollider = GetComponent<PolygonCollider2D>();
+
         if(GameManager.SceneType == SceneType.map_1) 
             _slime = GetComponentInParent<EnemyGreenSlime>();
         if(GameManager.SceneType == SceneType.map_3)
@@ -36,7 +37,7 @@ public class EnemyMelee : MonoBehaviour
     private void TakeDamage()
     {
         if (_player.IsDead)
-            return;
+            return;      
 
         CameraEffect.PlayShakeEffect();
 
@@ -44,10 +45,13 @@ public class EnemyMelee : MonoBehaviour
         
         if(_slime!=null) 
             _player.HealthPoint -= (_slime.Damage - _player.DamageReduction);
+
         if(_swordman!=null) 
-            _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction);  
+            _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction); 
+
         if(_shieldman!=null) 
-            _player.HealthPoint -= (_shieldman.Damage - _player.DamageReduction);    
+            _player.HealthPoint -= (_shieldman.Damage - _player.DamageReduction);   
+
         SliderHealthPlayerUI.UpdateUI();
 
         if (_player.HealthPoint <= 0)
