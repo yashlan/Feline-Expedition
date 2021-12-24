@@ -454,7 +454,7 @@ public class PlayerController : Singleton<PlayerController>
 
         var maxHealth = SliderHealthPlayerUI.Instance.sliderHP.maxValue;
 
-        if (Input.GetKey(OptionsManager.RechargeKey)
+        if (Input.GetKeyDown(OptionsManager.RechargeKey)
             && IsIdle() && Time.time > _delaycanSelfHeal && _manaPoint > 0 && _healthPoint < maxHealth)
         {
             StartCoroutine(ISelfHeal());
@@ -530,17 +530,17 @@ public class PlayerController : Singleton<PlayerController>
         while (_manaPoint > 0 && _healthPoint <= maxHealth)
         {
             _anim.SetInteger("SelfHealCount", 1);
-            yield return new WaitForSeconds(0.5f);
+            yield return null;
         }
 
-        if(HealthPoint >= maxHealth)
+        if (HealthPoint >= maxHealth)
         {
             HealthPoint = (int)maxHealth;
             _anim.SetInteger("SelfHealCount", 0);
             yield break;
         }
 
-        if(_manaPoint <= 0)
+        if (_manaPoint <= 0)
         {
             _manaPoint = 0;
             _anim.SetInteger("SelfHealCount", 0);
@@ -585,6 +585,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (IsDead)
             yield break;
+
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         var dir = (transform.position - enemy.position).normalized;
         dir.y = 0.5f;
@@ -691,13 +693,20 @@ public class PlayerController : Singleton<PlayerController>
 
     public void OnHitDeadArea()
     {
+        if(_healthPoint <= 0)
+        {
+            Dead();
+            return;
+        }
+
         GameManager.ChangeGameState(GameState.HitDeadArea);
 
-        _isDead = true;
-
-        if (GameManager.GameState == GameState.HitDeadArea && _isDead)
+        if (GameManager.GameState == GameState.HitDeadArea && !_isDead)
         {
+            _isDead = true;
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            _healthPoint -= 5;
+            SliderHealthPlayerUI.UpdateUI();
             PanelSlideUIController.Instance.FadeIn(() => GetLastPos(), true);
         }
     }
@@ -708,6 +717,14 @@ public class PlayerController : Singleton<PlayerController>
         GameManager.GameState = GameState.Playing;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         transform.position = _lastPos;
+
+        if (FindObjectsOfType<Enemy>() == null)
+            return;
+
+        foreach (var enemy in FindObjectsOfType<Enemy>())
+        {
+            enemy.ResetPosition();
+        }
     }
     #endregion
 
@@ -722,10 +739,9 @@ public class PlayerController : Singleton<PlayerController>
     {
         GameManager.ChangeGameState(GameState.GameOver);
 
-        _isDead = true;
-
-        if (GameManager.GameState == GameState.GameOver && _isDead)
+        if (GameManager.GameState == GameState.GameOver && !_isDead)
         {
+            _isDead = true;
             _anim.SetTrigger("Dead");
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
             PanelSlideUIController.Instance.FadeIn(() => Restart(), true);

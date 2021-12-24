@@ -160,6 +160,11 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         get => Instance._coins; 
         set => Instance._coins = value; 
     }
+    public static int HealthPointExtra 
+    { 
+        get => Instance._healthPointExtra; 
+        set => Instance._healthPointExtra = value; 
+    }
 
     #endregion
 
@@ -167,12 +172,12 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     public static bool IsWaterSpearUsed() => IsWaterSpearWasUnlocked && IsWaterSpearEquip;
 
     #region DEFAULT STATS
-    private const int DEFAULT_HEALTHPOINT      = 30;
-    private const int DEFAULT_MANAPOINT        = 100;
-    private const int DEFAULT_DAMAGE_MELEE     = 10;
-    private const int DEFAULT_DAMAGE_MAGIC     = 7;
-    private const int DEFAULT_DAMAGE_REDUCTION = 0;
-    private const int DEFAULT_MANA_REGEN       = 3;
+    public const int DEFAULT_HEALTHPOINT      = 30;
+    public const int DEFAULT_MANAPOINT        = 100;
+    public const int DEFAULT_DAMAGE_MELEE     = 10;
+    public const int DEFAULT_DAMAGE_MAGIC     = 7;
+    public const int DEFAULT_DAMAGE_REDUCTION = 0;
+    public const int DEFAULT_MANA_REGEN       = 3;
     #endregion
 
 

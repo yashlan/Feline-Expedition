@@ -1,19 +1,18 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SliderHealthPlayerUI : Singleton<SliderHealthPlayerUI>
 {
     public Slider sliderHP;
-    static PlayerController player => PlayerController.Instance;
 
     void Start()
     {
-        sliderHP.maxValue = player.HealthPoint;
-        sliderHP.value = sliderHP.maxValue;
+        sliderHP.maxValue = PlayerData.DEFAULT_HEALTHPOINT + PlayerData.HealthPointExtra;
     }
 
     public static void UpdateUI() 
     {
-        Instance.sliderHP.value = player.HealthPoint;
+        Instance.sliderHP.value = PlayerController.Instance.HealthPoint;
 
         if (Instance.sliderHP.value <= 0)
             Instance.sliderHP.value = 0;

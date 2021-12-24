@@ -15,6 +15,12 @@ public class SelfHealTransition : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (isEndCharge)
+        {
+            PlayerController.Instance.IsSelfHeal = false;
+            return;
+        }
+
         PlayerController.Instance.IsSelfHeal = true;
 
         if (PlayerController.Instance.IsSelfHeal)

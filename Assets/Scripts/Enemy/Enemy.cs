@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 public enum EnemyType
 {
-
-    GreenSlime, Swordman, Shieldman,
-
+    GreenSlime, 
+    Swordman, 
+    Shieldman,
 }
 
 public class Enemy : MonoBehaviour
@@ -79,11 +79,16 @@ public class Enemy : MonoBehaviour
         firstPos = transform.position;
     }
 
+    public void ResetPosition()
+    {
+        transform.position = firstPos;
+    }
+
     public void SetNewStats(EnemyType enemyType)
     {
-        if(enemyType == EnemyType.GreenSlime) Setup(25, 5, 0, 7, 0.7f, 5);        
-        if(enemyType == EnemyType.Swordman) Setup(40, 10, 5, 7, 1f, 15);
-        if(enemyType == EnemyType.Shieldman) Setup(40, 10, 5, 7, 1f, 15);
+        if(enemyType == EnemyType.GreenSlime) Setup(25, 5,  0, 7, 0.7f,  5);        
+        if(enemyType == EnemyType.Swordman)   Setup(40, 5,  5, 7,   1f, 15);
+        if(enemyType == EnemyType.Shieldman)  Setup(40, 10, 5, 7,   2f, 15);
     }
 
     private void MoveToTarget()
@@ -140,7 +145,9 @@ public class Enemy : MonoBehaviour
             {
                 distance = Vector2.Distance(transform.position, _target.transform.position);
 
-                if (distance <= AttackRadius && _target.IsGrounded)
+                var distanceY = _target.transform.position.y - transform.position.y;
+
+                if (distance <= AttackRadius && _target.IsGrounded && distanceY < 2)
                 {
                     MoveToTarget();
                 }
@@ -184,7 +191,9 @@ public class Enemy : MonoBehaviour
         _target.AddCoin(CoinReward);
         PlayerCoinsUI.UpdateUI();
 
-        if(enemyType == EnemyType.GreenSlime)
+        IsDead = true;
+
+        if (enemyType == EnemyType.GreenSlime)
         {
             Destroy(gameObject);
             return;
@@ -193,7 +202,6 @@ public class Enemy : MonoBehaviour
         Anim.SetTrigger("Dead");
         gameObject.layer = LayerMask.NameToLayer("Default");
         Rigidbody.constraints= RigidbodyConstraints2D.FreezeAll;
-        IsDead =  true;
         _boxCollider.enabled = false;
     }
 

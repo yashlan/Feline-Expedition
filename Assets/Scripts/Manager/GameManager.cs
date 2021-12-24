@@ -99,6 +99,10 @@ public class GameManager : Singleton<GameManager>
 
     public void ExitOnClick()
     {
+        PlayerData.Save(PlayerPrefsKey.HEALTHPOINT, PlayerController.Instance.HealthPoint);
+        PlayerData.Save(PlayerPrefsKey.MANAPOINT, PlayerController.Instance.ManaPoint);
+        PlayerData.Save(PlayerPrefsKey.COIN, PlayerController.Instance.Coins);
+
         Time.timeScale = 1;
         AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[0]);
         SceneManager.LoadScene("home");
