@@ -23,6 +23,7 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
 
     [Header("SFX UI")]
     public AudioClip ButtonEnterClip;
+    public AudioClip TypingClip;
 
     [Header("SFX Environment Map 1")]
     public AudioClip EnviThunderClip;
@@ -39,6 +40,11 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip PlayerThrowClip;
     public AudioClip PlayerBasicAttack1Clip;
     public AudioClip PlayerDeadClip;
+
+    [Header("SFX NPC")]
+    public AudioClip NPCRoccaClip;
+    public AudioClip NPCGerrinClip;
+    public AudioClip NPCGwynnClip;
 
     [Header("SFX Enemy")]
     public AudioClip EnemyDeadClip;

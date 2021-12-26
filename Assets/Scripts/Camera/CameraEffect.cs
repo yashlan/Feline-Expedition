@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,18 +9,10 @@ public class CameraEffect : Singleton<CameraEffect>
     [SerializeField]
     private float _shakePower;
 
-    [Header("Zoom in/out")]
-    [SerializeField]
-    private float _ortographicSize; 
-
     private static float ShakePower => Instance._shakePower;
-    public static float OrtographicSize { get => Instance._ortographicSize; set => Instance._ortographicSize = value; }
 
     static CinemachineBasicMultiChannelPerlin cinemachineBasic;
-    static float firstOrtoSize;
     static CinemachineVirtualCamera virtualCamera;
-
-    static PlayerController player => PlayerController.Instance;
 
     void Start()
     {
@@ -27,11 +20,12 @@ public class CameraEffect : Singleton<CameraEffect>
 
         cinemachineBasic = 
             virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
-        firstOrtoSize = virtualCamera.m_Lens.OrthographicSize;
     }
 
     #region CHINEMACHINE CAMERA SHAKE
+    /// <summary>
+    /// defualt shake power = 10, add float value to make dynamic value. example : PlayShakeEffect(100);
+    /// </summary>
     public static void PlayShakeEffect()
     {
         Instance.StartCoroutine(PlayShake(ShakePower));
@@ -54,18 +48,46 @@ public class CameraEffect : Singleton<CameraEffect>
     #endregion
 
     #region ZOOM IN/OUT CAMERA
-    public static void PlayZoomInOutEffect()
+    public static void PlayZoomIn(float targetSize, Action<bool> OnZoomIn = null)
     {
-        OrtographicSize = 18;
-        Instance.StartCoroutine(PlayZoomInOut(OrtographicSize));
+        Instance.StartCoroutine(IPlayZoomIn(targetSize, OnZoomIn));
     }
 
-    private static IEnumerator PlayZoomInOut(float ortoSize)
+    public static void PlayZoomOut(float targetSize, Action<bool> OnZoomOut = null)
     {
-        virtualCamera.m_Lens.OrthographicSize = ortoSize;
-        yield return new WaitUntil(() => PlayerData.IsInvincibleShieldUsed() ? !player.IsDefend : !player.IsSelfHeal);
-        virtualCamera.m_Lens.OrthographicSize = firstOrtoSize;
-        yield break;
+        Instance.StartCoroutine(IPlayZoomOut(targetSize, OnZoomOut));
+    }
+
+    private static IEnumerator IPlayZoomIn(float targetSize, Action<bool> OnZoomIn)
+    {
+        while (virtualCamera.m_Lens.OrthographicSize > targetSize)
+        {
+            virtualCamera.m_Lens.OrthographicSize -= 15 * Time.deltaTime;
+            yield return null;
+        }
+
+        if(virtualCamera.m_Lens.OrthographicSize <= targetSize)
+        {
+            virtualCamera.m_Lens.OrthographicSize = targetSize;
+            OnZoomIn(true);
+            yield break;
+        }
+    }
+
+    private static IEnumerator IPlayZoomOut(float targetSize, Action<bool> OnZoomOut)
+    {
+        while (virtualCamera.m_Lens.OrthographicSize < targetSize)
+        {
+            virtualCamera.m_Lens.OrthographicSize += 15 * Time.deltaTime;
+            yield return null;
+        }
+
+        if (virtualCamera.m_Lens.OrthographicSize >= targetSize)
+        {
+            virtualCamera.m_Lens.OrthographicSize = targetSize;
+            OnZoomOut(true);
+            yield break;
+        }
     }
     #endregion
 }

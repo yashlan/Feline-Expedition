@@ -1558,6 +1558,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a72be6dbb33ae1d48b44895f4943bee6, type: 3}
   - {fileID: 8300000, guid: f480091c3c59e4f49a590777b7d70f20, type: 3}
   ButtonEnterClip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
+  TypingClip: {fileID: 8300000, guid: 9cd84bd1e0b1f3b4492a21f8bc371aa9, type: 3}
   EnviThunderClip: {fileID: 8300000, guid: 0afd185b9304c1b4fbe757fe14c4718b, type: 3}
   EnviBrigdeClip: {fileID: 8300000, guid: bbba4d713d406fd49852c4f6483e7dcd, type: 3}
   EnviLeverBrigdeClip: {fileID: 8300000, guid: c29b3541bea40004884b90c4f2feb965, type: 3}
@@ -1566,6 +1567,9 @@ MonoBehaviour:
   PlayerThrowClip: {fileID: 8300000, guid: b02184156f325714c8b85f7193952533, type: 3}
   PlayerBasicAttack1Clip: {fileID: 8300000, guid: e5bf640bc6986194fabbd303fc4acf1a, type: 3}
   PlayerDeadClip: {fileID: 0}
+  NPCRoccaClip: {fileID: 8300000, guid: 72b808d141234cd4da7c6471f305a491, type: 3}
+  NPCGerrinClip: {fileID: 8300000, guid: c13e00e3368617942b07bc93baf94572, type: 3}
+  NPCGwynnClip: {fileID: 8300000, guid: 92acec88a9142ee44871784244497bb8, type: 3}
   EnemyDeadClip: {fileID: 0}
   BossBattleDeadClip: {fileID: 0}
 --- !u!4 &798677380
@@ -2131,11 +2135,12 @@ MonoBehaviour:
   _damageMelee: 0
   _damageMagic: 0
   _manaRegen: 0
+  _isMapUnlocked: 0
   _totalRuneSlotUsed: 0
   _coins: 0
   _isBeastWasPurchased: 0
   _isDisorderWasPurchased: 0
-  _isIlusionWasPurchased: 0
+  _isIlusionWasPurchased: 1
   _isTruthWasPurchased: 0
   _isHarmonyWasPurchased: 0
   _isSpiritRuneWasPurchased: 0
@@ -2151,6 +2156,9 @@ MonoBehaviour:
   _isInvincibleShieldEquip: 0
   _lastScene: map_1
   _lastCheckPoint: map_1_point_1
+  _npcGerrinTalkSession: 1
+  _npcGwynnTalkSession: 1
+  _npcRoccaTalkSession: 1
 --- !u!4 &1021348502
 Transform:
   m_ObjectHideFlags: 0

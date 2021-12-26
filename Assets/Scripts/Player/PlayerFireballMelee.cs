@@ -12,10 +12,12 @@ public class PlayerFireballMelee : MonoBehaviour
     Rigidbody2D _rb;
     PlayerController _player => PlayerController.Instance;
 
-    List<string> _tagList = new List<string>()
+    List<string> _layerList = new List<string>()
     {
         "Enemy",
         "Vase",
+        "Ground",
+        "Wall",
     };
 
     void Awake()
@@ -32,18 +34,24 @@ public class PlayerFireballMelee : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var tag = collision.gameObject.tag;
+        var layer = collision.gameObject.layer;
 
-        if (_tagList.Find(t => t.Equals(tag)) != null)
+        foreach (var layerName in _layerList)
         {
-            TakeDamage(collision);
-            Destroy(gameObject);
+            if (layer == LayerMask.NameToLayer(layerName))
+            {
+                TakeDamage(collision);
+                Destroy(gameObject);
+            }
         }
     }
 
     private void TakeDamage(Collider2D collision)
     {
-        CameraEffect.PlayShakeEffect();
+        if (CollisionWithEnemy(collision))
+            CameraEffect.PlayShakeEffect();
+        else
+            CameraEffect.PlayShakeEffect(5);
 
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
@@ -74,6 +82,11 @@ public class PlayerFireballMelee : MonoBehaviour
                 Destroy(vase.gameObject);
         }
 
-        Instantiate(_fireballEffect, collision.transform.position, Quaternion.identity);
+        Instantiate(_fireballEffect, CollisionWithEnemy(collision) ? collision.transform.position : transform.position, Quaternion.identity);
+    }
+
+    private bool CollisionWithEnemy(Collider2D collision)
+    {
+        return collision.gameObject.layer == LayerMask.NameToLayer("Enemy");
     }
 }

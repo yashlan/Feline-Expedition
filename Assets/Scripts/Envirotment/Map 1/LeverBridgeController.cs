@@ -5,11 +5,12 @@ using UnityEngine.UI;
 public class LeverBridgeController : MonoBehaviour
 {
     public GameObject Bridge;
+    public GameObject pointer;
     public GameObject canvasInfo;
     public GameObject leverHand;
 
     bool isSwitched = false;
-    Text textInfo;
+    bool canSwitch = false;
     Animator anim;
     Animator bridgeAnim;
 
@@ -17,32 +18,38 @@ public class LeverBridgeController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         bridgeAnim = Bridge.GetComponent<Animator>();
-        textInfo = canvasInfo.GetComponentInChildren<Text>();
-
-        canvasInfo.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            textInfo.text = $"Press {OptionsManager.InteractionKey} To Switch Lever";
-
-            canvasInfo.SetActive(!isSwitched);
-
-            if(PlayerController.Instance.IsIdle() && Input.GetKeyDown(OptionsManager.InteractionKey) && !isSwitched)
-            {
-                AudioManager.PlaySfx(AudioManager.Instance.EnviLeverBrigdeClip);
-                anim.SetTrigger("Switched");
-                isSwitched = true;
-            }
+            canSwitch = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        canvasInfo.SetActive(false);
+        canSwitch = false;
     }
+
+    void Update()
+    {
+        if (canSwitch)
+        {
+            if (PlayerController.Instance.IsIdle() && Input.GetKeyDown(OptionsManager.InteractionKey) && !isSwitched)
+            {
+                AudioManager.PlaySfx(AudioManager.Instance.EnviLeverBrigdeClip);
+                anim.SetTrigger("Switched");
+
+                if (pointer != null)
+                    pointer.SetActive(false);
+
+                isSwitched = true;
+            }
+        }
+    }
+
 
     #region EVENT ANIMATION
     public void RotatingBridge()

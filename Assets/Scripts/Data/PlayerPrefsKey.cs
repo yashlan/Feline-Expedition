@@ -19,13 +19,13 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     public const string DASH         = "DASH";
     public const string ATTACK_MELEE = "ATTACK_MELEE";
     public const string ATTACK_THROW = "ATTACK_THROW";
-    public const string RECHARGE     = "RECHARGE";
+    public const string SELFHEAL     = "SELFHEAL";
     public const string INTERACTION  = "INTERACTION";
     public const string OPEN_MAP     = "OPEN_MAP";
     #endregion
 
     #region PLAYER STATS DATA
-    //public const string NOT_FIRST_PLAY   = "NOT_FIRST_PLAY";
+    public const string UNLOCKED_MAP     = "UNLOCKED_MAP";
     public const string HEALTHPOINT      = "HEALTHPOINT";
     public const string MANAPOINT        = "MANAPOINT";
     public const string DAMAGE_MELEE     = "DAMAGE_MELEE";
@@ -51,5 +51,11 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     #region SHOP
     public const string COIN                 = "COIN";
     public const string TOTAL_RUNE_SLOT_USED = "TOTAL_RUNE_SLOT_USED";
+    #endregion
+
+    #region NPC
+    public const string GERRIN_TALK_SESSION = "GERRIN_TALK_SESSION";
+    public const string GWYNN_TALK_SESSION  = "GWYNN_TALK_SESSION";
+    public const string ROCCA_TALK_SESSION  =  "ROCCA_TALK_SESSION";
     #endregion
 }

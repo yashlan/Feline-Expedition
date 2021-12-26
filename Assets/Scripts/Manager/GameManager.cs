@@ -21,7 +21,14 @@ public enum SceneType
 {
     map_1,
     map_2,
-    map_3,
+    map_3_1,
+    map_3_2,
+    map_3_3,
+    map_3_4,
+    mid_boss,
+    boss,
+    save_area_1,
+    save_area_2,
 }
 
 public class GameManager : Singleton<GameManager>
@@ -43,12 +50,45 @@ public class GameManager : Singleton<GameManager>
     {
         OptionsManager.HideMouseCursor();
 
-        if(sceneType == SceneType.map_1) 
-            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
+        if (sceneType == SceneType.map_1) 
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[1]));
+
         if(sceneType == SceneType.map_2) 
-            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
-        if(sceneType == SceneType.map_3)
-            ChangeGameState(GameState.Playing,() => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+
+        if(sceneType == SceneType.map_3_1)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+
+        if (sceneType == SceneType.map_3_2)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+
+        if (sceneType == SceneType.map_3_3)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+
+        if (sceneType == SceneType.map_3_4)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+
+        if (sceneType == SceneType.mid_boss)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+
+        if (sceneType == SceneType.boss)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+
+        if (sceneType == SceneType.save_area_1)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
+
+        if (sceneType == SceneType.save_area_2)
+            ChangeGameState(GameState.Playing,
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
     }
 
     void Update()
@@ -60,8 +100,11 @@ public class GameManager : Singleton<GameManager>
 
         if(_gameState == GameState.HitTransitionArea)
         {
-            PlayerController.FreezePositon();
+            PlayerController.FreezePosition();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     #region FOR PAUSE MENU

@@ -199,9 +199,9 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        Rigidbody.bodyType = RigidbodyType2D.Static;
         Anim.SetTrigger("Dead");
         gameObject.layer = LayerMask.NameToLayer("Default");
-        Rigidbody.constraints= RigidbodyConstraints2D.FreezeAll;
         _boxCollider.enabled = false;
     }
 

@@ -3,34 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPCController : MonoBehaviour
+public class NPCController : DialogueManager
 {
-    public GameObject canvasInfo;
-    Text textInfo;
-
-    void Awake()
-    {
-        canvasInfo.SetActive(false);
-        textInfo = canvasInfo.GetComponentInChildren<Text>();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            textInfo.text = $"Press {OptionsManager.InteractionKey} To Talk";
-
+            canTalking = true;
             canvasInfo.SetActive(true);
-
-            if (Input.GetKeyDown(OptionsManager.InteractionKey))
-            {
-                DialogueManager.StartConversation();
-            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        canTalking = false;
         canvasInfo.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (canTalking && PlayerController.Instance.IsIdle() && !PlayerController.Instance.FacingRight)
+        {
+            if (Input.GetKeyDown(OptionsManager.InteractionKey) && index == -1)
+            {
+                StartConversation();
+                AudioManager.PlaySfx(npcClip);
+            }
+
+            if (Input.GetKeyDown(OptionsManager.InteractionKey) && index > -1 && next.activeSelf)
+            {
+                NextDialogue();
+                AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
+            }
+        }
     }
 }

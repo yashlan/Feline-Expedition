@@ -113,6 +113,8 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Player Anim State")]
     [SerializeField]
+    private bool _isTalking;
+    [SerializeField]
     private bool _isDead;
     [SerializeField]
     private bool _isHurt;
@@ -168,6 +170,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsTimeComboAttack { get => _isTimeComboAttack; set => _isTimeComboAttack = value; }
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
     public bool IsSelfHeal { get => _isSelfHeal; set => _isSelfHeal = value; }
+    public bool IsTalking { get => _isTalking; set => _isTalking = value; }
     public bool IsDefend => _isDefend;
     public bool FacingRight => _facingRight;
     public bool IsGrounded => _isGrounded;
@@ -196,6 +199,33 @@ public class PlayerController : Singleton<PlayerController>
             PlayerData.Coins);
 
         StartCoroutine(SetupUI());
+
+        if (GameManager.SceneType == SceneType.map_1)
+        {
+            StartCoroutine(SetupMap1(2f));
+        }
+    }
+
+    IEnumerator SetupMap1(float timeToStop)
+    {
+        yield return new WaitUntil(() => GameManager.GameState == GameState.Playing);
+        while (timeToStop > 0)
+        {
+            _horizontal = -1;
+            _rb.velocity = new Vector2(_horizontal * _moveSpeed, _rb.velocity.y);
+            _anim.SetFloat("Speed", Mathf.Abs(_rb.velocity.x));
+            _isMoving = _anim.GetFloat("Speed") != 0f;
+            timeToStop -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (timeToStop <= 0)
+        {
+            FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().m_Follow = transform;
+            GameObject.Find("trigger move").transform.GetChild(0).gameObject.SetActive(true);
+            TutorialManager.Instance.hasShowMoveKey = true;
+            yield break;
+        }
     }
 
     IEnumerator SetupUI()
@@ -213,10 +243,10 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-        if (_isDead)
+        if (_isDead || IsTalking)
             return;
 
-        if(GameManager.GameState == GameState.Playing)
+        if (GameManager.GameState == GameState.Playing)
         {
             InputPlayer();
             CheckIsTouchWall();
@@ -226,6 +256,11 @@ public class PlayerController : Singleton<PlayerController>
             if (_isGrounded || _isTouchingWall)
             {
                 _dashAmountOnAir = 1;
+
+                if (GameManager.SceneType == SceneType.map_1)
+                {
+                    _canDoubleJump = TutorialManager.Instance.hasShowDoubleJumpKey;
+                }
                 _jumpAmount = _canDoubleJump ? 2 : 1;
             }
         }
@@ -233,7 +268,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void FixedUpdate()
     {
-        if (_isDead)
+        if (_isDead || IsTalking)
             return;
 
         if (GameManager.GameState == GameState.Playing)
@@ -252,17 +287,65 @@ public class PlayerController : Singleton<PlayerController>
 
     private void InputPlayer()
     {
-        Movement(false);
-        Attack(false);
-        JumpAttack(false);
-        SelfHeal();
-        Jump();
-        Dash();
+        if(GameManager.SceneType == SceneType.map_1)
+        {
+            if (TutorialManager.Instance.hasShowMoveKey)
+            {
+                Movement(false);
+            }
 
-        if (PlayerData.IsInvincibleShieldUsed())
-            ShowInvincibleShield();
+            if (TutorialManager.Instance.hasShowAttackMeleeKey)
+            {
+                Attack(false);
+            }
+
+            if (TutorialManager.Instance.hasShowAttackMeleeKey && 
+                TutorialManager.Instance.hasShowJumpKey)
+            {
+                JumpAttack(false);
+            }
+
+            if (TutorialManager.Instance.hasShowSelfHealKey)
+            {
+                SelfHeal();
+            }
+
+            if (TutorialManager.Instance.hasShowJumpKey)
+            {
+                Jump();
+            }
+
+            if (TutorialManager.Instance.hasShowDashKey)
+            {
+                Dash();
+            }
+
+            if (PlayerData.IsInvincibleShieldUsed())
+            {
+                ShowInvincibleShield();
+            }
+            else
+            {
+                if (TutorialManager.Instance.hasShowAttackThrowKey)
+                {
+                    Throw();
+                }
+            }
+        }
         else
-            Throw();
+        {
+            Movement(false);
+            Attack(false);
+            JumpAttack(false);
+            SelfHeal();
+            Jump();
+            Dash();
+
+            if (PlayerData.IsInvincibleShieldUsed())
+                ShowInvincibleShield();
+            else
+                Throw();
+        }
     }
 
     private void Movement(bool _withShadowEffect)
@@ -449,12 +532,9 @@ public class PlayerController : Singleton<PlayerController>
         if (!_isGrounded)
             _delaycanSelfHeal = Time.time + 0.15f;
 
-        /*        if (_isCharging)
-                    CameraEffect.PlayZoomInOutEffect();*/
-
         var maxHealth = SliderHealthPlayerUI.Instance.sliderHP.maxValue;
 
-        if (Input.GetKeyDown(OptionsManager.RechargeKey)
+        if (Input.GetKeyDown(OptionsManager.SelfHealKey)
             && IsIdle() && Time.time > _delaycanSelfHeal && _manaPoint > 0 && _healthPoint < maxHealth)
         {
             StartCoroutine(ISelfHeal());
@@ -465,9 +545,6 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (!_isGrounded)
             _delaycanShowShield = Time.time + 0.15f;
-
-        if (_isDefend)
-            CameraEffect.PlayZoomInOutEffect();
 
         if (Input.GetKey(OptionsManager.AttackThrowKey)
             && IsIdle() && Time.time > _delaycanShowShield)
@@ -817,11 +894,16 @@ public class PlayerController : Singleton<PlayerController>
     }
     #endregion
 
-    #region FREEZE RIGIDBODY WHEN TOUCH TRANSITION AREA
+    #region FREEZE/UNFREEZE RIGIDBODY WHEN TOUCH TRANSITION AREA OR TALK WITH NPC
 
-    public static void FreezePositon()
+    public static void FreezePosition()
     {
         Instance._rb.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public static void UnFreezePosition()
+    {
+        Instance._rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     #endregion
 

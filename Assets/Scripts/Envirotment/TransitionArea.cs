@@ -26,7 +26,7 @@ public class TransitionArea : MonoBehaviour
         PlayerData.Save(PlayerPrefsKey.COIN,        PlayerController.Instance.Coins);
         PlayerData.Save(PlayerPrefsKey.LAST_SCENE, Destination);
         PlayerData.Save(PlayerPrefsKey.LAST_CHECKPOINT, CheckPointDestination);
-        Invoke(nameof(ChangeScene), 0.5f);
+        Invoke(nameof(ChangeScene), 0.25f);
     }
 
     void ChangeScene()

@@ -13,13 +13,13 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
     private const string DEFAULT_KEY_DASH        = "C";
     private const string DEFAULT_KEY_MELEE       = "X";
     private const string DEFAULT_KEY_THROW       = "S";
-    private const string DEFAULT_KEY_RECHARGE    = "A";
+    private const string DEFAULT_KEY_SELFHEAL    = "A";
     private const string DEFAULT_KEY_INTERACTION = "V";
     private const string DEFAULT_KEY_OPEN_MAP    = "D";
 
     public static KeyCode AttackMeleeKey { get; set; }
     public static KeyCode AttackThrowKey { get; set; }
-    public static KeyCode RechargeKey { get; set; }
+    public static KeyCode SelfHealKey { get; set; }
     public static KeyCode JumpKey { get; set; }
     public static KeyCode DashKey { get; set; }
     public static KeyCode LeftKey { get; set; }
@@ -68,7 +68,7 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
         PlayerPrefs.GetString(PlayerPrefsKey.DASH)         == string.Empty &&
         PlayerPrefs.GetString(PlayerPrefsKey.ATTACK_MELEE) == string.Empty &&
         PlayerPrefs.GetString(PlayerPrefsKey.ATTACK_THROW) == string.Empty &&
-        PlayerPrefs.GetString(PlayerPrefsKey.RECHARGE)     == string.Empty &&
+        PlayerPrefs.GetString(PlayerPrefsKey.SELFHEAL)     == string.Empty &&
         PlayerPrefs.GetString(PlayerPrefsKey.INTERACTION)  == string.Empty &&
         PlayerPrefs.GetString(PlayerPrefsKey.OPEN_MAP)     == string.Empty;
 
@@ -80,7 +80,7 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
         PlayerPrefs.SetString(PlayerPrefsKey.DASH,         DEFAULT_KEY_DASH);
         PlayerPrefs.SetString(PlayerPrefsKey.ATTACK_MELEE, DEFAULT_KEY_MELEE);
         PlayerPrefs.SetString(PlayerPrefsKey.ATTACK_THROW, DEFAULT_KEY_THROW);
-        PlayerPrefs.SetString(PlayerPrefsKey.RECHARGE,     DEFAULT_KEY_RECHARGE);
+        PlayerPrefs.SetString(PlayerPrefsKey.SELFHEAL,     DEFAULT_KEY_SELFHEAL);
         PlayerPrefs.SetString(PlayerPrefsKey.INTERACTION,  DEFAULT_KEY_INTERACTION);
         PlayerPrefs.SetString(PlayerPrefsKey.OPEN_MAP,     DEFAULT_KEY_OPEN_MAP);
 
@@ -95,9 +95,17 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
         DashKey        = KeyCodeValueOf(PlayerPrefsKey.DASH,         DEFAULT_KEY_DASH);
         AttackMeleeKey = KeyCodeValueOf(PlayerPrefsKey.ATTACK_MELEE, DEFAULT_KEY_MELEE);
         AttackThrowKey = KeyCodeValueOf(PlayerPrefsKey.ATTACK_THROW, DEFAULT_KEY_THROW);
-        RechargeKey    = KeyCodeValueOf(PlayerPrefsKey.RECHARGE,     DEFAULT_KEY_RECHARGE);
+        SelfHealKey    = KeyCodeValueOf(PlayerPrefsKey.SELFHEAL,     DEFAULT_KEY_SELFHEAL);
         InteractionKey = KeyCodeValueOf(PlayerPrefsKey.INTERACTION,  DEFAULT_KEY_INTERACTION);
         OpenMapKey     = KeyCodeValueOf(PlayerPrefsKey.OPEN_MAP,     DEFAULT_KEY_OPEN_MAP);
+
+        if (FindObjectsOfType<GetSpriteKeyCode>().Length > 0)
+        {
+            foreach (var imageTutorial in FindObjectsOfType<GetSpriteKeyCode>())
+            {
+                imageTutorial.UpdateKey();
+            }
+        }
     }
 
     private static KeyCode KeyCodeValueOf(string prefsKey, string defaultValue)
@@ -181,8 +189,10 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
 
     public static void HideMouseCursor()
     {
+#if !UNITY_EDITOR
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+#endif
     }
 
     public static void ShowMouseCursor()
@@ -190,11 +200,11 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-    #endregion CURSOR MOUSE
+#endregion CURSOR MOUSE
 
-    #region UTILITY
+#region UTILITY
     private int IntValueOf(bool val) => val ? 1 : 0;
     private bool BoolValueOf(int val) => val != 0;
-    #endregion
+#endregion
 
 }

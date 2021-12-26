@@ -31,6 +31,10 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private int _manaRegen;
 
+    [Header("UnlockedMap")]
+    [SerializeField]
+    private bool _isMapUnlocked;
+
     [Header("Shop Attribute")]
     [SerializeField]
     private int _totalRuneSlotUsed;
@@ -82,6 +86,14 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     private string _lastScene;
     [SerializeField]
     private string _lastCheckPoint;
+
+    [Header("Talk NPC Session")]
+    [SerializeField]
+    private int _npcGerrinTalkSession = 1;
+    [SerializeField]
+    private int _npcGwynnTalkSession = 1;
+    [SerializeField]
+    private int _npcRoccaTalkSession = 1;
 
     #region GETTER SETTER
     public static int HealthPoint
@@ -160,10 +172,35 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         get => Instance._coins; 
         set => Instance._coins = value; 
     }
+
     public static int HealthPointExtra 
     { 
         get => Instance._healthPointExtra; 
         set => Instance._healthPointExtra = value; 
+    }
+
+    public static int NpcGerrinTalkSession 
+    { 
+        get => Instance._npcGerrinTalkSession; 
+        set => Instance._npcGerrinTalkSession = value; 
+    }
+
+    public static int NpcGwynnTalkSession 
+    { 
+        get => Instance._npcGwynnTalkSession; 
+        set => Instance._npcGwynnTalkSession = value; 
+    }
+
+    public static int NpcRoccaTalkSession 
+    {
+        get => Instance._npcRoccaTalkSession; 
+        set => Instance._npcRoccaTalkSession = value;
+    }
+
+    public static bool IsMapUnlocked 
+    { 
+        get => Instance._isMapUnlocked;
+        set => Instance._isMapUnlocked = value;
     }
 
     #endregion
@@ -191,6 +228,14 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     private void Load()
     {
+        _isMapUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.UNLOCKED_MAP, 0));
+
+        #region NPC
+        _npcGerrinTalkSession = PlayerPrefs.GetInt(PlayerPrefsKey.GERRIN_TALK_SESSION, _npcGerrinTalkSession);
+        _npcGwynnTalkSession  = PlayerPrefs.GetInt(PlayerPrefsKey.GWYNN_TALK_SESSION,  _npcGwynnTalkSession);
+        _npcRoccaTalkSession  = PlayerPrefs.GetInt(PlayerPrefsKey.ROCCA_TALK_SESSION,  _npcRoccaTalkSession);
+        #endregion
+
         #region SHOP
         _coins = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                             _coins);
         _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, _totalRuneSlotUsed);
@@ -207,8 +252,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         _manaPoint   = PlayerPrefs.GetFloat(PlayerPrefsKey.MANAPOINT,          DEFAULT_MANAPOINT        + _manaPointExtra);
         _damageMelee = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_MELEE,         DEFAULT_DAMAGE_MELEE     + _damageMeleeExtra);
         _damageMagic = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_MAGIC,         DEFAULT_DAMAGE_MAGIC     + _damageMagicExtra);
-        _damageReduction = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_REDUCTION, DEFAULT_DAMAGE_REDUCTION + DamageReduction);
-        _manaRegen = PlayerPrefs.GetInt(PlayerPrefsKey.MANA_REGEN,             DEFAULT_MANA_REGEN       + ManaRegen);
+        _damageReduction = PlayerPrefs.GetInt(PlayerPrefsKey.DAMAGE_REDUCTION, DEFAULT_DAMAGE_REDUCTION + _damageReductionExtra);
+        _manaRegen = PlayerPrefs.GetInt(PlayerPrefsKey.MANA_REGEN,             DEFAULT_MANA_REGEN       + _manaRegenExtra);
 
         _lastScene = PlayerPrefs.GetString(PlayerPrefsKey.LAST_SCENE,           _lastScene);
         _lastCheckPoint = PlayerPrefs.GetString(PlayerPrefsKey.LAST_CHECKPOINT, _lastCheckPoint);

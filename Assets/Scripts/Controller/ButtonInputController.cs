@@ -68,7 +68,7 @@ public class ButtonInputController : MonoBehaviour
         SetButtonSprite("Button Dash",         GetSprite(PlayerPrefsKey.DASH));
         SetButtonSprite("Button Throw Attack", GetSprite(PlayerPrefsKey.ATTACK_THROW));
         SetButtonSprite("Button Melee Attack", GetSprite(PlayerPrefsKey.ATTACK_MELEE));
-        SetButtonSprite("Button Recharge",     GetSprite(PlayerPrefsKey.RECHARGE));
+        SetButtonSprite("Button Recharge",     GetSprite(PlayerPrefsKey.SELFHEAL));
         SetButtonSprite("Button Interaction",  GetSprite(PlayerPrefsKey.INTERACTION));
         SetButtonSprite("Button Open Map",     GetSprite(PlayerPrefsKey.OPEN_MAP));
     }
@@ -112,8 +112,8 @@ public class ButtonInputController : MonoBehaviour
                 break;
 
             case "recharge":
-                OptionsManager.RechargeKey = _newKey;
-                SetNewKey(PlayerPrefsKey.RECHARGE);
+                OptionsManager.SelfHealKey = _newKey;
+                SetNewKey(PlayerPrefsKey.SELFHEAL);
                 break;
 
             case "melee":
@@ -144,5 +144,13 @@ public class ButtonInputController : MonoBehaviour
         OptionsManager.SaveNewKeyCode(prefsKey, _newKey.ToString());
         buttonImage.sprite = GetSprite(prefsKey); print(_newKey.ToString());
         _panelAssignKey.SetActive(false);
+
+        if (FindObjectsOfType<GetSpriteKeyCode>().Length > 0)
+        {
+            foreach (var imageTutorial in FindObjectsOfType<GetSpriteKeyCode>())
+            {
+                imageTutorial.UpdateKey();
+            }
+        }
     }
 }

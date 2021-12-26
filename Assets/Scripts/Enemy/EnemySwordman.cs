@@ -10,7 +10,7 @@ public class EnemySwordman : Enemy
 
     void Update()
     {
-        if (_target.IsDead)
+        if (_target.IsDead || IsDead)
             return;
 
         if(GameManager.GameState == GameState.Playing)
@@ -23,7 +23,7 @@ public class EnemySwordman : Enemy
 
     void FixedUpdate()
     {
-        if (_target.IsDead)
+        if (_target.IsDead || IsDead)
             return;
 
         if (GameManager.GameState == GameState.Playing)
