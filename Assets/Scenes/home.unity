@@ -2140,7 +2140,7 @@ MonoBehaviour:
   _coins: 0
   _isBeastWasPurchased: 0
   _isDisorderWasPurchased: 0
-  _isIlusionWasPurchased: 1
+  _isIlusionWasPurchased: 0
   _isTruthWasPurchased: 0
   _isHarmonyWasPurchased: 0
   _isSpiritRuneWasPurchased: 0

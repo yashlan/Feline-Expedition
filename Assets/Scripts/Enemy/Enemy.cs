@@ -6,6 +6,7 @@ public enum EnemyType
     GreenSlime, 
     Swordman, 
     Shieldman,
+    Archer,
 }
 
 public class Enemy : MonoBehaviour
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
     float horizontal;
     Vector3 firstPos;
     BoxCollider2D _boxCollider;
+    float shootDelay;
 
     public PlayerController _target => PlayerController.Instance;
 
@@ -84,11 +86,36 @@ public class Enemy : MonoBehaviour
         transform.position = firstPos;
     }
 
+    private void Block()
+    {
+        if(enemyType == EnemyType.Shieldman)
+        {
+            Anim.SetTrigger("Block");
+        }
+    }
+
+    public void ShootArrow()
+    {
+        if(enemyType == EnemyType.Archer)
+        {
+            distance = Vector2.Distance(transform.position, _target.transform.position);
+
+            var distanceY = _target.transform.position.y - transform.position.y;
+
+            if (distance <= AttackRadius && Time.time > shootDelay && _target.IsGrounded && distanceY < 2)
+            {
+                Anim.SetTrigger("Shoot");
+                shootDelay = Time.time + CoolDownAttack;
+            }
+        }
+    }
+
     public void SetNewStats(EnemyType enemyType)
     {
         if(enemyType == EnemyType.GreenSlime) Setup(25, 5,  0, 7, 0.7f,  5);        
         if(enemyType == EnemyType.Swordman)   Setup(40, 5,  5, 7,   1f, 15);
         if(enemyType == EnemyType.Shieldman)  Setup(40, 10, 5, 7,   2f, 15);
+        if(enemyType == EnemyType.Archer)     Setup(40, 3,  0, 0,   3f,  5);
     }
 
     private void MoveToTarget()
@@ -150,6 +177,9 @@ public class Enemy : MonoBehaviour
                 if (distance <= AttackRadius && _target.IsGrounded && distanceY < 2)
                 {
                     MoveToTarget();
+
+                    //if(distance <= 4)
+                    //    Block();
                 }
                 else
                     MoveToFirstPosition();

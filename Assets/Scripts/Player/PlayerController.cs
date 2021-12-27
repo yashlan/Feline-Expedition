@@ -604,10 +604,16 @@ public class PlayerController : Singleton<PlayerController>
     {
         var maxHealth = SliderHealthPlayerUI.Instance.sliderHP.maxValue;
 
-        while (_manaPoint > 0 && _healthPoint <= maxHealth)
+        while (_manaPoint > 0 && _healthPoint <= maxHealth && !_isHurt)
         {
             _anim.SetInteger("SelfHealCount", 1);
             yield return null;
+        }
+
+        if (_isHurt)
+        {
+            _anim.SetInteger("SelfHealCount", 0);
+            yield break;
         }
 
         if (HealthPoint >= maxHealth)

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8261598809857034550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -126.8, y: 41.8, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_Children:
   - {fileID: 8261598810712857115}
   - {fileID: 8261598810602169290}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   EnemyMelee: {fileID: 8261598810712857117}
-  AttackRadius: 15
+  AttackRadius: 20
   FacingRight: 1
   isKnock: 0
   HealthPoint: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   CoinReward: 0
   IsDead: 0
   GroundCheckPoint: {fileID: 8261598810602169290}
-  GroundCastDistance: 20
+  GroundCastDistance: 3
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -154,11 +154,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 50
-  m_Material: {fileID: 6200000, guid: a47899953bad6a1418ad52380e3f5106, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8261598809857034505
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.072328925, y: 0}
+  m_Offset: {x: -0.072328925, y: 0.10496092}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.8617866, y: 5.33}
+  m_Size: {x: 3.8617866, y: 5.120078}
   m_EdgeRadius: 0
 --- !u!1 &8261598810602169289
 GameObject:
@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8261598810602169289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: -2.4, z: 0}
+  m_LocalPosition: {x: 1.83, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8261598809857034551}

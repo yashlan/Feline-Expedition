@@ -26,9 +26,7 @@ public enum SceneType
     map_3_3,
     map_3_4,
     mid_boss,
-    boss,
     save_area_1,
-    save_area_2,
 }
 
 public class GameManager : Singleton<GameManager>
@@ -78,15 +76,7 @@ public class GameManager : Singleton<GameManager>
             ChangeGameState(GameState.Playing,
                 () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
 
-        if (sceneType == SceneType.boss)
-            ChangeGameState(GameState.Playing,
-                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
-
         if (sceneType == SceneType.save_area_1)
-            ChangeGameState(GameState.Playing,
-                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
-
-        if (sceneType == SceneType.save_area_2)
             ChangeGameState(GameState.Playing,
                 () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[2]));
     }
@@ -102,9 +92,6 @@ public class GameManager : Singleton<GameManager>
         {
             PlayerController.FreezePosition();
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     #region FOR PAUSE MENU
