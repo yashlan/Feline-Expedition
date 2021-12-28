@@ -200,11 +200,11 @@ public class PlayerController : Singleton<PlayerController>
 
         if (GameManager.SceneType == SceneType.map_1)
         {
-            StartCoroutine(SetupMap1(2f));
+            StartCoroutine(SetupOnNewGame(2f));
         }
     }
 
-    IEnumerator SetupMap1(float timeToStop)
+    IEnumerator SetupOnNewGame(float timeToStop)
     {
         yield return new WaitUntil(() => GameManager.GameState == GameState.Playing);
         while (timeToStop > 0)
@@ -219,9 +219,11 @@ public class PlayerController : Singleton<PlayerController>
 
         if (timeToStop <= 0)
         {
-            FindObjectOfType<Cinemachine.CinemachineVirtualCamera>().m_Follow = transform;
-            GameObject.Find("trigger move").transform.GetChild(0).gameObject.SetActive(true);
-            TutorialManager.Instance.hasShowMoveKey = true;
+            CameraEffect.PlayZoomIn(20, (x) =>
+            {
+                GameObject.Find("trigger move").transform.GetChild(0).gameObject.SetActive(true);
+                TutorialManager.Instance.hasShowMoveKey = true;
+            });
             yield break;
         }
     }

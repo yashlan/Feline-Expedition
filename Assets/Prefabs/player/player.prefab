@@ -176,6 +176,7 @@ MonoBehaviour:
   _isTimeComboAttack: 0
   _timeToResetCombo: 0
   _comboAttackCount: 0
+  _coins: 0
   _healthPoint: 30
   _manaPoint: 0
   _damageReduction: 0
@@ -186,7 +187,6 @@ MonoBehaviour:
   _coolDownSpearAttack: 0.25
   _coolDownJumpAttack: 0.25
   _coolDownDash: 0.25
-  _coolDownThrow: 0.25
   _moveSpeed: 25
   _canDoubleJump: 1
   _jumpAmount: 1
@@ -213,11 +213,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 832
   _facingRight: 1
+  _isTalking: 0
   _isDead: 0
   _isHurt: 0
   _isThrowing: 0
   _isDefend: 0
-  _isCharging: 0
+  _isSelfHeal: 0
   _isDashing: 0
   _isAttacking: 0
   _isJumpAttack: 0

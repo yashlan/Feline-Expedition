@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Rigidbody2D Rigidbody;
 
     float delayAttack;
+    float delayFlip;
     RaycastHit2D hitGround;
     float horizontal;
     Vector3 firstPos;
@@ -114,13 +115,10 @@ public class Enemy : MonoBehaviour
 
     public void Block(bool canBlock)
     {
-        if(canBlock && Time.time > blockDelay)
+        if(canBlock)
         {
             Anim.SetTrigger("Block");
-            blockDelay = Time.time + 1f;
         }
-
-        IsBlocking = Time.time > blockDelay;
     }
 
     public void Shoot(bool canShot)
@@ -199,17 +197,22 @@ public class Enemy : MonoBehaviour
 
     private void Flip()
     {
-        var scale = transform.localScale;
+        if(Time.time > delayFlip)
+        {
+            var scale = transform.localScale;
 
-        scale.x = Mathf.Abs(scale.x);
+            scale.x = Mathf.Abs(scale.x);
 
-        if (_target.transform.position.x < transform.position.x) scale.x *= -1;
+            if (_target.transform.position.x < transform.position.x) scale.x *= -1;
 
-        transform.localScale = scale;
+            transform.localScale = scale;
 
-        FacingRight = scale.x > 0;
+            FacingRight = scale.x > 0;
 
-        horizontal = scale.x > 0 ? 1 : -1;
+            horizontal = scale.x > 0 ? 1 : -1;
+
+            delayFlip = Time.time + 0.5f;
+        }
     }
 
     public void GroundCheck()

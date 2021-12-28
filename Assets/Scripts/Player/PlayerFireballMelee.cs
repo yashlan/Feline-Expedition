@@ -66,8 +66,8 @@ public class PlayerFireballMelee : MonoBehaviour
                 return;
             }
 
-            print("next");
-            enemy.HealthPoint -= (_player.DamageMagic - enemy.DamageReduction);
+            if(!enemy.IsBlocking)
+                enemy.HealthPoint -= (_player.DamageMagic - enemy.DamageReduction);
 
             if (enemy.HealthPoint <= 0)
                 enemy.Dead();

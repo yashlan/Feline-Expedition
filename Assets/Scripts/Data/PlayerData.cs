@@ -229,7 +229,6 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     {
 #if UNITY_EDITOR
         Save(PlayerPrefsKey.COIN, 1000000);
-        Save(PlayerPrefsKey.LAST_CHECKPOINT, "test");
 #endif
         Load();
     }
