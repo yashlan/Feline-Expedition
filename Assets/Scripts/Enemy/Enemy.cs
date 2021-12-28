@@ -7,6 +7,7 @@ public enum EnemyType
     Swordman, 
     Shieldman,
     Archer,
+    CorrotionSlime,
 }
 
 public class Enemy : MonoBehaviour
@@ -16,7 +17,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Melee")]
     public EnemyMelee EnemyMelee;
-    public float AttackRadius;
 
     [Header("Facing")]
     public bool FacingRight;
@@ -27,29 +27,39 @@ public class Enemy : MonoBehaviour
     [Header("Stat Enemy")]
     public int HealthPoint;
     public int Damage;
+    public int DamageAir;
     public int DamageReduction;
     public float Speed;
     public float CoolDownAttack;
     public int CoinReward;
     public bool IsDead;
 
+    [Header("Attack when Cast")]
+    public Transform attackPoint;
+    public float attackRange;
+    public LayerMask PlayerMask;
 
+    [Header("find target")]
+    public float AttackRadius;
 
     [Header("Ground Raycast")]
     public Transform GroundCheckPoint;
     public float GroundCastDistance;
     public LayerMask GroundMask;
 
+    [Header("Block/Defend Armor")]
+    public bool IsBlocking;
+
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rigidbody;
 
-    float distance;
     float delayAttack;
     RaycastHit2D hitGround;
     float horizontal;
     Vector3 firstPos;
     BoxCollider2D _boxCollider;
     float shootDelay;
+    float blockDelay;
 
     public PlayerController _target => PlayerController.Instance;
 
@@ -63,6 +73,7 @@ public class Enemy : MonoBehaviour
     private void Setup(
         int healthPoint, 
         int damage, 
+        int damageAir, 
         int damageReduction, 
         float speed, 
         float coolDownAttack,
@@ -70,11 +81,26 @@ public class Enemy : MonoBehaviour
     {
         HealthPoint = healthPoint;
         Damage = damage;
+        DamageAir = damageAir;
         DamageReduction = damageReduction;
         Speed = speed;
         CoolDownAttack = coolDownAttack;
         CoinReward = coinReward;
     }
+
+    public void SetNewStats(EnemyType enemyType)
+    {
+        if (enemyType == EnemyType.GreenSlime)     Setup(25,   5, 0,  0,  7, 0.7f, 5);
+        if (enemyType == EnemyType.Swordman)       Setup(40,   5, 0,  5,  7, 1f,  15);
+        if (enemyType == EnemyType.Shieldman)      Setup(40,   5, 0,  5,  7, 3f,  15);
+        if (enemyType == EnemyType.Archer)         Setup(40,   0, 3,  0,  0, 2f,  5);
+        if (enemyType == EnemyType.CorrotionSlime) Setup(300, 10, 15, 10, 4, 3f,  200);
+    }
+
+    public float DistanceToPlayer() =>
+        Vector2.Distance(transform.position, _target.transform.position);
+
+    public float DistanceY() => (_target.transform.position.y - transform.position.y);
 
     public void SetFirstPosition()
     {
@@ -86,55 +112,89 @@ public class Enemy : MonoBehaviour
         transform.position = firstPos;
     }
 
-    private void Block()
+    public void Block(bool canBlock)
     {
-        if(enemyType == EnemyType.Shieldman)
+        if(canBlock && Time.time > blockDelay)
         {
             Anim.SetTrigger("Block");
+            blockDelay = Time.time + 1f;
+        }
+
+        IsBlocking = Time.time > blockDelay;
+    }
+
+    public void Shoot(bool canShot)
+    {
+        if(canShot && Time.time > shootDelay)
+        {
+            Anim.SetTrigger("Shoot");
+            shootDelay = Time.time + CoolDownAttack;
         }
     }
 
-    public void ShootArrow()
+    public void Attack()
     {
-        if(enemyType == EnemyType.Archer)
+        if (!isKnock)
         {
-            distance = Vector2.Distance(transform.position, _target.transform.position);
-
-            var distanceY = _target.transform.position.y - transform.position.y;
-
-            if (distance <= AttackRadius && Time.time > shootDelay && _target.IsGrounded && distanceY < 2)
+            if (hitGround)
             {
-                Anim.SetTrigger("Shoot");
-                shootDelay = Time.time + CoolDownAttack;
+                if (Time.time > delayAttack)
+                {
+                    Anim.SetTrigger("Attack");
+                    delayAttack = Time.time + CoolDownAttack;
+                }
             }
         }
     }
 
-    public void SetNewStats(EnemyType enemyType)
+    public void CheckHitPlayer(Action<bool> OnHit)
     {
-        if(enemyType == EnemyType.GreenSlime) Setup(25, 5,  0, 7, 0.7f,  5);        
-        if(enemyType == EnemyType.Swordman)   Setup(40, 5,  5, 7,   1f, 15);
-        if(enemyType == EnemyType.Shieldman)  Setup(40, 10, 5, 7,   2f, 15);
-        if(enemyType == EnemyType.Archer)     Setup(40, 3,  0, 0,   3f,  5);
+        var hitPlayer = Physics2D.Raycast(
+            attackPoint.position,
+            (FacingRight ? Vector2.right : Vector2.left),
+            attackRange,
+            PlayerMask);
+
+        OnHit(hitPlayer);
     }
 
-    private void MoveToTarget()
+    public void MoveToTarget()
     {
+        if (enemyType != EnemyType.GreenSlime)
+            Anim.SetFloat("Speed", Mathf.Abs(Rigidbody.velocity.x));
+
         Rigidbody.velocity = new Vector2(Speed * horizontal, 0);
         transform.LookAt(_target.transform);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
-    private void MoveToFirstPosition()
+    public void MoveToFirstPosition()
     {
+        firstPos.y = transform.position.y;
         Rigidbody.velocity = new Vector2(transform.position.x < firstPos.x ? Speed : -Speed, 0);
         transform.LookAt(firstPos);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
+    public void StopMove()
+    {
+        Rigidbody.velocity = Vector2.zero;
+        if (enemyType != EnemyType.GreenSlime)
+            Anim.SetFloat("Speed", 0);
+    }
+
     public void HandleFacing()
     {
-        Flip();
+        if (enemyType == EnemyType.Archer)
+        {
+            Flip();
+            return;
+        }
+
+        if (DistanceToPlayer() <= AttackRadius)
+        {
+            Flip();
+        }
     }
 
     private void Flip()
@@ -164,35 +224,6 @@ public class Enemy : MonoBehaviour
             Speed = FacingRight ? -Speed : Speed;
     }
 
-    public void SetAttackState()
-    {
-        if (!isKnock)
-        {
-            if (hitGround)
-            {
-                distance = Vector2.Distance(transform.position, _target.transform.position);
-
-                var distanceY = _target.transform.position.y - transform.position.y;
-
-                if (distance <= AttackRadius && _target.IsGrounded && distanceY < 2)
-                {
-                    MoveToTarget();
-
-                    //if(distance <= 4)
-                    //    Block();
-                }
-                else
-                    MoveToFirstPosition();
-
-                if (Time.time > delayAttack && distance < 6f)
-                {
-                    Anim.SetTrigger("Attack");
-                    delayAttack = Time.time + CoolDownAttack;
-                }
-            }
-        }
-    }
-
     public void KnockBack(float force)
     {
         StartCoroutine(IKnockBack(force));
@@ -209,11 +240,6 @@ public class Enemy : MonoBehaviour
             ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.2f);
         isKnock = false;
-    }
-
-    public void MovementSkeleton()
-    {
-        Anim.SetFloat("Speed", Mathf.Abs(Rigidbody.velocity.x));
     }
 
     public void Dead()
@@ -237,7 +263,6 @@ public class Enemy : MonoBehaviour
 
 
     #region DEBUG
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -245,6 +270,9 @@ public class Enemy : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(GroundCheckPoint.position, GroundCheckPoint.position + (Vector3.down * GroundCastDistance));
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(attackPoint.position, attackPoint.position + ((!FacingRight ? Vector3.left : Vector3.right) * attackRange));
     }
     #endregion
 

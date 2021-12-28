@@ -22,8 +22,15 @@ public class EnemyArcher : Enemy
         if (GameManager.GameState == GameState.Playing)
         {
             GroundCheck();
-            ShootArrow();
-            //SetAttackState();
+
+            CheckHitPlayer((hit) => {
+
+                if (hit)
+                {
+                    Shoot(hit);
+                }
+
+            });
             //MovementSkeleton();
         }
     }

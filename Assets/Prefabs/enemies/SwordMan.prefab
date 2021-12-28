@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &936908255216588174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6335197412780534944}
+  m_Layer: 8
+  m_Name: attack point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6335197412780534944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936908255216588174}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3371746376149201918}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3371746374457340289
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +172,7 @@ Transform:
   m_Children:
   - {fileID: 3371746375329577823}
   - {fileID: 3371746374457340290}
+  - {fileID: 6335197412780534944}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,16 +241,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   EnemyMelee: {fileID: 3371746375329577817}
-  AttackRadius: 20
   FacingRight: 1
+  useFirstPosition: 1
   isKnock: 0
   HealthPoint: 0
   Damage: 0
+  DamageAir: 0
   DamageReduction: 0
   Speed: 0
   CoolDownAttack: 0
   CoinReward: 0
   IsDead: 0
+  attackPoint: {fileID: 6335197412780534944}
+  attackRange: 4
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  AttackRadius: 20
   GroundCheckPoint: {fileID: 3371746374457340290}
   GroundCastDistance: 3
   GroundMask:
@@ -227,6 +265,7 @@ MonoBehaviour:
     m_Bits: 64
   Anim: {fileID: 0}
   Rigidbody: {fileID: 0}
+  distance: 0
 --- !u!50 &3371746376149201913
 Rigidbody2D:
   serializedVersion: 4

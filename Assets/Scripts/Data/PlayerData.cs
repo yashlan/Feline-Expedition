@@ -179,6 +179,12 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         set => Instance._healthPointExtra = value; 
     }
 
+    public static int ManaPointExtra
+    {
+        get => Instance._manaPointExtra;
+        set => Instance._manaPointExtra = value;
+    }
+
     public static int NpcGerrinTalkSession 
     { 
         get => Instance._npcGerrinTalkSession; 
@@ -220,7 +226,11 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
 
     void Start()
-    {  
+    {
+#if UNITY_EDITOR
+        Save(PlayerPrefsKey.COIN, 1000000);
+        Save(PlayerPrefsKey.LAST_CHECKPOINT, "test");
+#endif
         Load();
     }
 
@@ -310,7 +320,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     public void OnRuneEquip() // belum selesai
     {
-        if (_isBeastEquip /*&& _totalSlot > 0*/)
+        if (_isBeastEquip)
         {
             _damageMeleeExtra = 8;
             _damageMelee += _damageMeleeExtra;
@@ -333,7 +343,6 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
         if (_isTruthEquip)
         {
-            //+2 mana regen
             _manaRegenExtra = 2;
             ManaRegen += _manaRegenExtra;
             Save(PlayerPrefsKey.MANA_REGEN_EXTRA, _manaRegenExtra);
@@ -371,4 +380,20 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
                                     !_isIlusionEquip && 
                                     !_isSpiritRuneEquip && 
                                     !_isTruthEquip;
+
+    public static void SetValueOnCreateNewGame()
+    {
+        Save(PlayerPrefsKey.HEALTHPOINT, DEFAULT_HEALTHPOINT + HealthPointExtra);
+        Save(PlayerPrefsKey.MANAPOINT, DEFAULT_MANAPOINT + ManaPointExtra);
+        Save(PlayerPrefsKey.COIN, 0);
+
+        Save(PlayerPrefsKey.LAST_SCENE,      "map_1");
+        Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_1_point_1");
+
+        Save(PlayerPrefsKey.ROCCA_TALK_SESSION,  1);
+        Save(PlayerPrefsKey.GERRIN_TALK_SESSION, 1);
+        Save(PlayerPrefsKey.GWYNN_TALK_SESSION,  1);
+
+        Save(PlayerPrefsKey.UNLOCKED_MAP,        0);
+    }
 }

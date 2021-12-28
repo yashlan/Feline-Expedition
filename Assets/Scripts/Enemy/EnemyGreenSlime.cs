@@ -15,7 +15,22 @@ public class EnemyGreenSlime : Enemy
         if(GameManager.GameState == GameState.Playing)
         {
             GroundCheck();
-            SetAttackState();
+            CheckHitPlayer((hit) => {
+
+                if (hit)
+                {
+                    Attack();
+                }
+                else
+                {
+                    if (DistanceToPlayer() <= AttackRadius)
+                        MoveToTarget();
+                    else
+                    {
+                        MoveToFirstPosition();
+                    }
+                }
+            });
         }
     }
 

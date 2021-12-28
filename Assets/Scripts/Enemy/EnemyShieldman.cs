@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public class EnemyShieldman : Enemy
 {
-     void Start()
+    void Start()
     {
         SetNewStats(enemyType);
         SetFirstPosition();
@@ -11,11 +13,28 @@ public class EnemyShieldman : Enemy
         if (_target.IsDead || IsDead)
             return;
 
-        if(GameManager.GameState == GameState.Playing)
+        if (GameManager.GameState == GameState.Playing)
         {
             GroundCheck();
-            SetAttackState();
-            MovementSkeleton();
+            CheckHitPlayer((hit) => {
+
+                if (hit)
+                {
+                    Attack();
+                }
+                else
+                {
+                    if (DistanceToPlayer() <= AttackRadius)
+                    {
+                        Block(Input.GetKeyDown(OptionsManager.AttackThrowKey));
+                        MoveToTarget();
+                    }
+                    else
+                    {
+                        StopMove();
+                    }
+                }
+            });
         }
     }
 

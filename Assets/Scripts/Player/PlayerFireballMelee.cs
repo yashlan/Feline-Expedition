@@ -58,18 +58,19 @@ public class PlayerFireballMelee : MonoBehaviour
             var enemy = collision.gameObject.GetComponent<Enemy>();
 
             if (enemy.IsDead)
-            return;
+                return;
 
+            if (enemy.IsBlocking)
+            {
+                Instantiate(_fireballEffect, transform.position, Quaternion.identity);
+                return;
+            }
+
+            print("next");
             enemy.HealthPoint -= (_player.DamageMagic - enemy.DamageReduction);
 
-            if (enemy.HealthPoint <= 0 && enemy.enemyType == EnemyType.GreenSlime)
-            {
-                Destroy(enemy.gameObject);
-            }
-            else if (enemy.HealthPoint <= 0 && enemy.enemyType == EnemyType.Swordman)
-            {
+            if (enemy.HealthPoint <= 0)
                 enemy.Dead();
-            }
         }
 
         if (collision.gameObject.GetComponent<VaseController>() != null)

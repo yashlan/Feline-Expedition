@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6256595638929264894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2170309827950863944}
+  m_Layer: 0
+  m_Name: attack point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2170309827950863944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256595638929264894}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8261598809857034551}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8261598809857034550
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,9 +39,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8261598809857034551}
+  - component: {fileID: 8261598809857034507}
   - component: {fileID: 8261598809857034504}
   - component: {fileID: 8261598809857034508}
-  - component: {fileID: 8261598809857034507}
   - component: {fileID: 8261598809857034506}
   - component: {fileID: 8261598809857034505}
   m_Layer: 8
@@ -30,13 +60,52 @@ Transform:
   m_GameObject: {fileID: 8261598809857034550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -126.8, y: 41.8, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.4, z: 1}
   m_Children:
   - {fileID: 8261598810712857115}
   - {fileID: 8261598810602169290}
+  - {fileID: 2170309827950863944}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8261598809857034507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261598809857034550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e085e1c68570aa3428321f344cddcabd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 2
+  EnemyMelee: {fileID: 8261598810712857117}
+  FacingRight: 1
+  useFirstPosition: 1
+  isKnock: 0
+  HealthPoint: 0
+  Damage: 0
+  DamageAir: 0
+  DamageReduction: 0
+  Speed: 0
+  CoolDownAttack: 0
+  CoinReward: 0
+  IsDead: 0
+  attackPoint: {fileID: 2170309827950863944}
+  attackRange: 5
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  AttackRadius: 20
+  GroundCheckPoint: {fileID: 8261598810602169290}
+  GroundCastDistance: 3
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  Anim: {fileID: 0}
+  Rigidbody: {fileID: 0}
 --- !u!212 &8261598809857034504
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107,37 +176,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8261598809857034507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261598809857034550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e085e1c68570aa3428321f344cddcabd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyType: 2
-  EnemyMelee: {fileID: 8261598810712857117}
-  AttackRadius: 20
-  FacingRight: 1
-  isKnock: 0
-  HealthPoint: 0
-  Damage: 0
-  DamageReduction: 0
-  Speed: 0
-  CoolDownAttack: 0
-  CoinReward: 0
-  IsDead: 0
-  GroundCheckPoint: {fileID: 8261598810602169290}
-  GroundCastDistance: 3
-  GroundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  Anim: {fileID: 0}
-  Rigidbody: {fileID: 0}
 --- !u!50 &8261598809857034506
 Rigidbody2D:
   serializedVersion: 4
@@ -194,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8261598810602169290}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Ground Check Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +264,7 @@ GameObject:
   - component: {fileID: 8261598810712857115}
   - component: {fileID: 8261598810712857117}
   - component: {fileID: 8261598810712857116}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,8 +322,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.513237, y: -0.1547842}
-      - {x: -0.18120104, y: -0.33252928}
-      - {x: -1.6998, y: -0.38131893}
-      - {x: 0.9727131, y: -0.9800956}
-      - {x: 3.773862, y: 0.052399576}
+    - - {x: 2.5658808, y: 0.8846155}
+      - {x: -0.7052753, y: 2.0508764}
+      - {x: -0.8026142, y: -0.03167224}
+      - {x: -1.6362134, y: -2.4349337}
+      - {x: -0.29207146, y: -2.368275}
+      - {x: 1.167222, y: -1.9433665}
+      - {x: 2.8520756, y: -1.4789572}
+      - {x: 4.6219587, y: -0.93106043}
+      - {x: 5.46609, y: -0.027948797}

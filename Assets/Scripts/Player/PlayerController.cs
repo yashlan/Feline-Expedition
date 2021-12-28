@@ -57,8 +57,6 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField]
     private float _coolDownDash = 0.25f;
     [SerializeField]
-    private float _coolDownThrow = 0.25f;
-    [SerializeField]
     private float _moveSpeed = 25f;
     [SerializeField]
     private bool _canDoubleJump = false;

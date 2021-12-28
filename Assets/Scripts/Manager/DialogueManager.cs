@@ -230,6 +230,11 @@ public class DialogueManager : MonoBehaviour
                     SetNewCurrentSession(2, PlayerPrefsKey.GWYNN_TALK_SESSION);
                     SetNewCurrentSession(4, PlayerPrefsKey.ROCCA_TALK_SESSION);
                 }
+
+                if(GwynnTalkSession() >= 2)
+                {
+                    todoObject.SetActive(true);
+                }
             }
 
             if (nPCType == NPCType.Rocca)
