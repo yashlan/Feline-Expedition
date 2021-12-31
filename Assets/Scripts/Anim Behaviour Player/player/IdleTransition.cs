@@ -14,6 +14,12 @@ public class IdleTransition : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (PlayerController.Instance.IsSelfHeal)
+            PlayerController.Instance.IsSelfHeal = false;
+
+        if(PlayerController.Instance.Rigidbody.constraints != RigidbodyConstraints2D.FreezeRotation)
+            PlayerController.Instance.Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
         if (PlayerController.Instance.IsTimeComboAttack && !PlayerData.IsWaterSpearUsed())
         {
             animator.Play("player attack anim");
@@ -28,6 +34,12 @@ public class IdleTransition : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         PlayerController.Instance.IsTimeComboAttack = false;
+
+        if (PlayerController.Instance.IsSelfHeal)
+            PlayerController.Instance.IsSelfHeal = false;
+
+        if (PlayerController.Instance.Rigidbody.constraints != RigidbodyConstraints2D.FreezeRotation)
+            PlayerController.Instance.Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
