@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d2cc5bbdc7e044a995a8d3bbc7948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeType: 3
 --- !u!60 &2605445736235552858
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -224,7 +225,6 @@ MonoBehaviour:
   enemyType: 4
   EnemyMelee: {fileID: 215537186208865429}
   FacingRight: 1
-  useFirstPosition: 0
   isKnock: 0
   HealthPoint: 0
   Damage: 0
@@ -239,17 +239,17 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  AttackRadius: 35
+  AttackRadius: 100
   GroundCheckPoint: {fileID: 7425542886627018461}
   GroundCastDistance: 5
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
+  IsBlocking: 0
   Anim: {fileID: 0}
   Rigidbody: {fileID: 0}
-  distance: 0
   bulletPoint: {fileID: 2358700977942325134}
-  bullet: {fileID: 0}
+  bullet: {fileID: 4606010240316402977, guid: 36337e6b3ae699f48a8cc082f3d3e263, type: 3}
 --- !u!212 &8198047966501939197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -350,10 +350,10 @@ CircleCollider2D:
   m_GameObject: {fileID: 8198047966501939196}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a47899953bad6a1418ad52380e3f5106, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.66594696}
+  m_Offset: {x: 0, y: -0.57940483}
   serializedVersion: 2
-  m_Radius: 2.5124855
+  m_Radius: 2.329094

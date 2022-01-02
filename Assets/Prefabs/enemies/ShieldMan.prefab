@@ -83,7 +83,6 @@ MonoBehaviour:
   enemyType: 2
   EnemyMelee: {fileID: 8261598810712857117}
   FacingRight: 1
-  useFirstPosition: 1
   isKnock: 0
   HealthPoint: 0
   Damage: 0
@@ -104,6 +103,7 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
+  IsBlocking: 0
   Anim: {fileID: 0}
   Rigidbody: {fileID: 0}
 --- !u!212 &8261598809857034504
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d2cc5bbdc7e044a995a8d3bbc7948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeType: 2
 --- !u!60 &8261598810712857116
 PolygonCollider2D:
   m_ObjectHideFlags: 0

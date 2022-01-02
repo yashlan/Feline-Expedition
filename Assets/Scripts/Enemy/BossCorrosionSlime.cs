@@ -31,10 +31,18 @@ public class BossCorrosionSlime : Enemy
                 }
                 else
                 {
-                    Shoot(!hit && DistanceToPlayer() <= AttackRadius);
+                    if (!hit)
+                    {
+                        var spawnLength = FindObjectsOfType<EnemyGreenSlime>().Length;
 
-                    if(DistanceToPlayer() <= AttackRadius)
-                        MoveToTarget();
+                        Shoot(spawnLength < 2 && DistanceToPlayer() >= 25 && DistanceToPlayer() <= 30);
+
+                        if (DistanceToPlayer() <= AttackRadius)
+                            MoveToTarget();
+
+                        if (DistanceToPlayer() > AttackRadius)
+                            StopMove();
+                    }
                 }
             });
         }

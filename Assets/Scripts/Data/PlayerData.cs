@@ -229,6 +229,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     {
 #if UNITY_EDITOR
         Save(PlayerPrefsKey.COIN, 1000000);
+        Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_boss_area_point_1");
+        Save(PlayerPrefsKey.LAST_SCENE, "mid_boss_area");
 #endif
         Load();
     }

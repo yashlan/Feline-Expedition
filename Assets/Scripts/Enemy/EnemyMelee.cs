@@ -2,25 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MeleeType
+{
+    GreenSlime,
+    SwordMan,
+    ShieldMan,
+    MidBossSlime,
+}
+
 public class EnemyMelee : MonoBehaviour
 {
+    public MeleeType meleeType;
     PlayerController _player => PlayerController.Instance;
-    EnemyGreenSlime _slime;
-    EnemySwordman _swordman;
+
     PolygonCollider2D _polygonCollider;
     float delay;
+
     EnemyShieldman _shieldman;
-
-
+    EnemyGreenSlime _slime;
+    EnemySwordman _swordman;
+    BossCorrosionSlime _midBossSlime;
 
     void Start()
     {
         _polygonCollider = GetComponent<PolygonCollider2D>();
 
-        if(GetComponentInParent<EnemyGreenSlime>() != null) _slime     = GetComponentInParent<EnemyGreenSlime>();
-        if(GetComponentInParent<EnemySwordman>()   != null) _swordman  = GetComponentInParent<EnemySwordman>();
-        if(GetComponentInParent<EnemyShieldman>()  != null) _shieldman = GetComponentInParent<EnemyShieldman>();
+        SetupMeleeType();
+    }
 
+    private void SetupMeleeType()
+    {
+        if(meleeType == MeleeType.GreenSlime) 
+            _slime = GetComponentInParent<EnemyGreenSlime>();
+
+        if (meleeType == MeleeType.MidBossSlime)
+            _midBossSlime = GetComponentInParent<BossCorrosionSlime>();
+
+        if (meleeType == MeleeType.ShieldMan)
+            _shieldman = GetComponentInParent<EnemyShieldman>();
+
+        if (meleeType == MeleeType.SwordMan)
+            _swordman = GetComponentInParent<EnemySwordman>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,20 +62,28 @@ public class EnemyMelee : MonoBehaviour
         CameraEffect.PlayShakeEffect();
 
         _player.KnockBack(1000, transform.parent);
-        
-        if(_slime != null) 
-            _player.HealthPoint -= (_slime.Damage - _player.DamageReduction);
 
-        if(_swordman != null) 
-            _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction); 
-
-        if(_shieldman != null) 
-            _player.HealthPoint -= (_shieldman.Damage - _player.DamageReduction);   
+        GetDamageFrom(meleeType);
 
         SliderHealthPlayerUI.UpdateUI();
 
         if (_player.HealthPoint <= 0)
             _player.Dead();
+    }
+
+    private void GetDamageFrom(MeleeType type)
+    {
+        if(type == MeleeType.GreenSlime)
+            _player.HealthPoint -= (_slime.Damage - _player.DamageReduction);
+
+        if (type == MeleeType.MidBossSlime)
+            _player.HealthPoint -= (_midBossSlime.Damage - _player.DamageReduction);
+
+        if (type == MeleeType.ShieldMan)
+            _player.HealthPoint -= (_shieldman.Damage - _player.DamageReduction);
+
+        if (type == MeleeType.SwordMan)
+            _player.HealthPoint -= (_swordman.Damage - _player.DamageReduction);
     }
 
     #region FOR EVENT ANIMATION

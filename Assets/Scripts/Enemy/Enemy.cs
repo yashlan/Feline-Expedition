@@ -7,7 +7,7 @@ public enum EnemyType
     Swordman, 
     Shieldman,
     Archer,
-    CorrotionSlime,
+    CorrosionSlime,
 }
 
 public class Enemy : MonoBehaviour
@@ -55,12 +55,13 @@ public class Enemy : MonoBehaviour
 
     float delayAttack;
     float delayFlip;
+    float delayShoot;
+    float delayBlock;
+
     RaycastHit2D hitGround;
     float horizontal;
     Vector3 firstPos;
-    BoxCollider2D _boxCollider;
-    float shootDelay;
-    float blockDelay;
+
 
     public PlayerController _target => PlayerController.Instance;
 
@@ -68,7 +69,6 @@ public class Enemy : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
-        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Setup(
@@ -87,6 +87,8 @@ public class Enemy : MonoBehaviour
         Speed = speed;
         CoolDownAttack = coolDownAttack;
         CoinReward = coinReward;
+
+        delayAttack = delayShoot = Time.time + CoolDownAttack;
     }
 
     public void SetNewStats(EnemyType enemyType)
@@ -94,14 +96,12 @@ public class Enemy : MonoBehaviour
         if (enemyType == EnemyType.GreenSlime)     Setup(25,   5, 0,  0,  7, 0.7f, 5);
         if (enemyType == EnemyType.Swordman)       Setup(40,   5, 0,  5,  7, 1f,  15);
         if (enemyType == EnemyType.Shieldman)      Setup(40,   5, 0,  5,  7, 3f,  15);
-        if (enemyType == EnemyType.Archer)         Setup(40,   0, 3,  0,  0, 2f,  5);
-        if (enemyType == EnemyType.CorrotionSlime) Setup(300, 10, 15, 10, 4, 3f,  200);
+        if (enemyType == EnemyType.Archer)         Setup(40,   0, 3,  0,  0, 2f,   5);
+        if (enemyType == EnemyType.CorrosionSlime) Setup(300,  5, 3,  0,  4, 3f,   200);
     }
 
     public float DistanceToPlayer() =>
         Vector2.Distance(transform.position, _target.transform.position);
-
-    public float DistanceY() => (_target.transform.position.y - transform.position.y);
 
     public void SetFirstPosition()
     {
@@ -123,10 +123,10 @@ public class Enemy : MonoBehaviour
 
     public void Shoot(bool canShot)
     {
-        if(canShot && Time.time > shootDelay)
+        if(canShot && Time.time > delayShoot)
         {
             Anim.SetTrigger("Shoot");
-            shootDelay = Time.time + CoolDownAttack;
+            delayShoot = Time.time + CoolDownAttack;
         }
     }
 
@@ -229,7 +229,10 @@ public class Enemy : MonoBehaviour
 
     public void KnockBack(float force)
     {
-        StartCoroutine(IKnockBack(force));
+        if(enemyType != EnemyType.CorrosionSlime)
+        {
+            StartCoroutine(IKnockBack(force));
+        }
     }
 
     IEnumerator IKnockBack(float force)
@@ -258,10 +261,9 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        gameObject.layer = LayerMask.NameToLayer("Default");
         Rigidbody.bodyType = RigidbodyType2D.Static;
         Anim.SetTrigger("Dead");
-        gameObject.layer = LayerMask.NameToLayer("Default");
-        _boxCollider.enabled = false;
     }
 
 

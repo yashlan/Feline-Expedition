@@ -88,6 +88,7 @@ public class PlayerFireballMelee : MonoBehaviour
 
     private bool CollisionWithEnemy(Collider2D collision)
     {
-        return collision.gameObject.layer == LayerMask.NameToLayer("Enemy");
+        var bossBattle = collision.gameObject.GetComponent<BossCorrosionSlime>();
+        return bossBattle == null && collision.gameObject.layer == LayerMask.NameToLayer("Enemy");
     }
 }
