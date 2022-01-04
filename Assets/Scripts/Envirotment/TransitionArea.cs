@@ -1,4 +1,5 @@
 using DigitalRuby.RainMaker;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,30 @@ public class TransitionArea : MonoBehaviour
 {
     public string Destination;
     public string CheckPointDestination;
+
+    BoxCollider2D boxTransition;
+
+    void Start()
+    {
+        if (GameManager.SceneType == SceneType.map_2)
+        {
+            boxTransition = GetComponent<BoxCollider2D>();
+            boxTransition.enabled = false;
+        }
+    }
+
+    void Update()
+    {
+        if (GameManager.SceneType == SceneType.map_2)
+        {
+            if (PlayerData.NpcGerrinTalkSession == 3 &&
+                PlayerData.NpcGwynnTalkSession  == 3 &&
+                PlayerData.NpcRoccaTalkSession  == 5)
+            {
+                boxTransition.enabled = true;
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

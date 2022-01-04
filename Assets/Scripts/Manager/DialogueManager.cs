@@ -28,14 +28,17 @@ public class DialogueManager : MonoBehaviour
 
     [Header("To do")]
     [Tooltip("to do when stop conversation")]
-    public GameObject todoObject;
+    public GameObject todoObject; // panel shop
 
     [HideInInspector]
     public AudioClip npcClip;
 
     float typeSpeed = 0.05f;
 
-    string[] dialogueMessages;
+    string[] dialogueMessagesGerrin;
+    string[] dialogueMessagesGwynn;
+    string[] dialogueMessagesRocca;
+
 
     void Awake()
     {
@@ -55,102 +58,129 @@ public class DialogueManager : MonoBehaviour
     private int GwynnTalkSession() => PlayerData.NpcGwynnTalkSession;
     private int RoccaTalkSession() => PlayerData.NpcRoccaTalkSession;
 
-    private void SetupDialogueMessage()
+
+    public void SetupDialogueMessage()
     {
-        dialogueMessages = null;
+        dialogueMessagesGerrin = null;
+        dialogueMessagesGwynn = null;
+        dialogueMessagesRocca = null;
 
-        var listDialogueMessage = new List<string>();
+        var listDialogueMessageGerrin = new List<string>();
+        var listDialogueMessageGwynn = new List<string>();
+        var listDialogueMessageRocca = new List<string>();
+        
+        listDialogueMessageGerrin.Clear();
+        listDialogueMessageGwynn.Clear();
+        listDialogueMessageRocca.Clear();
 
-        if(nPCType == NPCType.Gerrin)
+
+        #region Gerrin
+
+        if (GerrinTalkSession() == 1)
+            listDialogueMessageGerrin.Add(NPCDialogSession_1.GERRIN_DIALOGUE_1_0);
+
+        if (GerrinTalkSession() == 2)
         {
-            if (GerrinTalkSession() == 1)
-                listDialogueMessage.Add(NPCDialogSession_1.GERRIN_DIALOGUE_1_0);
-
-            if (GerrinTalkSession() == 2)
-            {
-                listDialogueMessage.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_0);
-                listDialogueMessage.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_1);
-                listDialogueMessage.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_2);
-                listDialogueMessage.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_3);
-                listDialogueMessage.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_4);
-                listDialogueMessage.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_5);
-            }
+            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_0);
+            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_1);
+            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_2);
+            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_3);
+            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_4);
+            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_5);
         }
 
-        if (nPCType == NPCType.Gwynn)
+        if(GerrinTalkSession() == 3)
         {
-            if (GwynnTalkSession() == 1)
-                listDialogueMessage.Add(NPCDialogSession_1.GWYNN_DIALOGUE_1_0);
-
-            if (GwynnTalkSession() == 2)
-            {
-                listDialogueMessage.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_0);
-                listDialogueMessage.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_1);
-                listDialogueMessage.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_2);
-                listDialogueMessage.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_3);
-                listDialogueMessage.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_4);
-                listDialogueMessage.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_5);
-            }
+            listDialogueMessageGerrin.Add(NPCDialogSession_3.GERRIN_DIALOGUE_3_0);
         }
 
-        if (nPCType == NPCType.Rocca)
+        #endregion / Gerrin
+
+
+        #region Gwynn
+
+        if (GwynnTalkSession() == 1)
+            listDialogueMessageGwynn.Add(NPCDialogSession_1.GWYNN_DIALOGUE_1_0);
+
+        if (GwynnTalkSession() == 2)
         {
-            if (RoccaTalkSession() == 1)
-            {
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_0);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_1);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_2);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_3);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_4);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_5);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_6);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_7);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_8);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_9);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_10);
-                listDialogueMessage.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_11);
-            }
-
-            if (RoccaTalkSession() == 2)
-            {
-                listDialogueMessage.Add(NPCDialogSession_2.ROCCA_DIALOGUE_2_0);
-                listDialogueMessage.Add(NPCDialogSession_2.ROCCA_DIALOGUE_2_1);
-            }
-
-            if (RoccaTalkSession() == 3)
-            {
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_0);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_1);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_2);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_5);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_6);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_7);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_8);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_9);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_10);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_11);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_12);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_13);
-                listDialogueMessage.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_14);
-            }
-
-            if (RoccaTalkSession() == 4)
-            {
-                listDialogueMessage.Add(NPCDialogSession_4.ROCCA_DIALOGUE_4_0);
-                listDialogueMessage.Add(NPCDialogSession_4.ROCCA_DIALOGUE_4_1);
-            }
-
-            if (RoccaTalkSession() == 5)
-            {
-                listDialogueMessage.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_0);
-                listDialogueMessage.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_1);
-                listDialogueMessage.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_2);
-                listDialogueMessage.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_3);
-                listDialogueMessage.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_4);
-            }
+            listDialogueMessageGwynn.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_0);
+            listDialogueMessageGwynn.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_1);
+            listDialogueMessageGwynn.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_2);
+            listDialogueMessageGwynn.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_3);
+            listDialogueMessageGwynn.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_4);
+            listDialogueMessageGwynn.Add(NPCDialogSession_2.GWYNN_DIALOGUE_2_5);
         }
 
-        dialogueMessages = listDialogueMessage.ToArray();
+        if(GwynnTalkSession() == 3)
+        {
+            listDialogueMessageGwynn.Add(NPCDialogSession_3.GWYNN_DIALOGUE_3_0);
+            //listDialogueMessageGwynn.Add(NPCDialogSession_3.GWYNN_DIALOGUE_3_1);
+        }
+
+        #endregion / Gwynn
+
+        #region Rocca
+
+        if (RoccaTalkSession() == 1)
+        {
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_0);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_1);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_2);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_3);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_4);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_5);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_6);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_7);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_8);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_9);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_10);
+            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_11);
+        }
+
+        if (RoccaTalkSession() == 2)
+        {
+            listDialogueMessageRocca.Add(NPCDialogSession_2.ROCCA_DIALOGUE_2_0);
+            listDialogueMessageRocca.Add(NPCDialogSession_2.ROCCA_DIALOGUE_2_1);
+        }
+
+        if (RoccaTalkSession() == 3)
+        {
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_0);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_1);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_2);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_5);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_6);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_7);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_8);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_9);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_10);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_11);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_12);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_13);
+            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_14);
+        }
+
+        if (RoccaTalkSession() == 4)
+        {
+            listDialogueMessageRocca.Add(NPCDialogSession_4.ROCCA_DIALOGUE_4_0);
+            listDialogueMessageRocca.Add(NPCDialogSession_4.ROCCA_DIALOGUE_4_1);
+        }
+
+        if (RoccaTalkSession() == 5)
+        {
+            listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_0);
+            listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_1);
+            listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_2);
+            listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_3);
+            listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_4);
+        }
+
+        #endregion / Rocca
+
+        dialogueMessagesGerrin = listDialogueMessageGerrin.ToArray();
+        dialogueMessagesGwynn  = listDialogueMessageGwynn.ToArray();
+        dialogueMessagesRocca  = listDialogueMessageRocca.ToArray();
     }
 
     public void StartConversation()
@@ -158,10 +188,32 @@ public class DialogueManager : MonoBehaviour
         textMsg.text = null;
 
         index++;
-        if (index > dialogueMessages.Length - 1)
+
+        if(nPCType == NPCType.Gerrin)
         {
-            StopConversation();
-            return;
+            if (index > dialogueMessagesGerrin.Length - 1)
+            {
+                StopConversation();
+                return;
+            }
+        }
+
+        if (nPCType == NPCType.Gwynn)
+        {
+            if (index > dialogueMessagesGwynn.Length - 1)
+            {
+                StopConversation();
+                return;
+            }
+        }
+
+        if (nPCType == NPCType.Rocca)
+        {
+            if (index > dialogueMessagesRocca.Length - 1)
+            {
+                StopConversation();
+                return;
+            }
         }
 
         canvasInfo.SetActive(false);
@@ -172,7 +224,15 @@ public class DialogueManager : MonoBehaviour
         CameraEffect.PlayZoomIn(18, (x) =>
         {
             canvasDialog.SetActive(true);
-            StartCoroutine(StartTyping(dialogueMessages[index]));
+
+            if(nPCType == NPCType.Gerrin)
+                StartCoroutine(StartTyping(dialogueMessagesGerrin[index]));
+
+            if (nPCType == NPCType.Gwynn)
+                StartCoroutine(StartTyping(dialogueMessagesGwynn[index]));
+
+            if (nPCType == NPCType.Rocca)
+                StartCoroutine(StartTyping(dialogueMessagesRocca[index]));
         });
 
     }
@@ -182,12 +242,40 @@ public class DialogueManager : MonoBehaviour
         textMsg.text = null;
 
         index++;
-        if (index > dialogueMessages.Length - 1)
+
+        if(nPCType == NPCType.Gerrin)
         {
-            StopConversation();
-            return;
+            if (index > dialogueMessagesGerrin.Length - 1)
+            {
+                StopConversation();
+                return;
+            }
+
+            StartCoroutine(StartTyping(dialogueMessagesGerrin[index]));
         }
-        StartCoroutine(StartTyping(dialogueMessages[index])); 
+
+        if (nPCType == NPCType.Gwynn)
+        {
+            if (index > dialogueMessagesGwynn.Length - 1)
+            {
+                StopConversation();
+                return;
+            }
+
+            StartCoroutine(StartTyping(dialogueMessagesGwynn[index]));
+        }
+
+        if (nPCType == NPCType.Rocca)
+        {
+            if (index > dialogueMessagesRocca.Length - 1)
+            {
+                StopConversation();
+                return;
+            }
+
+            StartCoroutine(StartTyping(dialogueMessagesRocca[index]));
+        }
+
     }
 
     private void StopConversation()
@@ -206,52 +294,48 @@ public class DialogueManager : MonoBehaviour
         {
             PlayerController.UnFreezePosition();
 
-            if (nPCType == NPCType.Gerrin)
+            if(nPCType == NPCType.Rocca)
             {
-                if(RoccaTalkSession() >= 4)
-                    SetNewCurrentSession(2, PlayerPrefsKey.GERRIN_TALK_SESSION);
-                else if (GerrinTalkSession() == 2 && GwynnTalkSession() == 2)
-                    SetNewCurrentSession(5, PlayerPrefsKey.ROCCA_TALK_SESSION);
-                else
-                    SetNewCurrentSession(1, PlayerPrefsKey.GERRIN_TALK_SESSION);
-
-                if (index == -1 && !PlayerData.IsMapUnlocked && GerrinTalkSession() == 2)
+                if (RoccaTalkSession() == 1)
                 {
-                    todoObject.SetActive(true);
-                    PlayerData.IsMapUnlocked = true;
-                    PlayerData.Save(PlayerPrefsKey.OPEN_MAP, 1);
+                    SetNewCurrentSession(2, PlayerPrefsKey.GWYNN_TALK_SESSION);
+                    SetNewCurrentSession(2, PlayerPrefsKey.ROCCA_TALK_SESSION);
+                }
+
+                if(RoccaTalkSession() == 3)
+                {
+                    SetNewCurrentSession(2, PlayerPrefsKey.GERRIN_TALK_SESSION);
+                    SetNewCurrentSession(4, PlayerPrefsKey.ROCCA_TALK_SESSION);
                 }
             }
 
             if (nPCType == NPCType.Gwynn)
             {
-                if (RoccaTalkSession() == 2)
+                if(GwynnTalkSession() == 2)
                 {
-                    SetNewCurrentSession(2, PlayerPrefsKey.GWYNN_TALK_SESSION);
-                    SetNewCurrentSession(4, PlayerPrefsKey.ROCCA_TALK_SESSION);
+                    SetNewCurrentSession(3, PlayerPrefsKey.GWYNN_TALK_SESSION);
+                    SetNewCurrentSession(3, PlayerPrefsKey.ROCCA_TALK_SESSION);
                 }
 
                 if(GwynnTalkSession() >= 2)
-                {
                     todoObject.SetActive(true);
-                }
             }
 
-            if (nPCType == NPCType.Rocca)
+            if (nPCType == NPCType.Gerrin)
             {
-                if(RoccaTalkSession() == 1)
+                if(GerrinTalkSession() == 2)
                 {
-                    SetNewCurrentSession(2, PlayerPrefsKey.ROCCA_TALK_SESSION);
-                    SetNewCurrentSession(2, PlayerPrefsKey.GWYNN_TALK_SESSION);
-                }
+                    SetNewCurrentSession(3, PlayerPrefsKey.GERRIN_TALK_SESSION);
+                    SetNewCurrentSession(5, PlayerPrefsKey.ROCCA_TALK_SESSION);
 
-                if (RoccaTalkSession() == 3 && GwynnTalkSession() == 2)
-                {
-                    SetNewCurrentSession(4, PlayerPrefsKey.ROCCA_TALK_SESSION);
+                    todoObject.SetActive(true);
+                    PlayerData.Save(PlayerPrefsKey.UNLOCKED_MAP, IntValueOf(true));
                 }
-            }          
+            }        
         });
     }
+
+    private int IntValueOf(bool val) => val ? 1 : 0;
 
     private IEnumerator StartTyping(string message)
     {
@@ -274,6 +358,5 @@ public class DialogueManager : MonoBehaviour
     private void SetNewCurrentSession(int currentSession, string prefKey)
     {
         PlayerData.Save(prefKey, currentSession);
-        SetupDialogueMessage();
     }
 }

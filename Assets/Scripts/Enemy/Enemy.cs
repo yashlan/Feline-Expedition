@@ -47,8 +47,10 @@ public class Enemy : MonoBehaviour
     public float GroundCastDistance;
     public LayerMask GroundMask;
 
-    [Header("Block/Defend Armor")]
+    [Header("Animation State")]
     public bool IsBlocking;
+    public bool IsShooting;
+    public bool IsAttacking;
 
     [HideInInspector] public Animator Anim;
     [HideInInspector] public Rigidbody2D Rigidbody;
@@ -56,7 +58,6 @@ public class Enemy : MonoBehaviour
     float delayAttack;
     float delayFlip;
     float delayShoot;
-    float delayBlock;
 
     RaycastHit2D hitGround;
     float horizontal;
@@ -69,6 +70,8 @@ public class Enemy : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
+
+        Rigidbody.gravityScale = 500;
     }
 
     private void Setup(
@@ -123,7 +126,7 @@ public class Enemy : MonoBehaviour
 
     public void Shoot(bool canShot)
     {
-        if(canShot && Time.time > delayShoot)
+        if(canShot && Time.time > delayShoot && !IsAttacking)
         {
             Anim.SetTrigger("Shoot");
             delayShoot = Time.time + CoolDownAttack;
@@ -136,7 +139,7 @@ public class Enemy : MonoBehaviour
         {
             if (hitGround)
             {
-                if (Time.time > delayAttack)
+                if (Time.time > delayAttack && !IsShooting)
                 {
                     Anim.SetTrigger("Attack");
                     delayAttack = Time.time + CoolDownAttack;
@@ -149,7 +152,7 @@ public class Enemy : MonoBehaviour
     {
         var hitPlayer = Physics2D.Raycast(
             attackPoint.position,
-            (FacingRight ? Vector2.right : Vector2.left),
+            FacingRight ? Vector2.right : Vector2.left,
             attackRange,
             PlayerMask);
 
@@ -261,11 +264,10 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        gameObject.layer = LayerMask.NameToLayer("Dead");
         Rigidbody.bodyType = RigidbodyType2D.Static;
         Anim.SetTrigger("Dead");
     }
-
 
     #region DEBUG
     void OnDrawGizmosSelected()

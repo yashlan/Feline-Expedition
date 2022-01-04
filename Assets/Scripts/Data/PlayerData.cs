@@ -31,10 +31,6 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private int _manaRegen;
 
-    [Header("UnlockedMap")]
-    [SerializeField]
-    private bool _isMapUnlocked;
-
     [Header("Shop Attribute")]
     [SerializeField]
     private int _totalRuneSlotUsed;
@@ -53,13 +49,17 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private bool _isHarmonyWasPurchased;
     [SerializeField]
-    private bool _isSpiritRuneWasPurchased;
+    private bool _isSpiritWasPurchased;
 
     [Header("Unlocked Rune")]
     [SerializeField]
     private bool _isWaterSpearWasUnlocked;
     [SerializeField]
     private bool _isInvincibleShieldWasUnlocked;
+
+    [Header("Unlocked Map")]
+    [SerializeField]
+    private bool _isMapUnlocked;
 
     [Header("Passive Rune Equip")]
     [SerializeField]
@@ -91,9 +91,9 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     [SerializeField]
     private int _npcGerrinTalkSession = 1;
     [SerializeField]
-    private int _npcGwynnTalkSession = 1;
+    private int _npcGwynnTalkSession  = 1;
     [SerializeField]
-    private int _npcRoccaTalkSession = 1;
+    private int _npcRoccaTalkSession  = 1;
 
     #region GETTER SETTER
     public static int HealthPoint
@@ -101,6 +101,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         get => Instance._healthPoint; 
         set => Instance._healthPoint = value; 
     }
+
     public static int DamageMelee 
     {
         get => Instance._damageMelee; 
@@ -209,10 +210,83 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         set => Instance._isMapUnlocked = value;
     }
 
+    public static bool IsBeastWasPurchased 
+    { 
+        get => Instance._isBeastWasPurchased; 
+        set => Instance._isBeastWasPurchased = value; 
+    }
+
+    public static bool IsDisorderWasPurchased 
+    { 
+        get => Instance._isDisorderWasPurchased; 
+        set => Instance._isDisorderWasPurchased = value; 
+    }
+
+    public static bool IsIlusionWasPurchased
+    {
+        get => Instance._isIlusionWasPurchased; 
+        set => Instance._isIlusionWasPurchased = value;
+    }
+
+    public static bool IsTruthWasPurchased
+    {
+        get => Instance._isTruthWasPurchased; 
+        set => Instance._isTruthWasPurchased = value;
+    }
+
+    public static bool IsHarmonyWasPurchased
+    {
+        get => Instance._isHarmonyWasPurchased;
+        set => Instance._isHarmonyWasPurchased = value;
+    }
+
+    public static bool IsSpiritWasPurchased
+    {
+        get => Instance._isSpiritWasPurchased; 
+        set => Instance._isSpiritWasPurchased = value;
+    }
+
+    public static bool IsBeastEquip 
+    {
+        get => Instance._isBeastEquip;
+        set => Instance._isBeastEquip = value; 
+    }
+
+    public static bool IsDisorderEquip 
+    { 
+        get => Instance._isDisorderEquip;
+        set => Instance._isDisorderEquip = value; 
+    }
+
+    public static bool IsIlusionEquip 
+    { 
+        get => Instance._isIlusionEquip;
+        set => Instance._isIlusionEquip = value;
+    }
+
+    public static bool IsTruthEquip
+    {
+        get => Instance._isTruthEquip; 
+        set => Instance._isTruthEquip = value;
+    }
+
+    public static bool IsHarmonyEquip
+    {
+        get => Instance._isHarmonyEquip; 
+        set => Instance._isHarmonyEquip = value;
+    }
+
+    public static bool IsSpiritRuneEquip
+    {
+        get => Instance._isSpiritRuneEquip; 
+        set => Instance._isSpiritRuneEquip = value;
+    }
+
     #endregion
 
     public static bool IsInvincibleShieldUsed() => IsInvincibleShieldWasUnlocked && IsInvincibleShieldEquip;
     public static bool IsWaterSpearUsed() => IsWaterSpearWasUnlocked && IsWaterSpearEquip;
+
 
     #region DEFAULT STATS
     public const int DEFAULT_HEALTHPOINT      = 30;
@@ -229,8 +303,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     {
 #if UNITY_EDITOR
         Save(PlayerPrefsKey.COIN, 1000000);
-        Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_boss_area_point_1");
-        Save(PlayerPrefsKey.LAST_SCENE, "mid_boss_area");
+        //Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_2_point_1");
+        //Save(PlayerPrefsKey.LAST_SCENE, "map_2");
 #endif
         Load();
     }
@@ -250,6 +324,21 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         #region SHOP
         _coins = PlayerPrefs.GetInt(PlayerPrefsKey.COIN,                             _coins);
         _totalRuneSlotUsed = PlayerPrefs.GetInt(PlayerPrefsKey.TOTAL_RUNE_SLOT_USED, _totalRuneSlotUsed);
+
+        _isBeastWasPurchased    = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.BEAST_PURCHASED,    0));
+        _isDisorderWasPurchased = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.DISORDER_PURCHASED, 0));
+        _isIlusionWasPurchased  = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.ILUSION_PURCHASED,  0));
+        _isTruthWasPurchased    = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.TRUTH_PURCHASED,    0));
+        _isHarmonyWasPurchased  = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.HARMONY_PURCHASED,  0));
+        _isSpiritWasPurchased   = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.SPIRIT_PURCHASED,   0));
+
+        _isBeastEquip      = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.BEAST_EQUIP,    0));
+        _isDisorderEquip   = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.DISORDER_EQUIP, 0));
+        _isIlusionEquip    = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.ILUSION_EQUIP,  0));
+        _isTruthEquip      = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.TRUTH_EQUIP,    0));
+        _isHarmonyEquip    = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.HARMONY_EQUIP,  0));
+        _isSpiritRuneEquip = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.SPIRIT_EQUIP,   0));
+
         #endregion
 
         _healthPointExtra = PlayerPrefs.GetInt(PlayerPrefsKey.HEALTHPOINT_EXTRA,          _healthPointExtra);
@@ -323,42 +412,42 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     {
         if (_isBeastEquip)
         {
-            _damageMeleeExtra = 8;
+            _damageMeleeExtra = 16;
             _damageMelee += _damageMeleeExtra;
             Save(PlayerPrefsKey.DAMAGE_MELEE_EXTRA, _damageMeleeExtra);
         }
 
         if (_isDisorderEquip)
         {
-            _damageReductionExtra = 2;
+            _damageReductionExtra = 5;
             DamageReduction += _damageReductionExtra;
             Save(PlayerPrefsKey.DAMAGE_REDUCTION_EXTRA, _damageReductionExtra);
         }
 
         if (_isIlusionEquip)
         {
-            _damageMagicExtra = 7;
+            _damageMagicExtra = 15;
             DamageMagic += _damageMagicExtra;
             Save(PlayerPrefsKey.DAMAGE_MAGIC_EXTRA, _damageMagicExtra);
         }
 
         if (_isTruthEquip)
         {
-            _manaRegenExtra = 2;
+            _manaRegenExtra = 5;
             ManaRegen += _manaRegenExtra;
             Save(PlayerPrefsKey.MANA_REGEN_EXTRA, _manaRegenExtra);
         }
 
         if (_isHarmonyEquip)
         {
-            _healthPointExtra = 10;
+            _healthPointExtra = 20;
             _healthPoint += _healthPointExtra;
             Save(PlayerPrefsKey.HEALTHPOINT_EXTRA, _healthPointExtra);
         }
 
         if (_isSpiritRuneEquip)
         {
-            _manaPointExtra = 10;
+            _manaPointExtra = 20;
             ManaPoint += _manaPointExtra;
             Save(PlayerPrefsKey.MANAPOINT_EXTRA, _manaPointExtra);
         }

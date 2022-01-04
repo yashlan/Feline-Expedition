@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackBehaviour : StateMachineBehaviour
+public class EnemyShootBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,25 +14,20 @@ public class EnemyAttackBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var enemy = animator.GetComponentInParent<Enemy>();
-        
-        enemy.IsAttacking = true;
+        enemy.IsShooting = true;
 
-        if (!enemy.isKnock)
-        {
-            var rb = animator.GetComponentInParent<Rigidbody2D>();
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
+        var rb = animator.GetComponentInParent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        var enemy = animator.GetComponentInParent<Enemy>();
+        enemy.IsShooting = false;
+
         var rb = animator.GetComponentInParent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        var enemy = animator.GetComponentInParent<Enemy>();
-
-        enemy.IsAttacking = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

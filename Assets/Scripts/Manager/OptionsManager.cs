@@ -6,6 +6,7 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
 {
     public Texture2D cursorTexture;
     public RenderPipelineAsset[] renderPipelineAsset;
+
     #region KEYCODE
     private const string DEFAULT_KEY_LEFT        = "LeftArrow";
     private const string DEFAULT_KEY_RIGHT       = "RightArrow";

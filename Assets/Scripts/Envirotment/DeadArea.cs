@@ -8,5 +8,10 @@ public class DeadArea : MonoBehaviour
         {
             PlayerController.Instance.OnHitDeadArea();
         }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            collision.GetComponent<Enemy>().Dead();
+        }
     }
 }

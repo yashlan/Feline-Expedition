@@ -35,7 +35,7 @@ public class BossCorrosionSlime : Enemy
                     {
                         var spawnLength = FindObjectsOfType<EnemyGreenSlime>().Length;
 
-                        Shoot(spawnLength < 2 && DistanceToPlayer() >= 25 && DistanceToPlayer() <= 30);
+                        Shoot(spawnLength == 0 && DistanceToPlayer() >= 25 && DistanceToPlayer() <= 30);
 
                         if (DistanceToPlayer() <= AttackRadius)
                             MoveToTarget();

@@ -2703,6 +2703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Destination: map_3_1
   CheckPointDestination: map_3_1_point_1
+  LockedFirst: 1
 --- !u!1 &1059394039
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,6 +51,21 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     #region SHOP
     public const string COIN                 = "COIN";
     public const string TOTAL_RUNE_SLOT_USED = "TOTAL_RUNE_SLOT_USED";
+
+    public const string BEAST_PURCHASED    = "BEAST_PURCHASED";
+    public const string DISORDER_PURCHASED = "DISORDER_PURCHASED";
+    public const string ILUSION_PURCHASED  = "ILUSION_PURCHASED";
+    public const string TRUTH_PURCHASED    = "TRUTH_PURCHASED";
+    public const string HARMONY_PURCHASED  = "HARMONY_PURCHASED";
+    public const string SPIRIT_PURCHASED   = "SPIRIT_PURCHASED";
+
+    public const string BEAST_EQUIP    = "BEAST_EQUIP";
+    public const string DISORDER_EQUIP = "DISORDER_EQUIP";
+    public const string ILUSION_EQUIP  = "ILUSION_EQUIP";
+    public const string TRUTH_EQUIP    = "TRUTH_EQUIP";
+    public const string HARMONY_EQUIP  = "HARMONY_EQUIP";
+    public const string SPIRIT_EQUIP   = "SPIRIT_EQUIP";
+
     #endregion
 
     #region NPC

@@ -1,6 +1,11 @@
 
 public static class NPCDialogSession_3
 {
+    public const string GERRIN_DIALOGUE_3_0 = "go away, i am busy";
+
+    public const string GWYNN_DIALOGUE_3_0 = "welcome to my shop, can i help you?";
+    public const string GWYNN_DIALOGUE_3_1 = "thanks for your patronage";
+
     public const string ROCCA_DIALOGUE_3_0 = "well done, young adventure";
     public const string ROCCA_DIALOGUE_3_1 = "even you not look different, but at least, you know where you can buy something what you need";
     public const string ROCCA_DIALOGUE_3_2 = "let’s we proceed our conversation before";

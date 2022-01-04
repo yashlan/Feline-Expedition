@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class NPCController : DialogueManager
 {
@@ -35,6 +32,16 @@ public class NPCController : DialogueManager
                 NextDialogue();
                 AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
             }
+        }
+    }
+
+    float interval;
+    void FixedUpdate()
+    {
+        if(Time.time > interval)
+        {
+            SetupDialogueMessage();
+            interval = Time.time + 1f;
         }
     }
 }
