@@ -24,7 +24,6 @@ public enum SceneType
     map_3_1,
     map_3_2,
     map_3_3,
-    map_3_4,
     mid_boss,
     save_area_1,
 }
@@ -65,10 +64,6 @@ public class GameManager : Singleton<GameManager>
                 () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
 
         if (sceneType == SceneType.map_3_3)
-            ChangeGameState(GameState.Playing,
-                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
-
-        if (sceneType == SceneType.map_3_4)
             ChangeGameState(GameState.Playing,
                 () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
 

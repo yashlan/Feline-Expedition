@@ -663,11 +663,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -241.4808, y: -8.4001465}
-      - {x: -241.03664, y: 231.1874}
-      - {x: 74.51723, y: 231.64734}
-      - {x: 78.474464, y: -189.96239}
-      - {x: -241.2293, y: -188.24368}
+    - - {x: -249.01404, y: -8.4001465}
+      - {x: -249.0896, y: 155.29977}
+      - {x: 17.902664, y: 154.55519}
+      - {x: 15.837074, y: -105.64287}
+      - {x: -250.1322, y: -103.92414}
 --- !u!4 &282617147
 Transform:
   m_ObjectHideFlags: 0
@@ -1968,7 +1968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2760977647995663806, guid: d3f8e6c05d0b3534a892bd37dfe27f70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 133.2
+      value: 132.37
       objectReference: {fileID: 0}
     - target: {fileID: 2760977647995663806, guid: d3f8e6c05d0b3534a892bd37dfe27f70, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2920,7 +2920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857654477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.2, y: -108.6, z: 0}
+  m_LocalPosition: {x: -5.1, y: -113.8, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1884900344}
@@ -2971,7 +2971,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 75.10968, y: 20}
+  m_Size: {x: 107.6907, y: 12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3364,7 +3364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e6c5cb70d7a9942a9f081f0f397a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Destination: map_1
+  Destination: save_area_1
   CheckPointDestination: 
 --- !u!1 &1073335242
 GameObject:
@@ -5441,7 +5441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839097215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -105.11, y: -110.94, z: 0}
+  m_LocalPosition: {x: -119.9, y: -113.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 655671357}
@@ -5785,7 +5785,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -14.078659, y: 12.297348}
+  m_Offset: {x: -14.078659, y: 23.431915}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5796,7 +5796,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 141.98521, y: 19.052765}
+  m_Size: {x: 141.98521, y: 16.726135}
   m_EdgeRadius: 0
 --- !u!114 &1888985453
 MonoBehaviour:
