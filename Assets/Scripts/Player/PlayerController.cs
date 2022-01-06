@@ -134,6 +134,8 @@ public class PlayerController : Singleton<PlayerController>
     private bool _isMoving;
     [SerializeField]
     private bool _isJumping;
+    [SerializeField]
+    private bool _isShopping;
 
     private BoxCollider2D _boxCollider;
     private CircleCollider2D _circleCollider;
@@ -174,6 +176,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsGrounded => _isGrounded;
     public bool IsHurt => _isHurt;
     public bool IsDead => _isDead;
+    public bool IsShopping { get => _isShopping; set => _isShopping = value; }
 
     #endregion
 
@@ -243,7 +246,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-        if (_isDead || IsTalking)
+        if (_isDead || IsTalking || IsShopping)
             return;
 
         if (GameManager.GameState == GameState.Playing)
@@ -268,7 +271,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void FixedUpdate()
     {
-        if (_isDead || IsTalking)
+        if (_isDead || IsTalking || IsShopping)
             return;
 
         if (GameManager.GameState == GameState.Playing)

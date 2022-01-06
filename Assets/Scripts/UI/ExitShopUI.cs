@@ -12,7 +12,7 @@ public class ExitShopUI : MonoBehaviour
         if (Input.GetKeyDown(key))
         {
             gameObject.SetActive(false);
-            if(ObjToEnable != null)
+            if (ObjToEnable != null)
                 ObjToEnable.SetActive(true);
         }
     }

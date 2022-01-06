@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonItemRuneController : MonoBehaviour
 {
-    public Sprite runeIcon;
+    public Image runeIcon;
     public Text textItemName;
     public Text textPrice;
     public Text textDescription;
@@ -16,7 +16,7 @@ public class ButtonItemRuneController : MonoBehaviour
         int Price, 
         string Description)
     {
-        this.runeIcon = runeIcon;
+        this.runeIcon.sprite = runeIcon;
         this.textItemName.text = ItemName;
         this.textPrice.text = $"Buy {Price} ";
         this.textDescription.text = Description;

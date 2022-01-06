@@ -78,7 +78,7 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !PlayerController.Instance.IsShopping)
         {
             PauseGame();
         }

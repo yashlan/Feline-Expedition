@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
@@ -37,6 +38,21 @@ public class ShopManager : MonoBehaviour
     Button buttonItem2;
     Button buttonItem3;
 
+    void OnEnable()
+    {
+        PlayerController.Instance.IsShopping = true;
+    }
+
+    void OnDisable()
+    {
+        PlayerController.Instance.IsShopping = false;
+    }
+
+    IEnumerator UpdateCoinsInShop()
+    {
+        yield return new WaitUntil(() => GameManager.GameState == GameState.Playing);
+        PlayerCoinUIShop.UpdateUI();
+    }
 
     void Start()
     {
@@ -44,7 +60,7 @@ public class ShopManager : MonoBehaviour
         buttonItem2 = itemRune2.GetComponent<Button>();
         buttonItem3 = itemRune3.GetComponent<Button>();
 
-        buttonMeleeRune.onClick.AddListener(() => ButtonRuneListener("Melee", () => print("bug on first selected button")));
+        buttonMeleeRune.onClick.AddListener(() => ButtonRuneListener("Melee"));
         buttonSpellRune.onClick.AddListener(() => ButtonRuneListener("Spell"));
         buttonPowerRune.onClick.AddListener(() => ButtonRuneListener("Power"));
         buttonMagicRune.onClick.AddListener(() => ButtonRuneListener("Magic"));
@@ -53,12 +69,6 @@ public class ShopManager : MonoBehaviour
         buttonBuyItem.onClick.AddListener(() => ButtonBuyListener());
 
         StartCoroutine(UpdateCoinsInShop());
-    }
-
-    IEnumerator UpdateCoinsInShop()
-    {
-        yield return new WaitUntil(() => GameManager.GameState == GameState.Playing);
-        PlayerCoinUIShop.UpdateUI();
     }
 
     private void ButtonBuyListener()
@@ -82,7 +92,7 @@ public class ShopManager : MonoBehaviour
         //print("price : " + priceItem);
     }
 
-    private void ButtonRuneListener(string runeName, Action action = null)
+    private void ButtonRuneListener(string runeName)
     {
         bgUIShop.SetActive(false);
         bgRuneList.SetActive(true);
@@ -91,9 +101,9 @@ public class ShopManager : MonoBehaviour
 
         if (runeName == "Melee")
         {
-            SetupPropertiesItem1(null, "Melee test 1", 10, "Melee test 1 desc");
-            SetupPropertiesItem2(null, "Melee test 2", 20, "Melee test 2 desc");
-            SetupPropertiesItem3(null, "Melee test 3", 30, "Melee test 3 desc");
+            SetupPropertiesItem1(GetIcon("rune_beast"), "Melee test 1", 10, "Melee test 1 desc");
+            SetupPropertiesItem2(GetIcon("rune_disorder"), "Melee test 2", 20, "Melee test 2 desc");
+            SetupPropertiesItem3(GetIcon("rune_harmony"), "Melee test 3", 30, "Melee test 3 desc");
         }
 
         if (runeName == "Spell")
@@ -123,13 +133,15 @@ public class ShopManager : MonoBehaviour
             SetupPropertiesItem2(null, "Life test 2", 140, "Life test 2 desc");
             SetupPropertiesItem3(null, "Life test 3", 150, "Life test 3 desc");
         }
-
-        action?.Invoke();
     }
 
     void SelectFirstButton() => buttonItem1.Select();
 
-    private void SetupPropertiesItem1(Sprite runeIcon, string ItemName, int Price, string Description)
+    private void SetupPropertiesItem1(
+        Sprite runeIcon, 
+        string ItemName, 
+        int Price,
+        string Description)
     {
         buttonItem1.onClick.RemoveAllListeners();
         itemRune1.SetProperties(runeIcon, ItemName, Price, Description);
@@ -140,9 +152,15 @@ public class ShopManager : MonoBehaviour
                 SetPriceItem(Price);
                 AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
             });
+
+        SelectFirstButton();
     }
 
-    private void SetupPropertiesItem2(Sprite runeIcon, string ItemName, int Price, string Description)
+    private void SetupPropertiesItem2(
+        Sprite runeIcon, 
+        string ItemName, 
+        int Price, 
+        string Description)
     {
         buttonItem2.onClick.RemoveAllListeners();
         itemRune2.SetProperties(runeIcon, ItemName, Price, Description);
@@ -153,9 +171,15 @@ public class ShopManager : MonoBehaviour
                 SetPriceItem(Price);
                 AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
             });
+
+        SelectFirstButton();
     }
 
-    private void SetupPropertiesItem3(Sprite runeIcon, string ItemName, int Price, string Description)
+    private void SetupPropertiesItem3(
+        Sprite runeIcon, 
+        string ItemName, 
+        int Price, 
+        string Description)
     {
         buttonItem3.onClick.RemoveAllListeners();
         itemRune3.SetProperties(runeIcon, ItemName, Price, Description);
@@ -166,7 +190,9 @@ public class ShopManager : MonoBehaviour
                 SetPriceItem(Price);
                 AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
             });
+
+        SelectFirstButton();
     }
 
-    private void GetIcon(string name) => Resources.Load<Sprite>($"Rune/{name}");
+    private Sprite GetIcon(string name) => Resources.Load<Sprite>($"runes/{name}");
 }
