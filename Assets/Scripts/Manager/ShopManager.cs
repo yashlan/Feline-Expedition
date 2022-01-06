@@ -101,37 +101,30 @@ public class ShopManager : MonoBehaviour
 
         if (runeName == "Melee")
         {
-            SetupPropertiesItem1(GetIcon("rune_beast"), "Melee test 1", 10, "Melee test 1 desc");
-            SetupPropertiesItem2(GetIcon("rune_disorder"), "Melee test 2", 20, "Melee test 2 desc");
-            SetupPropertiesItem3(GetIcon("rune_harmony"), "Melee test 3", 30, "Melee test 3 desc");
+            
         }
 
         if (runeName == "Spell")
         {
-            SetupPropertiesItem1(null, "Spell test 1", 40, "Spell test 1 desc");
-            SetupPropertiesItem2(null, "Spell test 2", 50, "Spell test 2 desc");
-            SetupPropertiesItem3(null, "Spell test 3", 60, "Spell test 3 desc");
+
         }
 
         if (runeName == "Power")
         {
-            SetupPropertiesItem1(null, "power test 1", 70, "power test 1 desc");
-            SetupPropertiesItem2(null, "power test 2", 80, "power test 2 desc");
-            SetupPropertiesItem3(null, "power test 3", 90, "power test 3 desc");
+            SetupPropertiesItem1(GetIcon("rune_beast"),    "Beast",    50, RuneDescription.BEAST_DESC);
+            SetupPropertiesItem2(GetIcon("rune_disorder"), "Disorder", 50, RuneDescription.DISORDER_DESC);
         }
 
         if (runeName == "Magic")
         {
-            SetupPropertiesItem1(null, "Magic test 1", 100, "Magic test 1 desc");
-            SetupPropertiesItem2(null, "Magic test 2", 110, "Magic test 2 desc");
-            SetupPropertiesItem3(null, "Magic test 3", 120, "Magic test 3 desc");
+            SetupPropertiesItem1(GetIcon("rune_ilusion"), "Ilusuion", 50, RuneDescription.ILUSION_DESC);
+            SetupPropertiesItem2(GetIcon("rune_truth"),   "Truth",    50, RuneDescription.TRUTH_DESC);
         }
 
         if (runeName == "Life")
         {
-            SetupPropertiesItem1(null, "Life test 1", 130, "Life test 1 desc");
-            SetupPropertiesItem2(null, "Life test 2", 140, "Life test 2 desc");
-            SetupPropertiesItem3(null, "Life test 3", 150, "Life test 3 desc");
+            SetupPropertiesItem1(GetIcon("rune_harmony"), "Harmony", 100, RuneDescription.HARMONY_DESC);
+            SetupPropertiesItem2(GetIcon("rune_spirit"),  "Spirit",  100, RuneDescription.SPIRIT_DESC);
         }
     }
 

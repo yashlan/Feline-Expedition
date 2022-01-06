@@ -272,7 +272,10 @@ public class PlayerController : Singleton<PlayerController>
     void FixedUpdate()
     {
         if (_isDead || IsTalking || IsShopping)
+        {
+            FreezePosition();
             return;
+        }
 
         if (GameManager.GameState == GameState.Playing)
         {
@@ -517,8 +520,10 @@ public class PlayerController : Singleton<PlayerController>
     private void Throw()
     {
         if (Input.GetKeyDown(OptionsManager.AttackThrowKey)
-            && CanThrowAttack() && Time.time > _delayThrow)
+            && CanThrowAttack() && Time.time > _delayThrow && _manaPoint > 0)
         {
+            _manaPoint -= 5;
+            PlayerManaUI.UpdateUI();
             _isThrowing = true;
         }
         else
@@ -816,11 +821,6 @@ public class PlayerController : Singleton<PlayerController>
 
     #region ON DEAD HEALTHPOINT <= 0 (GAME OVER)
 
-    private void SetDefaultAtribute()
-    {
-        PlayerData.SetDefaultValue();
-    }
-
     public void Dead()
     {
         GameManager.ChangeGameState(GameState.GameOver);
@@ -830,16 +830,19 @@ public class PlayerController : Singleton<PlayerController>
             _isDead = true;
             _anim.SetTrigger("Dead");
             _rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            PanelSlideUIController.Instance.FadeIn(() => Restart(), true);
+            Invoke(nameof(ShowGameOverText), 2f);
+            PanelSlideUIController.Instance.FadeIn(() => Restart(), 5f);
         }
+    }
+
+    private void ShowGameOverText()
+    {
+        GameManager.ShowGameOverText();
     }
 
     private void Restart()
     {
-        SetDefaultAtribute();
-        _isDead = false;
-        GameManager.ChangeGameState(GameState.Playing);
-        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        PlayerData.SetDefaultValue();
         SceneManager.LoadScene(PlayerData.LastScene);
     }
     #endregion
@@ -920,6 +923,14 @@ public class PlayerController : Singleton<PlayerController>
 
     public void IncreaseMana(int amount)
     {
+        var maxManaPoint = PlayerData.DEFAULT_MANAPOINT + PlayerData.ManaPointExtra;
+
+        if(_manaPoint >= maxManaPoint)
+        {
+            _manaPoint = maxManaPoint;
+            PlayerManaUI.UpdateUI();
+            return;
+        }
         _manaPoint += amount;
         PlayerManaUI.UpdateUI();
     }
@@ -978,13 +989,18 @@ public class PlayerController : Singleton<PlayerController>
 
     public void SelfHealEvent()
     {
-        if(_manaPoint > 0)
+        if(_manaPoint <= 0)
         {
-            _manaPoint -= 20;
-            _healthPoint += 3;
+            _manaPoint = 0;
             PlayerManaUI.UpdateUI();
             SliderHealthPlayerUI.UpdateUI();
+            return;
         }
+
+        _manaPoint -= 20;
+        _healthPoint += 3;
+        PlayerManaUI.UpdateUI();
+        SliderHealthPlayerUI.UpdateUI();
     }
 
     public void ThrowFireballEvent()
@@ -1002,14 +1018,6 @@ public class PlayerController : Singleton<PlayerController>
     {
         _isHurt = false;
         _anim.SetBool("Hurt", _isHurt);
-    }
-
-    public void DeadEvent()
-    {
-        if (GameManager.GameState == GameState.GameOver)
-        {
-            print("Player dead");
-        }
     }
     #endregion
 }

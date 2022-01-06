@@ -26,8 +26,11 @@ public class EnemyShootBehaviour : StateMachineBehaviour
         var enemy = animator.GetComponentInParent<Enemy>();
         enemy.IsShooting = false;
 
-        var rb = animator.GetComponentInParent<Rigidbody2D>();
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        if(enemy.enemyType == EnemyType.CorrosionSlime)
+        {
+            var rb = animator.GetComponentInParent<Rigidbody2D>();
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

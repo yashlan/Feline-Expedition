@@ -34,7 +34,10 @@ public class GameManager : Singleton<GameManager>
     private GameState _gameState;
 
     [SerializeField]
-    private SceneType sceneType; 
+    private SceneType sceneType;
+
+    [Header("UI")]
+    public GameObject TextGameOver;
 
     [Header("Pause Menu")]
     [SerializeField]
@@ -90,6 +93,11 @@ public class GameManager : Singleton<GameManager>
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public static void ShowGameOverText()
+    {
+        Instance.TextGameOver.SetActive(true);
     }
 
     #region FOR PAUSE MENU

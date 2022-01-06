@@ -81,6 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554203824852061813}
+  - component: {fileID: 5213755110263649114}
   - component: {fileID: 554203824852061812}
   - component: {fileID: 7928517640173279096}
   m_Layer: 0
@@ -106,6 +107,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5213755110263649114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554203824852061814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8767040fa1390e443b447dcda545ff57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canHeal: 0
+  wasHeal: 0
+  canvasInfo: {fileID: 6512222515943495925}
 --- !u!212 &554203824852061812
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -210,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554203825331789059}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.037, y: 0.68, z: 3}
+  m_LocalPosition: {x: 0.023, y: 0.679, z: 3}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 554203824143859515}

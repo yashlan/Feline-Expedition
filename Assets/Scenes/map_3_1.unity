@@ -2942,6 +2942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameState: 0
   sceneType: 2
+  TextGameOver: {fileID: 5761799996954267172}
   _panelPause: {fileID: 5761799996954267171}
 --- !u!4 &1264954895
 Transform:
@@ -6387,6 +6388,11 @@ PrefabInstance:
 --- !u!1 &5761799996954267171 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1839532867397862932, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
+  m_PrefabInstance: {fileID: 5761799996954267170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5761799996954267172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4653287354455809845, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
   m_PrefabInstance: {fileID: 5761799996954267170}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8261598811576439720

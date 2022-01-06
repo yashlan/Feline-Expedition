@@ -583,7 +583,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: map_2
+          m_StringArgument: mid_boss_area
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &157191574
@@ -2377,7 +2377,6 @@ MonoBehaviour:
   _damageMelee: 0
   _damageMagic: 0
   _manaRegen: 0
-  _isMapUnlocked: 0
   _totalRuneSlotUsed: 0
   _coins: 0
   _isBeastWasPurchased: 0
@@ -2385,9 +2384,10 @@ MonoBehaviour:
   _isIlusionWasPurchased: 0
   _isTruthWasPurchased: 0
   _isHarmonyWasPurchased: 0
-  _isSpiritRuneWasPurchased: 0
+  _isSpiritWasPurchased: 0
   _isWaterSpearWasUnlocked: 0
   _isInvincibleShieldWasUnlocked: 0
+  _isMapUnlocked: 0
   _isBeastEquip: 0
   _isDisorderEquip: 0
   _isIlusionEquip: 0
