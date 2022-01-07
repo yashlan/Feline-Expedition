@@ -329,13 +329,11 @@ public class DialogueManager : MonoBehaviour
                     SetNewCurrentSession(5, PlayerPrefsKey.ROCCA_TALK_SESSION);
 
                     todoObject.SetActive(true);
-                    PlayerData.Save(PlayerPrefsKey.UNLOCKED_MAP, IntValueOf(true));
+                    PlayerData.Save(PlayerPrefsKey.UNLOCKED_MAP, true);
                 }
             }        
         });
     }
-
-    private int IntValueOf(bool val) => val ? 1 : 0;
 
     private IEnumerator StartTyping(string message)
     {

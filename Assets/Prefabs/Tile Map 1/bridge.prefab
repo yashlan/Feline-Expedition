@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3455228004154188206}
   - component: {fileID: 7656548776642238655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bridge_Rail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

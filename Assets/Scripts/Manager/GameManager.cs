@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("UI")]
     public GameObject TextGameOver;
+    public GameObject MiniMap;
 
     [Header("Pause Menu")]
     [SerializeField]
@@ -91,12 +92,35 @@ public class GameManager : Singleton<GameManager>
             PlayerController.FreezePosition();
         }
 
+        if(PlayerData.IsMapUnlocked && 
+            _gameState == GameState.Playing &&
+            Input.GetKeyDown(OptionsManager.OpenMapKey))
+        {
+            MiniMap.SetActive(true);
+        }
+        else if(PlayerData.IsMapUnlocked && 
+            _gameState == GameState.Playing && 
+            Input.GetKeyUp(OptionsManager.OpenMapKey))
+        {
+            MiniMap.SetActive(false);
+        }
+
+
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+#endif
     }
 
     public static void ShowGameOverText()
     {
+        Instance.TextGameOver.SetActive(true);
+    }
+
+    public static void ShowGameOverText(string customText)
+    {
+        var text = Instance.TextGameOver.GetComponent<Text>();
+        text.text = customText;
         Instance.TextGameOver.SetActive(true);
     }
 

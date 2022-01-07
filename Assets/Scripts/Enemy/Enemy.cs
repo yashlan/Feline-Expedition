@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public enum EnemyType
 {
     GreenSlime, 
@@ -100,7 +102,7 @@ public class Enemy : MonoBehaviour
         if (enemyType == EnemyType.Swordman)       Setup(40,   5, 0,  5,  7, 1f,  15);
         if (enemyType == EnemyType.Shieldman)      Setup(40,   5, 0,  5,  7, 3f,  15);
         if (enemyType == EnemyType.Archer)         Setup(40,   0, 3,  0,  0, 2f,   5);
-        if (enemyType == EnemyType.CorrosionSlime) Setup(300,  5, 3,  0,  4, 3f,   200);
+        if (enemyType == EnemyType.CorrosionSlime) Setup(30,  5, 3,  0,  4, 3f,   200);
     }
 
     public float DistanceToPlayer() =>
@@ -296,7 +298,34 @@ public class Enemy : MonoBehaviour
 
     public void DeadEvent()
     {
+        if(enemyType == EnemyType.CorrosionSlime)
+        {
+            if(FindObjectsOfType<EnemyGreenSlime>().Length > 0)
+            {
+                foreach (var enemy in FindObjectsOfType<EnemyGreenSlime>())
+                {
+                    enemy.Dead();
+                }
+            }
+            StartCoroutine(IOnBossDead());
+            return;
+        }
+
         Destroy(gameObject);
+    }
+
+    IEnumerator IOnBossDead()
+    {
+        PlayerData.Delete(PlayerPrefsKey.LAST_SCENE);
+
+        PlayerController.Instance.Rigidbody.velocity = Vector2.zero;
+        PlayerController.FreezePosition();
+        PlayerController.Instance.enabled = false;
+        yield return new WaitForSeconds(2f);
+        PanelSlideUIController.Instance.FadeIn(
+            () => GameManager.ShowGameOverText("Thanks For Playing"), 0f);
+        yield return new WaitForSeconds(10f);
+        SceneManager.LoadScene("home");
     }
     #endregion
 }

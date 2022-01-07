@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2562888972661829612}
   - component: {fileID: 5829230968702963137}
   - component: {fileID: 9220260018811326788}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: mid boss bullet VFX sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

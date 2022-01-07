@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5316493565572158844}
   - component: {fileID: 4794043405585894027}
   - component: {fileID: 4794043405585894026}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fireball Player VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4861,7 +4861,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -3403423
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

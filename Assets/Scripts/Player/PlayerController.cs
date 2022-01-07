@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    [Header("Icon Mini Map")]
+    [SerializeField]
+    private GameObject playerIcon;
+
     [Header("Melee")]
     [SerializeField]
     private PlayerMelee _meleeAttack1;
@@ -136,6 +140,8 @@ public class PlayerController : Singleton<PlayerController>
     private bool _isJumping;
     [SerializeField]
     private bool _isShopping;
+    [SerializeField]
+    private bool _isRest;
 
     private BoxCollider2D _boxCollider;
     private CircleCollider2D _circleCollider;
@@ -177,6 +183,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsHurt => _isHurt;
     public bool IsDead => _isDead;
     public bool IsShopping { get => _isShopping; set => _isShopping = value; }
+    public bool IsRest { get => _isRest; set => _isRest = value; }
 
     #endregion
 
@@ -205,6 +212,8 @@ public class PlayerController : Singleton<PlayerController>
         {
             StartCoroutine(SetupOnNewGame(2f));
         }
+
+        playerIcon.transform.localPosition = Vector3.zero;
     }
 
     IEnumerator SetupOnNewGame(float timeToStop)
@@ -246,7 +255,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-        if (_isDead || IsTalking || IsShopping)
+        if (_isDead || _isTalking || _isShopping || _isRest)
             return;
 
         if (GameManager.GameState == GameState.Playing)
@@ -271,7 +280,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void FixedUpdate()
     {
-        if (_isDead || IsTalking || IsShopping)
+        if (_isDead || _isTalking || _isShopping || _isRest)
         {
             FreezePosition();
             return;

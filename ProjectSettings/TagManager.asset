@@ -22,8 +22,8 @@ TagManager:
   - Vase
   - Wall
   - Dead
-  - 
-  - 
+  - Minimap
+  - VFX
   - 
   - 
   - 
@@ -69,4 +69,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1175387119
+    locked: 0
+  - name: Mini Map
+    uniqueID: 1313514847
     locked: 0

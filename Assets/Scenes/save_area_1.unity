@@ -1262,7 +1262,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 12279
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3082,6 +3082,7 @@ MonoBehaviour:
   _gameState: 0
   sceneType: 3
   TextGameOver: {fileID: 5761799996954267172}
+  MiniMap: {fileID: 5761799996954267173}
   _panelPause: {fileID: 5761799996954267171}
 --- !u!4 &1264954895
 Transform:
@@ -5965,6 +5966,11 @@ GameObject:
 --- !u!1 &5761799996954267172 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4653287354455809845, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
+  m_PrefabInstance: {fileID: 5761799996954267170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5761799996954267173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3865964977928161355, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
   m_PrefabInstance: {fileID: 5761799996954267170}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6446031390499659294

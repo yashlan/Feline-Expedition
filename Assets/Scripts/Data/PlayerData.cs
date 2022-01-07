@@ -303,11 +303,22 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
     {
 #if UNITY_EDITOR
         Save(PlayerPrefsKey.COIN, 1000000);
+        Save(PlayerPrefsKey.UNLOCKED_MAP, true);
         //Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_2_point_1");
         //Save(PlayerPrefsKey.LAST_SCENE, "map_2");
 #endif
         Load();
     }
+
+    #region DELETE
+
+    public static void Delete(string prefsKey)
+    {
+        PlayerPrefs.DeleteKey(prefsKey);
+        Instance.Load();
+    }
+
+    #endregion
 
     #region LOAD
 

@@ -19,8 +19,9 @@ public class Campfire : MonoBehaviour
     {
         if (canHeal)
         {
-            if (Input.GetKeyDown(OptionsManager.InteractionKey) && !wasHeal)
+            if (Input.GetKeyDown(OptionsManager.InteractionKey) && !wasHeal && PlayerController.Instance.IsIdle())
             {
+                PlayerController.Instance.IsRest = true;
                 PanelSlideUIController.Instance.FadeIn(() => StartHeal(), true);
                 wasHeal = true;
             }
@@ -39,6 +40,7 @@ public class Campfire : MonoBehaviour
         SliderHealthPlayerUI.UpdateUI();
 
         wasHeal = false;
+        PlayerController.Instance.IsRest = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
