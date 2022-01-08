@@ -113,7 +113,6 @@ MonoBehaviour:
   enemyType: 3
   EnemyMelee: {fileID: 0}
   FacingRight: 1
-  useFirstPosition: 0
   isKnock: 0
   HealthPoint: 0
   Damage: 0
@@ -134,6 +133,9 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 576
+  IsBlocking: 0
+  IsShooting: 0
+  IsAttacking: 0
   Anim: {fileID: 0}
   Rigidbody: {fileID: 0}
   arrowPoint: {fileID: 1143056181479954427}
@@ -227,7 +229,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 5
 --- !u!61 &6322364775281696512
 BoxCollider2D:

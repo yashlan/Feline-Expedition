@@ -177,7 +177,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
     public bool IsSelfHeal { get => _isSelfHeal; set => _isSelfHeal = value; }
     public bool IsTalking { get => _isTalking; set => _isTalking = value; }
-    public bool IsDefend => _isDefend;
+    public bool IsDefend { get => _isDefend; set => _isDefend = value; }
     public bool FacingRight => _facingRight;
     public bool IsGrounded => _isGrounded;
     public bool IsHurt => _isHurt;
@@ -563,10 +563,17 @@ public class PlayerController : Singleton<PlayerController>
         if (!_isGrounded)
             _delaycanShowShield = Time.time + 0.15f;
 
-        if (Input.GetKey(OptionsManager.AttackThrowKey)
-            && IsIdle() && Time.time > _delaycanShowShield)
+        if(_isGrounded && _manaPoint > 0)
         {
-            StartCoroutine(ShowShield());
+            if (Input.GetKeyDown(OptionsManager.AttackThrowKey) && Time.time > _delaycanShowShield)
+            {
+                StartCoroutine(ShowShield());
+            }
+            else if (Input.GetKeyUp(OptionsManager.AttackThrowKey))
+            {
+                StopCoroutine(ShowShield());
+                _anim.SetInteger("ShieldCount", 0);
+            }
         }
     }
 
@@ -653,17 +660,9 @@ public class PlayerController : Singleton<PlayerController>
 
     private IEnumerator ShowShield()
     {
-        _isDefend = true;
-        _rb.constraints = RigidbodyConstraints2D.FreezeAll;
         _anim.SetInteger("ShieldCount", 1);
-        _manaPoint--;
         yield return new WaitForSeconds(0.5f);
         _anim.SetInteger("ShieldCount", 2);
-        yield return new WaitForSeconds(3f); //wait until mana habis
-        _anim.SetInteger("ShieldCount", 0);
-        _isDefend = false;
-        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        yield break;
     }
     #endregion
 
@@ -1006,7 +1005,7 @@ public class PlayerController : Singleton<PlayerController>
             return;
         }
 
-        _manaPoint -= 20;
+        _manaPoint -= 10;
         _healthPoint += 3;
         PlayerManaUI.UpdateUI();
         SliderHealthPlayerUI.UpdateUI();
@@ -1027,6 +1026,20 @@ public class PlayerController : Singleton<PlayerController>
     {
         _isHurt = false;
         _anim.SetBool("Hurt", _isHurt);
+    }
+
+    public void ShieldEvent()
+    {
+        if (_manaPoint <= 0)
+        {
+            _manaPoint = 0;
+            _anim.SetInteger("ShieldCount", 0);
+            PlayerManaUI.UpdateUI();
+            return;
+        }
+
+        _manaPoint -= 3;
+        PlayerManaUI.UpdateUI();
     }
     #endregion
 }

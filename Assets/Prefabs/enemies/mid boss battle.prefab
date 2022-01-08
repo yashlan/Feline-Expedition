@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8683826414439704406}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,9 +185,9 @@ GameObject:
   - component: {fileID: 1453624267403036025}
   - component: {fileID: 8319844922146957293}
   - component: {fileID: 362057294856107770}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: mid boss battle
-  m_TagString: Enemy
+  m_TagString: Boss Battle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +246,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   IsBlocking: 0
+  IsShooting: 0
+  IsAttacking: 0
   Anim: {fileID: 0}
   Rigidbody: {fileID: 0}
   bulletPoint: {fileID: 2358700977942325134}
@@ -339,7 +341,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!58 &362057294856107770
 CircleCollider2D:

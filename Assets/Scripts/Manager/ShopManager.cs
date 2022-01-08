@@ -40,11 +40,13 @@ public class ShopManager : MonoBehaviour
 
     void OnEnable()
     {
+        OptionsManager.ShowMouseCursor();
         PlayerController.Instance.IsShopping = true;
     }
 
     void OnDisable()
     {
+        OptionsManager.HideMouseCursor();
         PlayerController.Instance.IsShopping = false;
     }
 

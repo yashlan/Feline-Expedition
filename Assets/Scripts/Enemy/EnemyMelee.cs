@@ -61,6 +61,9 @@ public class EnemyMelee : MonoBehaviour
 
         CameraEffect.PlayShakeEffect();
 
+        if(_player.IsDefend)
+            return;
+
         _player.KnockBack(1000, transform.parent);
 
         GetDamageFrom(meleeType);

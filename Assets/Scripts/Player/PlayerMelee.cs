@@ -16,7 +16,8 @@ public class PlayerMelee : MonoBehaviour
     List<string> _tagList = new List<string>() 
     { 
         "Enemy", 
-        "Vase", 
+        "Vase",
+        "Boss Battle",
     };
 
     void Start()
@@ -48,7 +49,7 @@ public class PlayerMelee : MonoBehaviour
             if (enemy.IsDead)
                 return;
 
-            enemy.KnockBack(20);
+            enemy.KnockBack(100);
 
             enemy.HealthPoint -= (_player.DamageMelee - enemy.DamageReduction);
 

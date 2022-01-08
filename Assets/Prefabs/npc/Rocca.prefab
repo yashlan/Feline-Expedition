@@ -89,6 +89,108 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyType: 7
+--- !u!1 &963877525416316902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8082598883583144286}
+  - component: {fileID: 8868487072152093114}
+  - component: {fileID: 1693814666012531481}
+  m_Layer: 0
+  m_Name: warning info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8082598883583144286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963877525416316902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8.64, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7289743341874824014}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &8868487072152093114
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963877525416316902}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1234735947
+  m_SortingLayer: 5
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 34975bbc522a4014bb428364f0d695c4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 19.199999, y: 19.143751}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &1693814666012531481
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963877525416316902}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6da433fbee87fa84cb6879739317c1b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1822599410786698035
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +623,7 @@ GameObject:
   - component: {fileID: 7289743341874824015}
   - component: {fileID: 7289743341874824012}
   - component: {fileID: 119195579046894633}
+  - component: {fileID: 279912127307557049}
   m_Layer: 0
   m_Name: Rocca
   m_TagString: Untagged
@@ -541,6 +644,7 @@ Transform:
   m_Children:
   - {fileID: 8120650294833850075}
   - {fileID: 6188944959102551228}
+  - {fileID: 8082598883583144286}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -557,29 +661,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nPCType: 0
+  warningInfo: {fileID: 963877525416316902}
   canvasInfo: {fileID: 8683554011541687394}
   canvasDialog: {fileID: 8832919892583165722}
   next: {fileID: 6429978019493196363}
   textMsg: {fileID: 4886847406827056107}
   canTalking: 0
   index: 0
-  typeSpeed: 0.05
-  dialogueMessage:
-  - hello young adventure, how can i help you?
-  - are you the one who sending by guild?
-  - 'are you sure?
-
-    where are your party?'
-  - alone?! this is ridiculous
-  - "i don\u2019t know what the guild master think to send you alone"
-  - but i am sure, it must be a reason to that
-  - we talk again later, young adventure
-  - and . . .
-  - you have lack of defensive stuff
-  - i am afraid we can go further with that
-  - you can upgrade your belonging at the wolf guy over there
-  - after that, come back to me, and we talk
-  indexToDo: 0
   todoObject: {fileID: 0}
   npcClip: {fileID: 0}
 --- !u!95 &7289743341874824015
@@ -665,7 +753,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 9.578672, y: -0.23715925}
+  m_Offset: {x: -8.151844, y: -0.23715925}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -676,7 +764,33 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.0013084, y: 10.4743185}
+  m_Size: {x: 7.9057846, y: 10.4743185}
+  m_EdgeRadius: 0
+--- !u!61 &279912127307557049
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289743341874824013}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.532482, y: -0.23715925}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10, y: 10}
+    newSize: {x: 10, y: 10}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.9611206, y: 10.4743185}
   m_EdgeRadius: 0
 --- !u!1 &7462527750432937859
 GameObject:
@@ -775,7 +889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6188944959102551228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -972,7 +1086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 7.14, y: 9.07}
+  m_AnchoredPosition: {x: 0, y: 9.07}
   m_SizeDelta: {x: 2500, y: 961.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6113760148673371016

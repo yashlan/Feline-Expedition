@@ -19,12 +19,25 @@ public class NPCController : DialogueManager
 
     void Update()
     {
-        if (canTalking && PlayerController.Instance.IsIdle() && !PlayerController.Instance.FacingRight)
+        var playerPosX = PlayerController.Instance.transform.position.x;
+
+        if (canTalking && PlayerController.Instance.IsIdle())
         {
-            if (Input.GetKeyDown(OptionsManager.InteractionKey) && index == -1)
+            if(playerPosX > transform.position.x && !PlayerController.Instance.FacingRight)
             {
-                StartConversation();
-                AudioManager.PlaySfx(npcClip);
+                if (Input.GetKeyDown(OptionsManager.InteractionKey) && index == -1)
+                {
+                    StartConversation();
+                    AudioManager.PlaySfx(npcClip);
+                }
+            }
+            else if(playerPosX < transform.position.x && PlayerController.Instance.FacingRight)
+            {
+                if (Input.GetKeyDown(OptionsManager.InteractionKey) && index == -1)
+                {
+                    StartConversation();
+                    AudioManager.PlaySfx(npcClip);
+                }
             }
 
             if (Input.GetKeyDown(OptionsManager.InteractionKey) && index > -1 && next.activeSelf)
@@ -33,6 +46,8 @@ public class NPCController : DialogueManager
                 AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
             }
         }
+
+        UpdateWarningInfo();
     }
 
     float interval;

@@ -18,6 +18,7 @@ public class PlayerFireballMelee : MonoBehaviour
         "Vase",
         "Ground",
         "Wall",
+        "Boss Battle",
     };
 
     void Awake()

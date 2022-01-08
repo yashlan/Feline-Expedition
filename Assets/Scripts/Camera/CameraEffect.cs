@@ -62,7 +62,7 @@ public class CameraEffect : Singleton<CameraEffect>
     {
         while (virtualCamera.m_Lens.OrthographicSize > targetSize)
         {
-            virtualCamera.m_Lens.OrthographicSize -= 15 * Time.deltaTime;
+            virtualCamera.m_Lens.OrthographicSize -= 22.5f * Time.deltaTime;
             yield return null;
         }
 
@@ -78,7 +78,7 @@ public class CameraEffect : Singleton<CameraEffect>
     {
         while (virtualCamera.m_Lens.OrthographicSize < targetSize)
         {
-            virtualCamera.m_Lens.OrthographicSize += 15 * Time.deltaTime;
+            virtualCamera.m_Lens.OrthographicSize += 22.5f * Time.deltaTime;
             yield return null;
         }
 

@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     public NPCType nPCType;
 
     [Header("Component")]
+    public GameObject warningInfo;
     public GameObject canvasInfo;
     public GameObject canvasDialog;
     public GameObject next;
@@ -39,9 +40,12 @@ public class DialogueManager : MonoBehaviour
     string[] dialogueMessagesGwynn;
     string[] dialogueMessagesRocca;
 
+    SpriteRenderer spriteRenderer;
 
     void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         canvasDialog.SetActive(false);
         canvasInfo.SetActive(false);
         next.SetActive(false);
@@ -50,8 +54,44 @@ public class DialogueManager : MonoBehaviour
         SetupDialogueMessage();
 
         if (nPCType == NPCType.Gerrin) npcClip = AudioManager.Instance.NPCGerrinClip;
-        if (nPCType == NPCType.Gwynn)  npcClip = AudioManager.Instance.NPCGwynnClip;
-        if (nPCType == NPCType.Rocca)  npcClip = AudioManager.Instance.NPCRoccaClip;
+        if (nPCType == NPCType.Gwynn) npcClip = AudioManager.Instance.NPCGwynnClip;
+        if (nPCType == NPCType.Rocca) npcClip = AudioManager.Instance.NPCRoccaClip;
+    }
+
+    public void UpdateWarningInfo()
+    {
+        if (PlayerController.Instance.IsTalking || canTalking)
+        {
+            warningInfo.SetActive(false);
+            return;
+        }
+
+        if (GerrinTalkSession() == 1 && GwynnTalkSession() == 1 && RoccaTalkSession() == 1)
+        {
+            warningInfo.SetActive(nPCType == NPCType.Rocca);
+        }
+        else if (GerrinTalkSession() == 1 && GwynnTalkSession() == 2 && RoccaTalkSession() == 2)
+        {
+            warningInfo.SetActive(nPCType == NPCType.Gwynn);
+        }
+        else if (GerrinTalkSession() == 1 && GwynnTalkSession() == 3 && RoccaTalkSession() == 3)
+        {
+            warningInfo.SetActive(nPCType == NPCType.Rocca);
+        }
+        else if (GerrinTalkSession() == 2 && GwynnTalkSession() == 3 && RoccaTalkSession() == 4)
+        {
+            warningInfo.SetActive(nPCType == NPCType.Gerrin);
+        }
+        else if (GerrinTalkSession() == 2 && GwynnTalkSession() == 3 && RoccaTalkSession() == 4)
+        {
+            warningInfo.SetActive(nPCType == NPCType.Gerrin);
+        }
+        else if (GerrinTalkSession() == 3 && GwynnTalkSession() == 3 && RoccaTalkSession() == 5)
+        {
+            warningInfo.SetActive(nPCType == NPCType.Rocca);
+        }
+        else
+            warningInfo.SetActive(false);
     }
 
     private int GerrinTalkSession() => PlayerData.NpcGerrinTalkSession;
@@ -167,7 +207,7 @@ public class DialogueManager : MonoBehaviour
             listDialogueMessageRocca.Add(NPCDialogSession_4.ROCCA_DIALOGUE_4_1);
         }
 
-        if (RoccaTalkSession() == 5)
+        if (RoccaTalkSession() >= 5)
         {
             listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_0);
             listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_1);
@@ -185,6 +225,9 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConversation()
     {
+        var playerPosX = PlayerController.Instance.transform.position.x;
+        spriteRenderer.flipX = playerPosX > transform.position.x;
+
         textMsg.text = null;
 
         index++;
@@ -225,7 +268,7 @@ public class DialogueManager : MonoBehaviour
         {
             canvasDialog.SetActive(true);
 
-            if(nPCType == NPCType.Gerrin)
+            if (nPCType == NPCType.Gerrin)
                 StartCoroutine(StartTyping(dialogueMessagesGerrin[index]));
 
             if (nPCType == NPCType.Gwynn)
@@ -292,6 +335,8 @@ public class DialogueManager : MonoBehaviour
 
         CameraEffect.PlayZoomOut(25, (x) =>
         {
+            spriteRenderer.flipX = true;
+
             PlayerController.UnFreezePosition();
 
             if(nPCType == NPCType.Rocca)
@@ -307,6 +352,9 @@ public class DialogueManager : MonoBehaviour
                     SetNewCurrentSession(2, PlayerPrefsKey.GERRIN_TALK_SESSION);
                     SetNewCurrentSession(4, PlayerPrefsKey.ROCCA_TALK_SESSION);
                 }
+
+                if(RoccaTalkSession() == 5)
+                    SetNewCurrentSession(6, PlayerPrefsKey.ROCCA_TALK_SESSION);
             }
 
             if (nPCType == NPCType.Gwynn)

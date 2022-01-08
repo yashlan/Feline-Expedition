@@ -40,7 +40,6 @@ public class DebugGame : MonoBehaviour
 
     void SetDefault()
     {
-        cameraSlider.value = _camera.m_Lens.OrthographicSize;
 
         x_damp.value = 1;
         y_damp.value = 0;
@@ -65,8 +64,6 @@ public class DebugGame : MonoBehaviour
 
     void Update()
     {
-        _camera.m_Lens.OrthographicSize = cameraSlider.value;
-
         transposer.m_XDamping = x_damp.value;
         transposer.m_YDamping = y_damp.value;
 

@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - Dead Area
   - Finish Area
+  - Boss Battle
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Dead
   - Minimap
   - VFX
-  - 
+  - Boss Battle
   - 
   - 
   - 

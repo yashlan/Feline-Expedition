@@ -25,7 +25,7 @@ public class TransitionArea : MonoBehaviour
         {
             if (PlayerData.NpcGerrinTalkSession == 3 &&
                 PlayerData.NpcGwynnTalkSession  == 3 &&
-                PlayerData.NpcRoccaTalkSession  == 5)
+                PlayerData.NpcRoccaTalkSession  == 6)
             {
                 boxTransition.enabled = true;
             }

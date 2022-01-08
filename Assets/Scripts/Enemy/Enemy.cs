@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
         Anim = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
 
-        Rigidbody.gravityScale = 500;
+        //Rigidbody.gravityScale = 500;
     }
 
     private void Setup(
@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
         if (enemyType == EnemyType.Swordman)       Setup(40,   5, 0,  5,  7, 1f,  15);
         if (enemyType == EnemyType.Shieldman)      Setup(40,   5, 0,  5,  7, 3f,  15);
         if (enemyType == EnemyType.Archer)         Setup(40,   0, 3,  0,  0, 2f,   5);
-        if (enemyType == EnemyType.CorrosionSlime) Setup(30,  5, 3,  0,  4, 3f,   200);
+        if (enemyType == EnemyType.CorrosionSlime) Setup(300,  5, 3,  0,  4, 3f,   200);
     }
 
     public float DistanceToPlayer() =>

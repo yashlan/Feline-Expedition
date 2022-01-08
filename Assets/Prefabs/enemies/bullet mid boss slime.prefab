@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4606010240316402976}
   - component: {fileID: 9131464238753114240}
   - component: {fileID: 5910712577391804694}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: bullet mid boss slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,5 +156,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
