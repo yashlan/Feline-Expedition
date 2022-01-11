@@ -2,6 +2,7 @@ using DigitalRuby.RainMaker;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TransitionArea : MonoBehaviour
 {
@@ -10,8 +11,39 @@ public class TransitionArea : MonoBehaviour
 
     BoxCollider2D boxTransition;
 
+    [Header("Use Panel Before Transit")]
+    public bool usePanelConfirm;
+    public GameObject panelConfirm;
+    public Button button_yes;
+    public Button button_no;
+
+    void ButtonYesListener()
+    {
+        OptionsManager.HideMouseCursor();
+        panelConfirm.SetActive(false);
+        GameManager.ChangeGameState(GameState.HitTransitionArea);
+        AudioManager.StopSFX();
+        PanelSlideUIController.Instance.FadeIn(
+            () => Invoke(nameof(GotoNextDestination), 2f), false);
+        AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
+    }
+
+    void ButtonNoListener()
+    {
+        OptionsManager.HideMouseCursor();
+        PlayerController.UnFreezePosition();
+        panelConfirm.SetActive(false);
+        AudioManager.PlaySfx(AudioManager.Instance.ButtonEnterClip);
+    }
+
     void Start()
     {
+        if (usePanelConfirm)
+        {
+            button_yes.onClick.AddListener(ButtonYesListener);
+            button_no.onClick.AddListener(ButtonNoListener);
+        }
+
         if (GameManager.SceneType == SceneType.map_2)
         {
             boxTransition = GetComponent<BoxCollider2D>();
@@ -21,6 +53,9 @@ public class TransitionArea : MonoBehaviour
 
     void Update()
     {
+        if(usePanelConfirm)
+            PlayerController.Instance.IsTalking = panelConfirm.activeSelf;
+
         if (GameManager.SceneType == SceneType.map_2)
         {
             if (PlayerData.NpcGerrinTalkSession == 3 &&
@@ -34,6 +69,13 @@ public class TransitionArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (usePanelConfirm)
+        {
+            panelConfirm.SetActive(true);
+            OptionsManager.ShowMouseCursor();
+            return;
+        }
+
         if (collision.gameObject.tag == "Player")
         {
             GameManager.ChangeGameState(GameState.HitTransitionArea);

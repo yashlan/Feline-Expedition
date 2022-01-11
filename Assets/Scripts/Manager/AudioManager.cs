@@ -37,8 +37,14 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip Envi3LoremIpsumClip;
 
     [Header("SFX Player")]
+    public AudioClip PlayerHitEnemyClip;
     public AudioClip PlayerThrowClip;
-    public AudioClip PlayerBasicAttack1Clip;
+    public AudioClip PlayerMeleeBasicAttackClip;
+    public AudioClip PlayerMeleeSpearAttackClip;
+    public AudioClip PlayerDashClip;
+    public AudioClip PlayerJumpClip;
+    public AudioClip PlayerKnockClip;
+    public AudioClip PlayerFireballHitShieldClip;
     public AudioClip PlayerDeadClip;
 
     [Header("SFX NPC")]
@@ -46,11 +52,24 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip NPCGerrinClip;
     public AudioClip NPCGwynnClip;
 
-    [Header("SFX Enemy")]
-    public AudioClip EnemyDeadClip;
+    [Header("SFX Enemy Slime")]
+    public AudioClip EnemySlimeAttackMeleeClip;
+    public AudioClip EnemySlimeDeadClip;
 
-    [Header("SFX Boss Battle")]
-    public AudioClip BossBattleDeadClip;
+    [Header("SFX Enemy SwordMan Clip")]
+    public AudioClip EnemySwordManAttackMeleeClip;
+    public AudioClip EnemySwordManHitPlayerClip;
+    public AudioClip EnemySwordManDeadClip;
+
+    [Header("SFX Enemy ShieldMan Clip")]
+    public AudioClip EnemyShieldManAttackMeleeClip;
+    public AudioClip EnemyShieldManHitPlayerClip;
+    public AudioClip EnemyShieldManDeadClip;
+
+    [Header("SFX Mid Boss Battle")]
+    public AudioClip MidBossAttackMeleeClip;
+    public AudioClip MidBossAttackAirClip;
+    public AudioClip MidBossDeadClip;
 
 
     void Start()

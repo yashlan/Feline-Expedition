@@ -73,15 +73,15 @@ public class Enemy : MonoBehaviour
         Anim = GetComponent<Animator>();
         Rigidbody = GetComponent<Rigidbody2D>();
 
-        //Rigidbody.gravityScale = 500;
+        Rigidbody.gravityScale = 300;
     }
 
     private void Setup(
-        int healthPoint, 
-        int damage, 
-        int damageAir, 
-        int damageReduction, 
-        float speed, 
+        int healthPoint,
+        int damage,
+        int damageAir,
+        int damageReduction,
+        float speed,
         float coolDownAttack,
         int coinReward)
     {
@@ -98,11 +98,11 @@ public class Enemy : MonoBehaviour
 
     public void SetNewStats(EnemyType enemyType)
     {
-        if (enemyType == EnemyType.GreenSlime)     Setup(25,   5, 0,  0,  7, 0.7f, 5);
-        if (enemyType == EnemyType.Swordman)       Setup(40,   5, 0,  5,  7, 1f,  15);
-        if (enemyType == EnemyType.Shieldman)      Setup(40,   5, 0,  5,  7, 3f,  15);
-        if (enemyType == EnemyType.Archer)         Setup(40,   0, 3,  0,  0, 2f,   5);
-        if (enemyType == EnemyType.CorrosionSlime) Setup(300,  5, 3,  0,  4, 3f,   200);
+        if (enemyType == EnemyType.GreenSlime)     Setup(25,  3, 0, 0, 7, 0.7f, 5);
+        if (enemyType == EnemyType.Swordman)       Setup(40,  3, 0, 5, 7, 1f,  15);
+        if (enemyType == EnemyType.Shieldman)      Setup(40,  3, 0, 5, 7, 2f,  15);
+        if (enemyType == EnemyType.Archer)         Setup(40,  0, 3, 0, 0, 2f,   5);
+        if (enemyType == EnemyType.CorrosionSlime) Setup(300, 5, 3, 2, 4, 3f, 200);
     }
 
     public float DistanceToPlayer() =>
@@ -120,7 +120,10 @@ public class Enemy : MonoBehaviour
 
     public void Block(bool canBlock)
     {
-        if(canBlock)
+        if (isKnock || !hitGround)
+            return;
+
+        if (canBlock)
         {
             Anim.SetTrigger("Block");
         }
@@ -128,7 +131,10 @@ public class Enemy : MonoBehaviour
 
     public void Shoot(bool canShot)
     {
-        if(canShot && Time.time > delayShoot && !IsAttacking)
+        if (isKnock || !hitGround)
+            return;
+
+        if (canShot && Time.time > delayShoot && !IsAttacking)
         {
             Anim.SetTrigger("Shoot");
             delayShoot = Time.time + CoolDownAttack;
@@ -137,16 +143,13 @@ public class Enemy : MonoBehaviour
 
     public void Attack()
     {
-        if (!isKnock)
+        if (isKnock || !hitGround)
+            return;
+
+        if (Time.time > delayAttack && !IsShooting)
         {
-            if (hitGround)
-            {
-                if (Time.time > delayAttack && !IsShooting)
-                {
-                    Anim.SetTrigger("Attack");
-                    delayAttack = Time.time + CoolDownAttack;
-                }
-            }
+            Anim.SetTrigger("Attack");
+            delayAttack = Time.time + CoolDownAttack;
         }
     }
 
@@ -163,6 +166,9 @@ public class Enemy : MonoBehaviour
 
     public void MoveToTarget()
     {
+        if (isKnock || !hitGround)
+            return;
+
         if (enemyType != EnemyType.GreenSlime)
             Anim.SetFloat("Speed", Mathf.Abs(Rigidbody.velocity.x));
 
@@ -173,6 +179,9 @@ public class Enemy : MonoBehaviour
 
     public void MoveToFirstPosition()
     {
+        if (isKnock)
+            return;
+
         firstPos.y = transform.position.y;
         Rigidbody.velocity = new Vector2(transform.position.x < firstPos.x ? Speed : -Speed, 0);
         transform.LookAt(firstPos);
@@ -181,13 +190,22 @@ public class Enemy : MonoBehaviour
 
     public void StopMove()
     {
+        if (isKnock)
+            return;
+
         Rigidbody.velocity = Vector2.zero;
+
         if (enemyType != EnemyType.GreenSlime)
+        {
             Anim.SetFloat("Speed", 0);
+        }
     }
 
     public void HandleFacing()
     {
+        if (isKnock)
+            return;
+
         if (enemyType == EnemyType.Archer)
         {
             Flip();
@@ -223,13 +241,13 @@ public class Enemy : MonoBehaviour
     public void GroundCheck()
     {
         hitGround = Physics2D.Raycast(
-            GroundCheckPoint.position, 
+            GroundCheckPoint.position + (Vector3.down * GroundCastDistance), 
             Vector2.down, 
             GroundCastDistance, 
             GroundMask);
 
-        if (!hitGround) 
-            Speed = FacingRight ? -Speed : Speed;
+        if (!hitGround)
+            StopMove();
     }
 
     public void KnockBack(float force)
@@ -240,17 +258,25 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    int knockCount = 0;
+
     IEnumerator IKnockBack(float force)
     {
-        isKnock = true;
-        Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+        knockCount++;
 
-        Rigidbody.AddForce(
-            (_target.transform.position.x < transform.position.x ? 
-            Vector2.right : Vector2.left) * force,
-            ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.2f);
-        isKnock = false;
+        if(knockCount > 1)
+        {
+            knockCount = 0;
+            isKnock = true;
+            Rigidbody.velocity = new Vector2(Rigidbody.velocity.x, 0);
+
+            Rigidbody.AddForce(
+                (_target.transform.position.x < transform.position.x ?
+                Vector2.right : Vector2.left) * force,
+                ForceMode2D.Impulse);
+            yield return new WaitForSeconds(0.2f);
+            isKnock = false;
+        }
     }
 
     public void Dead()
@@ -266,9 +292,18 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        if (GetComponent<BoxCollider2D>() != null)
+            GetComponent<BoxCollider2D>().enabled = false;
+
+        if (GetComponent<CircleCollider2D>() != null)
+            GetComponent<CircleCollider2D>().enabled = false;
+
         gameObject.layer = LayerMask.NameToLayer("Dead");
         Rigidbody.bodyType = RigidbodyType2D.Static;
         Anim.SetTrigger("Dead");
+
+        if(enemyType == EnemyType.CorrosionSlime)
+            AudioManager.PlaySfx(AudioManager.Instance.MidBossDeadClip);
     }
 
     #region DEBUG
@@ -316,16 +351,23 @@ public class Enemy : MonoBehaviour
 
     IEnumerator IOnBossDead()
     {
+        yield return new WaitUntil(() => _target.IsIdle());
+
         PlayerData.Delete(PlayerPrefsKey.LAST_SCENE);
 
         PlayerController.Instance.Rigidbody.velocity = Vector2.zero;
         PlayerController.FreezePosition();
         PlayerController.Instance.enabled = false;
         yield return new WaitForSeconds(2f);
-        PanelSlideUIController.Instance.FadeIn(
-            () => GameManager.ShowGameOverText("Thanks For Playing"), 0f);
+        PanelSlideUIController.Instance.FadeIn(() => OnFadeIn(), 0f);
         yield return new WaitForSeconds(10f);
+        AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[0]);
         SceneManager.LoadScene("home");
+    }
+
+    void OnFadeIn()
+    {
+        GameManager.ShowGameOverText("Thanks For Playing");
     }
     #endregion
 }

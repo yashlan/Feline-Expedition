@@ -125,8 +125,6 @@ public class DialogueManager : MonoBehaviour
             listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_1);
             listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_2);
             listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_3);
-            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_4);
-            listDialogueMessageGerrin.Add(NPCDialogSession_2.GERRIN_DIALOGUE_2_5);
         }
 
         if(GerrinTalkSession() == 3)
@@ -173,9 +171,6 @@ public class DialogueManager : MonoBehaviour
             listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_6);
             listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_7);
             listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_8);
-            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_9);
-            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_10);
-            listDialogueMessageRocca.Add(NPCDialogSession_1.ROCCA_DIALOGUE_1_11);
         }
 
         if (RoccaTalkSession() == 2)
@@ -196,9 +191,6 @@ public class DialogueManager : MonoBehaviour
             listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_9);
             listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_10);
             listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_11);
-            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_12);
-            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_13);
-            listDialogueMessageRocca.Add(NPCDialogSession_3.ROCCA_DIALOGUE_3_14);
         }
 
         if (RoccaTalkSession() == 4)
@@ -213,7 +205,6 @@ public class DialogueManager : MonoBehaviour
             listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_1);
             listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_2);
             listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_3);
-            listDialogueMessageRocca.Add(NPCDialogSession_5.ROCCA_DIALOGUE_5_4);
         }
 
         #endregion / Rocca

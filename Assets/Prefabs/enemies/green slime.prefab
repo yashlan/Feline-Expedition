@@ -63,13 +63,13 @@ MonoBehaviour:
   CoinReward: 0
   IsDead: 0
   attackPoint: {fileID: 189008324588015779}
-  attackRange: 4
+  attackRange: 5
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  AttackRadius: 15
+  AttackRadius: 20
   GroundCheckPoint: {fileID: 6952478867164539294}
-  GroundCastDistance: 4
+  GroundCastDistance: 3
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -148,7 +148,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: bb95944b159959f479f660e36360500f, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &349801497952882814
 Animator:

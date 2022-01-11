@@ -1,24 +1,21 @@
 
 public static class NPCDialogSession_3
 {
-    public const string GERRIN_DIALOGUE_3_0 = "go away, i am busy";
+    public const string GERRIN_DIALOGUE_3_0 = "Go away, I’m busy.";
 
     public const string GWYNN_DIALOGUE_3_0 = "welcome to my shop, can i help you?";
     public const string GWYNN_DIALOGUE_3_1 = "thanks for your patronage";
 
-    public const string ROCCA_DIALOGUE_3_0 = "well done, young adventure";
-    public const string ROCCA_DIALOGUE_3_1 = "even you not look different, but at least, you know where you can buy something what you need";
-    public const string ROCCA_DIALOGUE_3_2 = "let’s we proceed our conversation before";
-    public const string ROCCA_DIALOGUE_3_3 = "we have a problem here, and that’s why i send letter to guild master";
-    public const string ROCCA_DIALOGUE_3_4 = "we need powerful party to clearing our path here";
-    public const string ROCCA_DIALOGUE_3_5 = "but it’s shameful that he just send you to defeated that monster";
-    public const string ROCCA_DIALOGUE_3_6 = "i already tell him what monster we dealing with";
-    public const string ROCCA_DIALOGUE_3_7 = "I know, this sounds weird since we're only dealing with a slime";
-    public const string ROCCA_DIALOGUE_3_8 = "but that’s not just a normal slime";
-    public const string ROCCA_DIALOGUE_3_9 = "i think that slime took negative mana flow from a corpse that lying everywhere";
-    public const string ROCCA_DIALOGUE_3_10 = "and it make that slime really stronger,";
-    public const string ROCCA_DIALOGUE_3_11 = "but i trust guild master instinct, that he send you to defeated it";
-    public const string ROCCA_DIALOGUE_3_12 = "so, i will show you where that slime is but, ";
-    public const string ROCCA_DIALOGUE_3_13 = "you need talk to snake over there, and he will give you a map";
-    public const string ROCCA_DIALOGUE_3_14 = "after that, you can comeback again, and we continue talking";
+    public const string ROCCA_DIALOGUE_3_0 = "Well done, young adventurer.";
+    public const string ROCCA_DIALOGUE_3_1 = "You got what you need?\nGreat!";
+    public const string ROCCA_DIALOGUE_3_2 = "As I was saying, we are having a bit of a problem here";
+    public const string ROCCA_DIALOGUE_3_3 = "and that’s why I sent a letter to guild master requesting support to clear the path.";
+    public const string ROCCA_DIALOGUE_3_4 = "but it’s weird that he only sent you to help us...";
+    public const string ROCCA_DIALOGUE_3_5 = "I’ve already told him what kind of monster we are dealing with.";
+    public const string ROCCA_DIALOGUE_3_6 = "Just to give you some clarity, we're dealing with a special kind of slime,";
+    public const string ROCCA_DIALOGUE_3_7 = "I believe it took negative mana flows from corpses inside the ruins which made it far stronger.";
+    public const string ROCCA_DIALOGUE_3_8 = "Well, seeing that Guild Master trusted you, I’m sure he knows what he’s doing.";
+    public const string ROCCA_DIALOGUE_3_9 = "I’ll show you the entrance to the ruins, but before that,";
+    public const string ROCCA_DIALOGUE_3_10 = "ask that snake over there for a map";
+    public const string ROCCA_DIALOGUE_3_11 = "after that, we’ll continue our talk.";
 }

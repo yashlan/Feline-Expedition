@@ -516,6 +516,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 _isDashing = true;
 
+                AudioManager.PlaySfx(AudioManager.Instance.PlayerDashClip);
+
                 _delayDash = Time.time + _coolDownDash;
             }
             else

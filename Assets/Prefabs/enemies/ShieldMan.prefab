@@ -97,7 +97,7 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  AttackRadius: 20
+  AttackRadius: 30
   GroundCheckPoint: {fileID: 8261598810602169290}
   GroundCastDistance: 3
   GroundMask:
@@ -197,7 +197,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &8261598809857034505
 BoxCollider2D:

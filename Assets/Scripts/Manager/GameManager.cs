@@ -73,7 +73,7 @@ public class GameManager : Singleton<GameManager>
 
         if (sceneType == SceneType.mid_boss)
             ChangeGameState(GameState.Playing,
-                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[3]));
+                () => AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[4]));
 
         if (sceneType == SceneType.save_area_1)
             ChangeGameState(GameState.Playing,

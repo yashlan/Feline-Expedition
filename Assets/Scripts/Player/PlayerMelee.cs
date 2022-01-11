@@ -44,12 +44,15 @@ public class PlayerMelee : MonoBehaviour
 
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
+
+            AudioManager.PlaySfx(AudioManager.Instance.PlayerHitEnemyClip);
+
             var enemy = collision.gameObject.GetComponent<Enemy>();
             
             if (enemy.IsDead)
                 return;
 
-            enemy.KnockBack(100);
+            enemy.KnockBack(30);
 
             enemy.HealthPoint -= (_player.DamageMelee - enemy.DamageReduction);
 
@@ -83,7 +86,11 @@ public class PlayerMelee : MonoBehaviour
 
     private IEnumerator Melee()
     {
-        AudioManager.PlaySfx(AudioManager.Instance.PlayerBasicAttack1Clip);
+        if (PlayerData.IsWaterSpearUsed())
+            AudioManager.PlaySfx(AudioManager.Instance.PlayerMeleeSpearAttackClip);
+        else
+            AudioManager.PlaySfx(AudioManager.Instance.PlayerMeleeBasicAttackClip);
+
         _polygonCollider.enabled = true;
         yield return new WaitForSeconds(0.025f);
         _polygonCollider.enabled = false;

@@ -12,7 +12,7 @@ public class EnemyGreenSlime : Enemy
         if (_target.IsDead || IsDead)
             return;
 
-        if(GameManager.GameState == GameState.Playing)
+        if (GameManager.GameState == GameState.Playing)
         {
             GroundCheck();
             CheckHitPlayer((hit) => {

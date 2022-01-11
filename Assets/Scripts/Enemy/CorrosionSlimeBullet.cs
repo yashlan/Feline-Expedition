@@ -15,6 +15,12 @@ public class CorrosionSlimeBullet : MonoBehaviour
         var enemy = slime.GetComponent<Enemy>();
         enemy.AttackRadius = 100;
 
+        Invoke(nameof(Destroy), 0.05f);
+
+    }
+
+    private void Destroy()
+    {
         Destroy(gameObject);
     }
 }

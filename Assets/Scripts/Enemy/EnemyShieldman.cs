@@ -26,7 +26,8 @@ public class EnemyShieldman : Enemy
                 {
                     if (DistanceToPlayer() <= AttackRadius)
                     {
-                        Block(Input.GetKeyDown(OptionsManager.AttackThrowKey));
+                        Block(FindObjectOfType<PlayerFireballMelee>() != null);
+
                         MoveToTarget();
                     }
                     else

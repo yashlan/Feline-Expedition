@@ -31,7 +31,6 @@ public class EnemyArcher : Enemy
                 }
 
             });
-            //MovementSkeleton();
         }
     }
 

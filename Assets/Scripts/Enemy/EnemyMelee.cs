@@ -64,7 +64,11 @@ public class EnemyMelee : MonoBehaviour
         if(_player.IsDefend)
             return;
 
-        _player.KnockBack(1000, transform.parent);
+        if(meleeType == MeleeType.SwordMan)
+            AudioManager.PlaySfx(AudioManager.Instance.EnemySwordManHitPlayerClip);
+
+
+        _player.KnockBack(1200, transform.parent);
 
         GetDamageFrom(meleeType);
 
@@ -95,6 +99,16 @@ public class EnemyMelee : MonoBehaviour
 
     private IEnumerator Melee()
     {
+        if (meleeType == MeleeType.MidBossSlime)
+            AudioManager.PlaySfx(AudioManager.Instance.MidBossAttackMeleeClip);
+
+        if(meleeType == MeleeType.GreenSlime)
+            AudioManager.PlaySfx(null);
+
+        if (meleeType == MeleeType.SwordMan)
+            AudioManager.PlaySfx(AudioManager.Instance.EnemySwordManAttackMeleeClip);
+
+
         _polygonCollider.enabled = true;
         yield return new WaitForSeconds(0.025f);
         _polygonCollider.enabled = false;

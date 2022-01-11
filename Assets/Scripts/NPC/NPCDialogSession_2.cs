@@ -1,19 +1,17 @@
 public static class NPCDialogSession_2
 {
-    public const string GWYNN_DIALOGUE_2_0 = "we have not open yet, please come back soon";
-    public const string GWYNN_DIALOGUE_2_1 = "what? it’s Rocca said that?";
-    public const string GWYNN_DIALOGUE_2_2 = "i don’t think you lack of defensive stuff,";
-    public const string GWYNN_DIALOGUE_2_3 = "with such powerful mana flow on you, it’s weird she said something like that";
-    public const string GWYNN_DIALOGUE_2_4 = "well, she not a mage either";
-    public const string GWYNN_DIALOGUE_2_5 = "but if you want to buy some stuff, you can come here";
+    public const string GWYNN_DIALOGUE_2_0 = "We’re not open yet, come again later.";
+    public const string GWYNN_DIALOGUE_2_1 = "Rocca said that?";
+    public const string GWYNN_DIALOGUE_2_2 = "I don’t see you lacking defensive gears...";
+    public const string GWYNN_DIALOGUE_2_3 = "With such a powerful mana flow within you, it’s weird she said something like that.";
+    public const string GWYNN_DIALOGUE_2_4 = "Well, it’s not like she can see mana flow anyway...";
+    public const string GWYNN_DIALOGUE_2_5 = "That being said, I got some good stuffs, care to take a look?";
 
-    public const string GERRIN_DIALOGUE_2_0 = "go away, i am busy";
-    public const string GERRIN_DIALOGUE_2_1 = "what? you need a map?";
-    public const string GERRIN_DIALOGUE_2_2 = "that mouse said that?";
-    public const string GERRIN_DIALOGUE_2_3 = "alright, here";
-    public const string GERRIN_DIALOGUE_2_4 = "and if you need more map, just say so";
-    public const string GERRIN_DIALOGUE_2_5 = "now, go away";
+    public const string GERRIN_DIALOGUE_2_0 = "Go away, I’m busy.";
+    public const string GERRIN_DIALOGUE_2_1 = "A map? The mouse told you to ask me?";
+    public const string GERRIN_DIALOGUE_2_2 = "Fine, here.\nIf you need other maps, just ask.";
+    public const string GERRIN_DIALOGUE_2_3 = "Now, go away";
 
-    public const string ROCCA_DIALOGUE_2_0 = "you can upgrade your belonging at the wolf guy over there";
-    public const string ROCCA_DIALOGUE_2_1 = "after that, come back to me, and we talk";
+    public const string ROCCA_DIALOGUE_2_0 = "See that wolf guy over there? He should be able to help you with that.";
+    public const string ROCCA_DIALOGUE_2_1 = "After that, return to me, I have something else to say to you";
 }

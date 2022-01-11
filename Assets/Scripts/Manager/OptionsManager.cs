@@ -44,6 +44,7 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
     void Start()
     {
         SetupCursor();
+        ShowMouseCursor();
 
         if (IsKeyCodeEmpty())
             SetDefaultButtonInput();
@@ -186,6 +187,7 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
     {
         Cursor.SetCursor(Instance.cursorTexture, Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public static void HideMouseCursor()
