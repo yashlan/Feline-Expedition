@@ -95,7 +95,10 @@ public class EnemyBulletMelee : MonoBehaviour
 
         CameraEffect.PlayShakeEffect();
 
-        player.KnockBack(1000, transform);
+        if (player.IsDefend)
+            return;
+
+        player.KnockBack(1200, transform);
 
         player.HealthPoint -= (_damage - player.DamageReduction);
 

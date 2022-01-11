@@ -1,112 +1,43 @@
 fileFormatVersion: 2
-guid: 50c66aa56d0dd9f459c72c5ec8c69236
+guid: a7fa06054f3de60479ea2a229ed2497e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5171221398253030913
-    second: stones_0
+      213: 7196633015380184589
+    second: cutting machine_0
   - first:
-      213: -5265537426725716387
-    second: stones_1
+      213: 4443808743523287906
+    second: cutting machine_1
   - first:
-      213: -1842656057284236593
-    second: stones_2
+      213: 1142497808676952374
+    second: cutting machine_2
   - first:
-      213: -5748754869296003714
-    second: stones_3
+      213: 8178521157450254883
+    second: cutting machine_3
   - first:
-      213: 1759472493345842592
-    second: stones_4
+      213: -7496964570622104827
+    second: cutting machine_4
   - first:
-      213: -1866489290812987814
-    second: stones_5
+      213: 5649599449007266664
+    second: cutting machine_5
   - first:
-      213: -4567193357162841080
-    second: stones_6
+      213: -7140192296552522079
+    second: cutting machine_6
   - first:
-      213: -4667342283382957069
-    second: stones_7
+      213: -3899856808925541004
+    second: cutting machine_7
   - first:
-      213: 4982842197649876010
-    second: stones_8
+      213: -668264645763318807
+    second: cutting machine_8
   - first:
-      213: 4016805582573421726
-    second: stones_9
+      213: -3702679078399978773
+    second: cutting machine_9
   - first:
-      213: 2067550640699417137
-    second: stones_10
+      213: -4686286096815500027
+    second: cutting machine_10
   - first:
-      213: 8249627225641629018
-    second: stones_11
-  - first:
-      213: 2256659226196838043
-    second: stones_12
-  - first:
-      213: 598818209342530962
-    second: stones_13
-  - first:
-      213: -1055762614865739930
-    second: stones_14
-  - first:
-      213: 1674111244185139168
-    second: stones_15
-  - first:
-      213: 8888146376713121883
-    second: stones_16
-  - first:
-      213: 8274919100929652024
-    second: stones_17
-  - first:
-      213: 9035086446719275226
-    second: stones_18
-  - first:
-      213: 6226717378297561436
-    second: stones_19
-  - first:
-      213: -8330344343631740023
-    second: stones_20
-  - first:
-      213: 3601635184245045296
-    second: stones_21
-  - first:
-      213: 3112345278833141524
-    second: stones_22
-  - first:
-      213: -4474607642472369304
-    second: stones_23
-  - first:
-      213: -4710933632339556999
-    second: stones_24
-  - first:
-      213: -4866632304754344818
-    second: stones_25
-  - first:
-      213: -8574887586371909438
-    second: stones_26
-  - first:
-      213: -1919014529090410081
-    second: stones_27
-  - first:
-      213: 6475436475940128472
-    second: stones_28
-  - first:
-      213: 4022064010244821187
-    second: stones_29
-  - first:
-      213: -6400545779109300391
-    second: stones_30
-  - first:
-      213: -8488554034709390104
-    second: stones_31
-  - first:
-      213: -6383313889902166344
-    second: stones_32
-  - first:
-      213: -1915418379744914086
-    second: stones_33
-  - first:
-      213: 6177795935806130273
-    second: stones_34
+      213: -1237444248091236958
+    second: cutting machine_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -208,211 +139,253 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stones_0
-      rect:
-        serializedVersion: 2
-        x: 372
-        y: 1167
-        width: 1109
-        height: 300
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 10e45c1a67ed3c740800000000000000
-      internalID: 5171221398253030913
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_4
-      rect:
-        serializedVersion: 2
-        x: 1903
-        y: 1336
-        width: 245
-        height: 92
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a523fd19e6ea6810800000000000000
-      internalID: 1759472493345842592
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_14
-      rect:
-        serializedVersion: 2
-        x: 2200
-        y: 864
-        width: 814
-        height: 195
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66f3ac5de7d2951f0800000000000000
-      internalID: -1055762614865739930
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_21
-      rect:
-        serializedVersion: 2
-        x: 298
-        y: 437
-        width: 467
-        height: 92
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03879772e149bf130800000000000000
-      internalID: 3601635184245045296
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_22
-      rect:
-        serializedVersion: 2
-        x: 1247
-        y: 423
-        width: 278
-        height: 79
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 417a63b8a85413b20800000000000000
-      internalID: 3112345278833141524
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_27
-      rect:
-        serializedVersion: 2
-        x: 1527
-        y: 138
-        width: 389
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f99a0c2047a4e55e0800000000000000
-      internalID: -1919014529090410081
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_28
-      rect:
-        serializedVersion: 2
-        x: 2176
-        y: 142
-        width: 234
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d6c402aa2f5dd950800000000000000
-      internalID: 6475436475940128472
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_29
-      rect:
-        serializedVersion: 2
-        x: 2433
-        y: 137
-        width: 437
-        height: 98
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c0968258ed31d730800000000000000
-      internalID: 4022064010244821187
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_32
-      rect:
-        serializedVersion: 2
-        x: 465
-        y: 134
-        width: 259
-        height: 67
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8be709e56d9e967a0800000000000000
-      internalID: -6383313889902166344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: stones_34
+      name: cutting machine_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 340
-        height: 84
+        width: 376.58334
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16883981ca0fbb550800000000000000
-      internalID: 6177795935806130273
+      spriteID: d0e859c19939fd360800000000000000
+      internalID: 7196633015380184589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_1
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2630b7702849bad30800000000000000
+      internalID: 4443808743523287906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_2
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6391ada24b7fadf00800000000000000
+      internalID: 1142497808676952374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_3
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32ac6d939a1ff7170800000000000000
+      internalID: 8178521157450254883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_4
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50b6162917e65f790800000000000000
+      internalID: -7496964570622104827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_5
+      rect:
+        serializedVersion: 2
+        x: 1880
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86b125914c8676e40800000000000000
+      internalID: 5649599449007266664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_6
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ae9108cfe0f8ec90800000000000000
+      internalID: -7140192296552522079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_7
+      rect:
+        serializedVersion: 2
+        x: 2632
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47dca1505ece0e9c0800000000000000
+      internalID: -3899856808925541004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_8
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb335568d8d9b6f0800000000000000
+      internalID: -668264645763318807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_9
+      rect:
+        serializedVersion: 2
+        x: 3384
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be2d2beeef07d9cc0800000000000000
+      internalID: -3702679078399978773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_10
+      rect:
+        serializedVersion: 2
+        x: 3760
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 505d57bbf97f6feb0800000000000000
+      internalID: -4686286096815500027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cutting machine_11
+      rect:
+        serializedVersion: 2
+        x: 4136
+        y: 0
+        width: 376.58334
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a5eb2b3307b3dee0800000000000000
+      internalID: -1237444248091236958
       vertices: []
       indices: 
       edges: []

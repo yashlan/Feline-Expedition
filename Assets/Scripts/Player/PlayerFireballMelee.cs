@@ -35,6 +35,12 @@ public class PlayerFireballMelee : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            Instantiate(_fireballEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
         var layer = collision.gameObject.layer;
 
         foreach (var layerName in _layerList)

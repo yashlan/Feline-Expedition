@@ -284,8 +284,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     #endregion
 
-    public static bool IsInvincibleShieldUsed() => IsInvincibleShieldWasUnlocked && IsInvincibleShieldEquip;
-    public static bool IsWaterSpearUsed() => IsWaterSpearWasUnlocked && IsWaterSpearEquip;
+    public static bool IsInvincibleShieldUsed() => IsInvincibleShieldWasUnlocked /*&& IsInvincibleShieldEquip*/;
+    public static bool IsWaterSpearUsed() => IsWaterSpearWasUnlocked /*&& IsWaterSpearEquip*/;
 
 
     #region DEFAULT STATS
@@ -305,7 +305,7 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         Save(PlayerPrefsKey.COIN, 1000000);
         Save(PlayerPrefsKey.UNLOCKED_MAP, true);
         //Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_2_point_1");
-        //Save(PlayerPrefsKey.LAST_SCENE, "map_2");
+        Save(PlayerPrefsKey.LAST_SCENE, "map_3_3");
 #endif
         Load();
     }
@@ -324,6 +324,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     private void Load()
     {
+        _isWaterSpearWasUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.WATER_SPEAR, 0));
+        _isInvincibleShieldWasUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.INVINCIBLE_SHIELD, 0));
         _isMapUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.UNLOCKED_MAP, 0));
 
         #region NPC

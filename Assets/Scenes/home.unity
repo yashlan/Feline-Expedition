@@ -1934,8 +1934,7 @@ MonoBehaviour:
   EnviThunderClip: {fileID: 8300000, guid: 0afd185b9304c1b4fbe757fe14c4718b, type: 3}
   EnviBrigdeClip: {fileID: 8300000, guid: bbba4d713d406fd49852c4f6483e7dcd, type: 3}
   EnviLeverBrigdeClip: {fileID: 8300000, guid: c29b3541bea40004884b90c4f2feb965, type: 3}
-  Envi2LoremIpsumClip: {fileID: 0}
-  Envi3LoremIpsumClip: {fileID: 0}
+  SawClip: {fileID: 0}
   PlayerHitEnemyClip: {fileID: 8300000, guid: 8a8ffcd60cf35dc4498931c4676f0604, type: 3}
   PlayerThrowClip: {fileID: 8300000, guid: b02184156f325714c8b85f7193952533, type: 3}
   PlayerMeleeBasicAttackClip: {fileID: 8300000, guid: e5bf640bc6986194fabbd303fc4acf1a, type: 3}

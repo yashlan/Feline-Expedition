@@ -148,27 +148,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pillar_0
-      rect:
-        serializedVersion: 2
-        x: 1235
-        y: 1589
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4d317205cbee3b30800000000000000
-      internalID: 4269108728175869260
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: pillar_1
       rect:
         serializedVersion: 2
@@ -177,7 +156,7 @@ TextureImporter:
         width: 183
         height: 408
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -185,69 +164,6 @@ TextureImporter:
       bones: []
       spriteID: 33257695d616ad4c0800000000000000
       internalID: -4261986975073480141
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_2
-      rect:
-        serializedVersion: 2
-        x: 1236
-        y: 1572
-        width: 19
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cda95dfa1b9a126f0800000000000000
-      internalID: -711100685523510564
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_3
-      rect:
-        serializedVersion: 2
-        x: 1067
-        y: 1163
-        width: 28
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef5e3937aca6498b0800000000000000
-      internalID: -5146371056422623746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_4
-      rect:
-        serializedVersion: 2
-        x: 1115
-        y: 1168
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e67919b4ea45ff790800000000000000
-      internalID: -7494178147352340626
       vertices: []
       indices: 
       edges: []
@@ -261,7 +177,7 @@ TextureImporter:
         width: 288
         height: 591
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -282,7 +198,7 @@ TextureImporter:
         width: 334
         height: 584
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -303,7 +219,7 @@ TextureImporter:
         width: 235
         height: 808
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -311,90 +227,6 @@ TextureImporter:
       bones: []
       spriteID: 7c6c95806bd500cf0800000000000000
       internalID: -288127339746179385
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_8
-      rect:
-        serializedVersion: 2
-        x: 2478
-        y: 802
-        width: 13
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3a2b1215c2eecbe00800000000000000
-      internalID: 1061985486259729059
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_9
-      rect:
-        serializedVersion: 2
-        x: 1450
-        y: 253
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a88138cf4cdd72a90800000000000000
-      internalID: -7338653229657155446
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_10
-      rect:
-        serializedVersion: 2
-        x: 1458
-        y: 249
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 125c6c9d6bdcc0e60800000000000000
-      internalID: 7929939229114025249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_11
-      rect:
-        serializedVersion: 2
-        x: 1436
-        y: 229
-        width: 11
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d96aa599234558c0800000000000000
-      internalID: -4011226047219865135
       vertices: []
       indices: 
       edges: []
@@ -408,7 +240,7 @@ TextureImporter:
         width: 556
         height: 157
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -416,27 +248,6 @@ TextureImporter:
       bones: []
       spriteID: 3ff89f40aefa312f0800000000000000
       internalID: -1003264872332816397
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pillar_13
-      rect:
-        serializedVersion: 2
-        x: 1461
-        y: 216
-        width: 5
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2937c072eafa4efb0800000000000000
-      internalID: -4619374155260988526
       vertices: []
       indices: 
       edges: []
@@ -450,7 +261,7 @@ TextureImporter:
         width: 8
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

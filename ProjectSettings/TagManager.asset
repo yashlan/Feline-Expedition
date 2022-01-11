@@ -10,6 +10,7 @@ TagManager:
   - Dead Area
   - Finish Area
   - Boss Battle
+  - Obstacle
   layers:
   - Default
   - TransparentFX

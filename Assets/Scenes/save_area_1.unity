@@ -4724,7 +4724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c410d454106eaa64db405bfd4a32d729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckPointId: map_save_area_1_point_1
+  CheckPointId: save_area_1_point_1
 --- !u!1 &1852460025
 GameObject:
   m_ObjectHideFlags: 0

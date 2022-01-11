@@ -25,16 +25,13 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip ButtonEnterClip;
     public AudioClip TypingClip;
 
-    [Header("SFX Environment Map 1")]
+    [Header("SFX Environment")]
     public AudioClip EnviThunderClip;
     public AudioClip EnviBrigdeClip;
     public AudioClip EnviLeverBrigdeClip;
 
-    [Header("SFX Environment Map 2")]
-    public AudioClip Envi2LoremIpsumClip;
-
-    [Header("SFX Environment Map 3")]
-    public AudioClip Envi3LoremIpsumClip;
+    [Header("SFX Obstacle")]
+    public AudioClip SawClip;
 
     [Header("SFX Player")]
     public AudioClip PlayerHitEnemyClip;

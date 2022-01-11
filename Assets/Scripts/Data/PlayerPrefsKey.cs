@@ -32,6 +32,10 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     public const string DAMAGE_MAGIC     = "DAMAGE_MAGIC";
     public const string DAMAGE_REDUCTION = "DAMAGE_REDUCTION";
     public const string MANA_REGEN       = "MANA_REGEN";
+
+    //unlocked
+    public const string WATER_SPEAR       = "WATER_SPEAR";
+    public const string INVINCIBLE_SHIELD = "INVINCIBLE_SHIELD";
     #endregion
 
     #region PLAYER STATS DATA EXTRA
