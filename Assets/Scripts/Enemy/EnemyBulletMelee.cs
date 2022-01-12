@@ -20,8 +20,11 @@ public class EnemyBulletMelee : MonoBehaviour
     public float _speed = 50;
     Rigidbody2D _rb;
 
-    EnemyArcher archer;
-    BossCorrosionSlime midBoss;
+    [HideInInspector]
+    public EnemyArcher archer;
+
+    [HideInInspector]
+    public BossCorrosionSlime midBoss;
 
     PlayerController player = PlayerController.Instance;
 
@@ -36,18 +39,6 @@ public class EnemyBulletMelee : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-
-        if(_bulletType == BulletType.Archer)
-        {
-            archer = FindObjectOfType<EnemyArcher>();
-            _damage = archer.DamageAir;
-        }
-
-        if(_bulletType == BulletType.Mid_Boss)
-        {
-            midBoss = FindObjectOfType<BossCorrosionSlime>();
-            _damage = midBoss.DamageAir;
-        }
     }
 
     void Start()
@@ -98,7 +89,7 @@ public class EnemyBulletMelee : MonoBehaviour
         if (player.IsDefend)
             return;
 
-        player.KnockBack(1200, transform);
+        player.KnockBack(1000, transform);
 
         player.HealthPoint -= (_damage - player.DamageReduction);
 

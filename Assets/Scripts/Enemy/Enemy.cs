@@ -195,7 +195,7 @@ public class Enemy : MonoBehaviour
 
         Rigidbody.velocity = Vector2.zero;
 
-        if (enemyType != EnemyType.GreenSlime)
+        if (enemyType != EnemyType.GreenSlime || enemyType != EnemyType.Archer)
         {
             Anim.SetFloat("Speed", 0);
         }

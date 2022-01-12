@@ -36,6 +36,10 @@ public class PlayerPrefsKey : SingletonDontDestroy<PlayerPrefsKey>
     //unlocked
     public const string WATER_SPEAR       = "WATER_SPEAR";
     public const string INVINCIBLE_SHIELD = "INVINCIBLE_SHIELD";
+
+    //use
+    public const string WATER_SPEAR_EQUIP       = "WATER_SPEAR_EQUIP";
+    public const string INVINCIBLE_SHIELD_EQUIP = "INVINCIBLE_SHIELD_EQUIP";
     #endregion
 
     #region PLAYER STATS DATA EXTRA

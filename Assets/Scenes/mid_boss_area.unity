@@ -1690,6 +1690,7 @@ MonoBehaviour:
   usePanelConfirm: 0
   panelConfirm: {fileID: 0}
   button_yes: {fileID: 0}
+  button_no: {fileID: 0}
 --- !u!1 &1075244778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1766,7 @@ MonoBehaviour:
   usePanelConfirm: 0
   panelConfirm: {fileID: 0}
   button_yes: {fileID: 0}
+  button_no: {fileID: 0}
 --- !u!1 &1136733540
 GameObject:
   m_ObjectHideFlags: 0
@@ -3757,11 +3759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6501523098216633791, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 208.88
+      value: 208.87994
       objectReference: {fileID: 0}
     - target: {fileID: 6501523098216633791, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 82.5
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 6783256714132101732, guid: 4691e53d948587e46a3eea5d5f3e2f86, type: 3}
       propertyPath: m_AnchoredPosition.y

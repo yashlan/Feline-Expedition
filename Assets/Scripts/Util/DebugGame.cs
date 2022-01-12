@@ -58,8 +58,8 @@ public class DebugGame : MonoBehaviour
 
         cameraSizeText.text = $"Camera Size : {cameraSlider.value}";
 
-        toggleWaterSpear.isOn = PlayerData.IsWaterSpearWasUnlocked && PlayerData.IsWaterSpearEquip;
-        toggleInvicible.isOn = PlayerData.IsInvincibleShieldWasUnlocked && PlayerData.IsInvincibleShieldEquip;
+        toggleWaterSpear.isOn = PlayerData.IsWaterSpearUnlocked && PlayerData.IsWaterSpearEquip;
+        toggleInvicible.isOn = PlayerData.IsInvincibleShieldUnlocked && PlayerData.IsInvincibleShieldEquip;
     }
 
     void Update()
@@ -89,13 +89,13 @@ public class DebugGame : MonoBehaviour
 
         toggleInvicible.onValueChanged.AddListener((isOn) => {
 
-            PlayerData.IsInvincibleShieldWasUnlocked = PlayerData.IsInvincibleShieldEquip = isOn;
+            PlayerData.IsInvincibleShieldUnlocked = PlayerData.IsInvincibleShieldEquip = isOn;
 
         });
 
         toggleWaterSpear.onValueChanged.AddListener((isOn) => {
 
-            PlayerData.IsWaterSpearWasUnlocked = PlayerData.IsWaterSpearEquip = isOn;
+            PlayerData.IsWaterSpearUnlocked = PlayerData.IsWaterSpearEquip = isOn;
 
         });
     }

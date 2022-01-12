@@ -53,9 +53,9 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     [Header("Unlocked Rune")]
     [SerializeField]
-    private bool _isWaterSpearWasUnlocked;
+    private bool _isWaterSpearUnlocked;
     [SerializeField]
-    private bool _isInvincibleShieldWasUnlocked;
+    private bool _isInvincibleShieldUnlocked;
 
     [Header("Unlocked Map")]
     [SerializeField]
@@ -144,16 +144,16 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         set => Instance._lastCheckPoint = value;
     }
 
-    public static bool IsWaterSpearWasUnlocked 
+    public static bool IsWaterSpearUnlocked 
     { 
-        get => Instance._isWaterSpearWasUnlocked; 
-        set => Instance._isWaterSpearWasUnlocked = value; 
+        get => Instance._isWaterSpearUnlocked; 
+        set => Instance._isWaterSpearUnlocked = value; 
     }
 
-    public static bool IsInvincibleShieldWasUnlocked 
+    public static bool IsInvincibleShieldUnlocked 
     { 
-        get => Instance._isInvincibleShieldWasUnlocked; 
-        set => Instance._isInvincibleShieldWasUnlocked = value; 
+        get => Instance._isInvincibleShieldUnlocked; 
+        set => Instance._isInvincibleShieldUnlocked = value; 
     }
 
     public static bool IsWaterSpearEquip 
@@ -284,8 +284,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     #endregion
 
-    public static bool IsInvincibleShieldUsed() => IsInvincibleShieldWasUnlocked /*&& IsInvincibleShieldEquip*/;
-    public static bool IsWaterSpearUsed() => IsWaterSpearWasUnlocked /*&& IsWaterSpearEquip*/;
+    public static bool IsInvincibleShieldUsed() => IsInvincibleShieldUnlocked && IsInvincibleShieldEquip;
+    public static bool IsWaterSpearUsed() => IsWaterSpearUnlocked && IsWaterSpearEquip;
 
 
     #region DEFAULT STATS
@@ -301,12 +301,13 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     void Start()
     {
-#if UNITY_EDITOR
-        Save(PlayerPrefsKey.COIN, 1000000);
-        Save(PlayerPrefsKey.UNLOCKED_MAP, true);
-        //Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_2_point_1");
-        Save(PlayerPrefsKey.LAST_SCENE, "map_3_3");
-#endif
+//#if UNITY_EDITOR
+//        Save(PlayerPrefsKey.COIN, 1000000);
+//        Save(PlayerPrefsKey.UNLOCKED_MAP, true);
+//        //Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_2_point_1");
+//        Save(PlayerPrefsKey.LAST_SCENE, "map_3_3");
+//        Save(PlayerPrefsKey.INVINCIBLE_SHIELD, true);
+//#endif
         Load();
     }
 
@@ -324,8 +325,12 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     private void Load()
     {
-        _isWaterSpearWasUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.WATER_SPEAR, 0));
-        _isInvincibleShieldWasUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.INVINCIBLE_SHIELD, 0));
+        _isWaterSpearEquip = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.WATER_SPEAR_EQUIP, 0));
+        _isInvincibleShieldEquip = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.INVINCIBLE_SHIELD_EQUIP, 0));
+
+
+        _isWaterSpearUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.WATER_SPEAR, 0));
+        _isInvincibleShieldUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.INVINCIBLE_SHIELD, 0));
         _isMapUnlocked = BoolValueOf(PlayerPrefs.GetInt(PlayerPrefsKey.UNLOCKED_MAP, 0));
 
         #region NPC

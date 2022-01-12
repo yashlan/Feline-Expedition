@@ -8,10 +8,22 @@ public class EnemyArcher : Enemy
     public Transform arrowPoint;
     public GameObject arrow;
 
+    GameObject arrowTemp;
+    GameObject arrowClone;
+
+    EnemyBulletMelee bulletMelee;
+
     void Start()
     {
         SetNewStats(enemyType);
         SetFirstPosition();
+
+        bulletMelee = arrow.GetComponent<EnemyBulletMelee>();
+
+        bulletMelee.archer = this;
+        bulletMelee._damage = DamageAir;
+
+        arrowTemp = Instantiate(arrow);
     }
 
     void Update()
@@ -50,6 +62,7 @@ public class EnemyArcher : Enemy
     /// </summary>
     public void ShootEvent()
     {
-        Instantiate(arrow, arrowPoint.position, Quaternion.identity, null);
+        arrowClone = Instantiate(arrowTemp, arrowPoint.position, Quaternion.identity, null);
+        arrowClone.SetActive(true);
     }
 }

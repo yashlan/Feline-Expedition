@@ -8,10 +8,21 @@ public class BossCorrosionSlime : Enemy
     public Transform bulletPoint;
     public GameObject bullet;
 
+    EnemyBulletMelee bulletMelee;
+    GameObject bulletTemp;
+    GameObject bulletClone;
+
     void Start()
     {
         SetNewStats(enemyType);
         SetFirstPosition();
+
+        bulletMelee = bullet.GetComponent<EnemyBulletMelee>();
+
+        bulletMelee.midBoss = this;
+        bulletMelee._damage = DamageAir;
+
+        bulletTemp = Instantiate(bullet);
     }
 
     void Update()
@@ -64,6 +75,7 @@ public class BossCorrosionSlime : Enemy
     /// </summary>
     public void ShootEvent()
     {
-        Instantiate(bullet, bulletPoint.position, Quaternion.identity, null);
+        bulletClone = Instantiate(bulletTemp, bulletPoint.position, Quaternion.identity, null);
+        bulletClone.SetActive(true);
     }
 }
