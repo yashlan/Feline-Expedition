@@ -576,7 +576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &157191571
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1170,7 +1170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &434991923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1931,14 +1931,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9c2b405aea218ba42a313926db393bb0, type: 3}
   ButtonEnterClip: {fileID: 8300000, guid: 5442bdff4a6d620439abb607a99ec995, type: 3}
   TypingClip: {fileID: 8300000, guid: 9cd84bd1e0b1f3b4492a21f8bc371aa9, type: 3}
+  ItemClip: {fileID: 8300000, guid: b7c12c490e85a14488b6dbab9771e8a8, type: 3}
   EnviThunderClip: {fileID: 8300000, guid: 0afd185b9304c1b4fbe757fe14c4718b, type: 3}
   EnviBrigdeClip: {fileID: 8300000, guid: bbba4d713d406fd49852c4f6483e7dcd, type: 3}
   EnviLeverBrigdeClip: {fileID: 8300000, guid: c29b3541bea40004884b90c4f2feb965, type: 3}
-  SawClip: {fileID: 0}
-  PlayerHitEnemyClip: {fileID: 8300000, guid: 8a8ffcd60cf35dc4498931c4676f0604, type: 3}
+  PlayerHitSlimeEnemyClip: {fileID: 8300000, guid: 8a8ffcd60cf35dc4498931c4676f0604, type: 3}
+  PlayerHitSkeletonEnemyClip: {fileID: 8300000, guid: ed80c515b061378408bbd4da1008c194, type: 3}
   PlayerThrowClip: {fileID: 8300000, guid: b02184156f325714c8b85f7193952533, type: 3}
   PlayerMeleeBasicAttackClip: {fileID: 8300000, guid: e5bf640bc6986194fabbd303fc4acf1a, type: 3}
-  PlayerMeleeSpearAttackClip: {fileID: 8300000, guid: 215394250f0e9b7419763075ebb9318a, type: 3}
+  PlayerMeleeSpearAttackClip: {fileID: 8300000, guid: 1ae78d815018e204596d5dbffbe95a17, type: 3}
   PlayerDashClip: {fileID: 8300000, guid: bb0f42468baf5d446b8a917223d38564, type: 3}
   PlayerJumpClip: {fileID: 0}
   PlayerKnockClip: {fileID: 0}
@@ -1947,14 +1948,16 @@ MonoBehaviour:
   NPCRoccaClip: {fileID: 8300000, guid: 72b808d141234cd4da7c6471f305a491, type: 3}
   NPCGerrinClip: {fileID: 8300000, guid: 10d83f795ffe7b343a219c4e0365f4f7, type: 3}
   NPCGwynnClip: {fileID: 8300000, guid: 92acec88a9142ee44871784244497bb8, type: 3}
-  EnemySlimeAttackMeleeClip: {fileID: 0}
-  EnemySlimeDeadClip: {fileID: 0}
+  EnemySlimeAttackMeleeClip: {fileID: 8300000, guid: b7e1b014d14f9154093b67280f7931e4, type: 3}
+  EnemySlimeDeadClip: {fileID: 8300000, guid: a16571e7409cea04e931f7b38003d09f, type: 3}
+  EnemyArcherShootClip: {fileID: 8300000, guid: 274e161d9e59d6c409739f91849e5df7, type: 3}
+  EnemyArcherDeadClip: {fileID: 8300000, guid: 336f49c1fd976854bb6b047d1932fa7f, type: 3}
   EnemySwordManAttackMeleeClip: {fileID: 8300000, guid: bc098b8382c88bb4ab4aa2f84148f8da, type: 3}
   EnemySwordManHitPlayerClip: {fileID: 8300000, guid: a5cf7a1cc95ebe940aa94ab2ef236ee8, type: 3}
-  EnemySwordManDeadClip: {fileID: 0}
-  EnemyShieldManAttackMeleeClip: {fileID: 0}
-  EnemyShieldManHitPlayerClip: {fileID: 0}
-  EnemyShieldManDeadClip: {fileID: 0}
+  EnemySwordManDeadClip: {fileID: 8300000, guid: 336f49c1fd976854bb6b047d1932fa7f, type: 3}
+  EnemyShieldManAttackMeleeClip: {fileID: 8300000, guid: bc098b8382c88bb4ab4aa2f84148f8da, type: 3}
+  EnemyShieldManHitPlayerClip: {fileID: 8300000, guid: a5cf7a1cc95ebe940aa94ab2ef236ee8, type: 3}
+  EnemyShieldManDeadClip: {fileID: 8300000, guid: 336f49c1fd976854bb6b047d1932fa7f, type: 3}
   MidBossAttackMeleeClip: {fileID: 8300000, guid: 1be9ee60833a5bb4ba28eafd29b73e50, type: 3}
   MidBossAttackAirClip: {fileID: 8300000, guid: 1be9ee60833a5bb4ba28eafd29b73e50, type: 3}
   MidBossDeadClip: {fileID: 8300000, guid: 22bee886630985242962deec6af92371, type: 3}
@@ -2626,8 +2629,8 @@ MonoBehaviour:
   _isTruthWasPurchased: 0
   _isHarmonyWasPurchased: 0
   _isSpiritWasPurchased: 0
-  _isWaterSpearWasUnlocked: 0
-  _isInvincibleShieldWasUnlocked: 0
+  _isWaterSpearUnlocked: 0
+  _isInvincibleShieldUnlocked: 0
   _isMapUnlocked: 0
   _isBeastEquip: 0
   _isDisorderEquip: 0

@@ -288,6 +288,7 @@ public class Enemy : MonoBehaviour
 
         if (enemyType == EnemyType.GreenSlime)
         {
+            AudioManager.PlaySfx(AudioManager.Instance.EnemySlimeDeadClip);
             Destroy(gameObject);
             return;
         }
@@ -302,8 +303,17 @@ public class Enemy : MonoBehaviour
         Rigidbody.bodyType = RigidbodyType2D.Static;
         Anim.SetTrigger("Dead");
 
-        if(enemyType == EnemyType.CorrosionSlime)
+        if (enemyType == EnemyType.CorrosionSlime)
             AudioManager.PlaySfx(AudioManager.Instance.MidBossDeadClip);
+
+        if (enemyType == EnemyType.Shieldman)
+            AudioManager.PlaySfx(AudioManager.Instance.EnemyShieldManDeadClip);
+
+        if (enemyType == EnemyType.Swordman)
+            AudioManager.PlaySfx(AudioManager.Instance.EnemySwordManDeadClip);
+
+        if (enemyType == EnemyType.Archer)
+            AudioManager.PlaySfx(AudioManager.Instance.EnemyArcherDeadClip);
     }
 
     #region DEBUG
@@ -361,6 +371,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(2f);
         PanelSlideUIController.Instance.FadeIn(() => OnFadeIn(), 0f);
         yield return new WaitForSeconds(10f);
+        OptionsManager.ShowMouseCursor();
         AudioManager.SetBackgroundMusic(AudioManager.Instance.BgmClip[0]);
         SceneManager.LoadScene("home");
     }

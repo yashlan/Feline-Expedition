@@ -25,16 +25,17 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     public AudioClip ButtonEnterClip;
     public AudioClip TypingClip;
 
+    [Header("SFX Item")]
+    public AudioClip ItemClip;
+
     [Header("SFX Environment")]
     public AudioClip EnviThunderClip;
     public AudioClip EnviBrigdeClip;
     public AudioClip EnviLeverBrigdeClip;
 
-    [Header("SFX Obstacle")]
-    public AudioClip SawClip;
-
     [Header("SFX Player")]
-    public AudioClip PlayerHitEnemyClip;
+    public AudioClip PlayerHitSlimeEnemyClip;
+    public AudioClip PlayerHitSkeletonEnemyClip;
     public AudioClip PlayerThrowClip;
     public AudioClip PlayerMeleeBasicAttackClip;
     public AudioClip PlayerMeleeSpearAttackClip;
@@ -52,6 +53,10 @@ public class AudioManager : SingletonDontDestroy<AudioManager>
     [Header("SFX Enemy Slime")]
     public AudioClip EnemySlimeAttackMeleeClip;
     public AudioClip EnemySlimeDeadClip;
+
+    [Header("SFX Enemy Archer Clip")]
+    public AudioClip EnemyArcherShootClip;
+    public AudioClip EnemyArcherDeadClip;
 
     [Header("SFX Enemy SwordMan Clip")]
     public AudioClip EnemySwordManAttackMeleeClip;

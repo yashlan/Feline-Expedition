@@ -9,6 +9,7 @@ public enum ItemType
 public class ItemToUnlock : MonoBehaviour
 {
     public GameObject imageInfo;
+    public GameObject collisionVFX;
     public ItemType itemType;
 
     void Start()
@@ -24,11 +25,10 @@ public class ItemToUnlock : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            AudioManager.PlaySfx(null);
+            AudioManager.PlaySfx(AudioManager.Instance.ItemClip);
 
             if(itemType == ItemType.water_spear)
             {
-                AudioManager.PlaySfx(null);
                 imageInfo.SetActive(true);
                 PlayerData.Save(PlayerPrefsKey.WATER_SPEAR, true);
                 FloatingTextInfoUI.Show("New Skill Unlocked : Water Spear Melee Attack, Press I To Change", 5f);
@@ -36,11 +36,12 @@ public class ItemToUnlock : MonoBehaviour
 
             if (itemType == ItemType.invincible_shield)
             {
-                AudioManager.PlaySfx(null);
                 imageInfo.SetActive(true);
                 PlayerData.Save(PlayerPrefsKey.INVINCIBLE_SHIELD, true);
                 FloatingTextInfoUI.Show("New Skill Unlocked : Invincible Shield, Press O To Change", 5f);
             }
+
+            Instantiate(collisionVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

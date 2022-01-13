@@ -62,6 +62,7 @@ public class EnemyArcher : Enemy
     /// </summary>
     public void ShootEvent()
     {
+        AudioManager.PlaySfx(AudioManager.Instance.EnemyArcherShootClip);
         arrowClone = Instantiate(arrowTemp, arrowPoint.position, Quaternion.identity, null);
         arrowClone.SetActive(true);
     }

@@ -75,6 +75,7 @@ public class BossCorrosionSlime : Enemy
     /// </summary>
     public void ShootEvent()
     {
+        AudioManager.PlaySfx(AudioManager.Instance.MidBossAttackAirClip);
         bulletClone = Instantiate(bulletTemp, bulletPoint.position, Quaternion.identity, null);
         bulletClone.SetActive(true);
     }

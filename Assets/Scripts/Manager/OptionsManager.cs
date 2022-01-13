@@ -44,7 +44,6 @@ public class OptionsManager : SingletonDontDestroy<OptionsManager>
     void Start()
     {
         SetupCursor();
-        ShowMouseCursor();
 
         if (IsKeyCodeEmpty())
             SetDefaultButtonInput();

@@ -45,12 +45,19 @@ public class PlayerMelee : MonoBehaviour
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
 
-            AudioManager.PlaySfx(AudioManager.Instance.PlayerHitEnemyClip);
 
             var enemy = collision.gameObject.GetComponent<Enemy>();
-            
+
             if (enemy.IsDead)
                 return;
+
+            if (PlayerData.IsWaterSpearUsed() || enemy.enemyType == EnemyType.GreenSlime || enemy.enemyType == EnemyType.CorrosionSlime)
+            {
+                AudioManager.PlaySfx(AudioManager.Instance.PlayerHitSlimeEnemyClip);
+            }
+            else
+                AudioManager.PlaySfx(AudioManager.Instance.PlayerHitSkeletonEnemyClip);
+
 
             enemy.KnockBack(30);
 

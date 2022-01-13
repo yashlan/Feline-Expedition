@@ -301,13 +301,6 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     void Start()
     {
-//#if UNITY_EDITOR
-//        Save(PlayerPrefsKey.COIN, 1000000);
-//        Save(PlayerPrefsKey.UNLOCKED_MAP, true);
-//        //Save(PlayerPrefsKey.LAST_CHECKPOINT, "map_2_point_1");
-//        Save(PlayerPrefsKey.LAST_SCENE, "map_3_3");
-//        Save(PlayerPrefsKey.INVINCIBLE_SHIELD, true);
-//#endif
         Load();
     }
 
@@ -491,8 +484,8 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
 
     public static void SetValueOnCreateNewGame()
     {
-        Save(PlayerPrefsKey.HEALTHPOINT, DEFAULT_HEALTHPOINT + HealthPointExtra);
-        Save(PlayerPrefsKey.MANAPOINT, DEFAULT_MANAPOINT + ManaPointExtra);
+        Save(PlayerPrefsKey.HEALTHPOINT, DEFAULT_HEALTHPOINT);
+        Save(PlayerPrefsKey.MANAPOINT, DEFAULT_MANAPOINT);
         Save(PlayerPrefsKey.COIN, 0);
 
         Save(PlayerPrefsKey.LAST_SCENE,      "map_1");
@@ -503,5 +496,11 @@ public class PlayerData : SingletonDontDestroy<PlayerData>
         Save(PlayerPrefsKey.GWYNN_TALK_SESSION,  1);
 
         Save(PlayerPrefsKey.UNLOCKED_MAP,        0);
+
+        Save(PlayerPrefsKey.WATER_SPEAR,             false);
+        Save(PlayerPrefsKey.WATER_SPEAR_EQUIP,       false);
+        Save(PlayerPrefsKey.INVINCIBLE_SHIELD,       false);
+        Save(PlayerPrefsKey.INVINCIBLE_SHIELD_EQUIP, false);
+
     }
 }
