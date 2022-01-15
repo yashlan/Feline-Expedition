@@ -28,6 +28,6 @@ Project Team 20 (WISH CASH) Studi Independent at PT Agate International
 
 20 - Joseph Putra Wibawa
 
-## Deskripsi Game Kami
+## Deskripsi Game
 
 Feline Expeditions adalah game Actions Platformer yang bercerita tentang petualangan seorang treasure hunter dari ras Feline bersama beberapa orang dari guild yang diberikan misi untuk menjelajah reruntuhan dimana di reruntuhan itu terdapat kekuatan tersembunyi dari leluhur ras Feline.
