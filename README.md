@@ -1,87 +1,33 @@
-#  Feline-Expedition
+#  Feline-Expedition 
 
-Halo teman-teman semua mungkin saya beri sedikit rule biar rapi dan agar kita bisa lebih kompak heheh
+Project Team 20 (WISH CASH) Studi Independent at PT Agate International
 
-## Rule in Unity
+## Peserta Tim
 
-- unity version 2020.3.17f1
-- penamaan class pakai PascalCase. example : AudioManager.cs
-- penulisan code. example :
+390 - Hendarto Kennely - Game Producer
 
-  void Awake() <br>
-  { <br>
-  ㅤㅤㅤㅤㅤㅤ&nbsp; &nbsp; &nbsp; print("test 123"); <br>
-  }
+342 - Sofyan Zainul Muttaqin - Product Management
 
-## Rule Branching
+38 - Umar Abdul Muntaqin - Game Designer
 
-- masing-masing membuat satu branch sesuai fitur yang dikerjakan. example : yashlan - in app purchase.
-- kemudian jika sudah selesai nanti di commit dengan message task yang sedang kamu kerjakan. dan kemudian push ke branch develop.
-- jangan lupa sebelum di push di fetch dulu ya
+333 - Daniel Mick Bachtera - Game Tester
 
-## kumpulan command git bash
+105 - Nuh Mahardhika Matien Siam - 2D Game Artist
 
-See What Branch You're On
+143 - Gavin Bagus Kenzie Narain - 2D Game Artist
 
-    Run this command:
-        git status
+58 - Ari Husna Lutfika - 2D Game Artist
 
-List All Branches
+244 - Trivita Annisa Utami - Game Programmer
 
-NOTE: The current local branch will be marked with an asterisk (\*).
+56 - Obbie Prasetyo - Game Programmer
 
-    To see local branches, run this command:
-        git branch
-    To see remote branches, run this command:
-        git branch -r
-    To see all local and remote branches, run this command:
-        git branch -a
+21 - Muhammad Yashlan Iskandar - Game Programmer
 
-Create a New Branch
+## Mentor Kami
 
-    Run this command (replacing my-branch-name with whatever name you want):
-        git checkout -b my-branch-name
-    You're now ready to commit to this branch.
+20 - Joseph Putra Wibawa
 
-Switch to a Branch In Your Local Repo
+## Deskripsi Game Kami
 
-    Run this command:
-        git checkout my-branch-name
-
-Switch to a Branch That Came From a Remote Repo
-
-    To get a list of all branches from the remote, run this command:
-        git pull
-    Run this command to switch to the branch:
-        git checkout --track origin/my-branch-name
-
-Push to a Branch
-
-    If your local branch does not exist on the remote, run either of these commands:
-        git push -u origin my-branch-name
-        git push -u origin HEAD
-
-NOTE: HEAD is a reference to the top of the current branch, so it's an easy way to push to a branch of the same name on the remote. This saves you from having to type out the exact name of the branch!
-
-    If your local branch already exists on the remote, run this command:
-        git push
-
-Merge a Branch
-
-    You'll want to make sure your working tree is clean and see what branch you're on. Run this command:
-        git status
-    First, you must check out the branch that you want to merge another branch into (changes will be merged into this branch). If you're not already on the desired branch, run this command:
-        git checkout master
-        NOTE: Replace master with another branch name as needed.
-    Now you can merge another branch into the current branch. Run this command:
-        git merge my-branch-name
-        NOTE: When you merge, there may be a conflict. Refer to Handling Merge Conflicts (the next exercise) to learn what to do.
-
-Delete Branches
-
-    To delete a remote branch, run this command:
-        git push origin --delete my-branch-name
-    To delete a local branch, run either of these commands:
-        git branch -d my-branch-name
-        git branch -D my-branch-name
-    NOTE: The -d option only deletes the branch if it has already been merged. The -D option is a shortcut for --delete --force, which deletes the branch irrespective of its merged status.
+Feline Expeditions adalah game Actions Platformer yang bercerita tentang petualangan seorang treasure hunter dari ras Feline bersama beberapa orang dari guild yang diberikan misi untuk menjelajah reruntuhan dimana di reruntuhan itu terdapat kekuatan tersembunyi dari leluhur ras Feline.
